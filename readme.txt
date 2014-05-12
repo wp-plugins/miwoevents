@@ -8,13 +8,18 @@ Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-MiwoEvents offers you an All-in-One platform to create Events (free or paid) with an easy to use interface.
+MiwoEvents offers you an All-in-One platform to create free or paid Events with an easy to use interface.
 
 == Description ==
 
+[Pro Version](http://miwisoft.com/wordpress-plugins/miwoevents-manage-book-events#pricing) |
+[Demo Site](http://demo.miwisoft.com/wordpress/miwoevents) |
+[Documentation](http://miwisoft.com/support/docs/wordpress/miwoevents) |
+[Tickets Support](http://miwisoft.com/support/tickets) 
+
 Want to manage/sell events on your site ? Disappointed with the current solutions for WordPress ? Lean back and see the versatile Event Management and Booking features of MiwoEvents.
 
-MiwoEvents offers you an All-in-One platform to create Events (free or paid), Custom Fields (for events or registration), Locations (with map) and allows your visitors to Register (individual or group) with an easy to use interface.
+[MiwoEvents](http://miwisoft.com/wordpress-plugins/miwoevents-manage-book-events) offers you an All-in-One platform to create Events (free or paid), Custom Fields (for events or registration), Locations (with map) and allows your visitors to Register (individual or group) with an easy to use interface.
 
 Multi-language support, SEO done right, CSS based Calendar and migration from other event plugins are some of the outstanding features included in MiwoEvents.
 
