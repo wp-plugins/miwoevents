@@ -64,7 +64,7 @@ You can migrate your data from The Events Calendar, Spider Event Calendar, Event
 
 = Documentation =
 
-Use the **[miwoevents]** shortcode to display the list of polls.
+Use the **[miwoevents]** shortcode to display the list of events.
 
 Further documentation will be maintained on the [Miwisoft.com site](http://miwisoft.com/support).
 
