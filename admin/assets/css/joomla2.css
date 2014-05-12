@@ -1,0 +1,146 @@
+fieldset.adminform { border: 1px solid #ccc; margin: 0 10px 10px 10px; }
+
+/** toolbar icons **/
+.icon-48-miwoevents {
+    background-image: url(../images/toolbar2.png);
+    padding-left:260px!important;
+    line-height:50px;
+}
+
+.icon-32-help1  { background-image: url(../images/icon-32-help1.png); }
+
+table.adminlist td.ordering span {
+    background-repeat: no-repeat;
+    height: 13px;
+}
+table.adminlist td.ordering span {
+    background-repeat: no-repeat;
+    height: 13px;
+}
+
+.miwoevents_cpanel, #miwoevents_cpanel { clear:both; margin:-1px 0 8px; padding:8px 0; position:relative; z-index:0; min-height: 95px; }
+.miwoevents_cpanel, #miwoevents_cpanel div.icon-wrapper { float:left; display: block !important; width: auto !important; height :auto!important; line-height:12px !important; background-image: none !important; }
+
+.miwoevents_cpanel div.icon,
+#miwoevents_cpanel div.icon {
+    float: left;
+    margin: 0px 15px 0px 0px;
+    text-align: center;
+}
+
+.miwoevents_cpanel div.icon a,
+#miwoevents_cpanel div.icon a {
+    background-color: #FFFFFF;
+    background-position: -30px center;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    color: #565656;
+    display: block;
+    float: left;
+    height: 97px;
+    text-decoration: none;
+    transition-duration: 0.8s;
+    transition-property: background-position, -moz-border-radius-bottomleft, -moz-box-shadow;
+    vertical-align: middle;
+    width: 108px;
+}
+
+.miwoevents_cpanel div.icon a:hover,
+#miwoevents_cpanel div.icon a:hover,
+.miwoevents_cpanel div.icon a:focus,
+#miwoevents_cpanel div.icon a:focus,
+.miwoevents_cpanel div.icon a:active,
+#miwoevents_cpanel div.icon a:active {
+    border-bottom-left-radius: 50% 20px;
+    box-shadow: -5px 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+.miwoevents_cpanel img,
+#miwoevents_cpanel img {
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.miwoevents_cpanel span,
+#miwoevents_cpanel span {
+    display: block;
+    text-align: center;
+}
+
+.pagination-start, .pagination-prev, .pagination-next, .pagination-end, .paging-input, .list-footer .limit {
+    display      : inline-block;
+    margin-right : 5px;
+}
+
+.list-footer {
+    display : inline-block;
+    width   : 100%;
+}
+
+ul.tablenav {
+    float       : right;
+    display     : inline-block;
+    cursor      : default;
+    height      : 30px;
+    line-height : 30px;
+    font-size   : 12px;
+}
+
+#editcell .tablenav > li {
+display : inline-block;
+}
+
+.pagination_link {
+    display     : inline-block;
+    color       : #AAAAAA;
+    background  : rgba(0, 0, 0, .05);
+    padding     : 0 10px 3px;
+    font-size   : 16px;
+    font-weight : 400;
+}
+
+.pagination_link.active:hover {
+    color      : #FFFFFF;
+    background : #2EA2CC;
+	cursor	   : pointer;
+}
+
+/* Lodos */
+
+.pagination-start, .pagination-prev, .pagination-next, .pagination-end, .paging-input, .list-footer .limit {
+    display      : inline-block;
+    margin-right : 5px;
+}
+
+.list-footer {
+    display : inline-block;
+    width   : 100%;
+}
+
+ul.tablenav {
+    float       : right;
+    display     : inline-block;
+    cursor      : default;
+    height      : 30px;
+    line-height : 30px;
+    font-size   : 12px;
+}
+
+#editcell .tablenav > li {
+display : inline-block;
+}
+
+.pagination_link {
+    display     : inline-block;
+    color       : #AAAAAA;
+    background  : rgba(0, 0, 0, .05);
+    padding     : 0 10px 3px;
+    font-size   : 16px;
+    font-weight : 400;
+}
+
+.pagination_link.active:hover {
+    color      : #FFFFFF;
+    background : #2EA2CC;
+	cursor	   : pointer;
+}

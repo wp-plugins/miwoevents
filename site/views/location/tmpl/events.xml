@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Events (by location)">
+		<message>Display a list of events from a location.</message>
+	</layout>
+	<state>
+		<name>Events (by location)</name>
+		<fields name="request">
+			<fieldset name="request" addfieldpath="/miwoevents/library/elements">
+				<field name="location_id" type="miwoeventslocations" size="3" default="0" label="Location" description="Choose the location which you want to display events." />
+			</fieldset>
+		</fields>	
+	</state>
+</metadata>

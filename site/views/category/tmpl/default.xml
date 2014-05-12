@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Category (Default)">
+		<message>Displays events from a category.</message>
+	</layout>
+	<state>
+		<name>Category (Default)</name>
+		<description>Displays events from a category.</description>
+		<fields name="request">			
+			<fieldset name="request"
+				addfieldpath="/miwoevents/library/elements">
+				<field name="category_id" type="miwoeventscategories" size="3" default="0" label="Category" description="Choose the category which you want to display events." />
+			</fieldset>
+		</fields>
+	</state>
+</metadata>

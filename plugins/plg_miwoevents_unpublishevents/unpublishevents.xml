@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="miwoevents" method="upgrade">
+	<name>MiwoEvents - Unpublish Events</name>
+	<author>Miwisoft LLC</author>
+    <creationDate>May 2013</creationDate>
+    <authorEmail>info@miwisoft.com</authorEmail>
+    <authorUrl>http://miwisoft.com</authorUrl>
+    <copyright>2009-2014 Miwisoft LLC</copyright>
+    <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
+    <version>1.0.0</version>
+	<description>This plugin will unpublish an event when it gets full.</description>
+	
+	<files>
+		<filename plugin="unpublishevents">unpublishevents.php</filename>
+	</files>
+</extension>

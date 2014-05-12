@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+	<name>Content - MiwoEvents</name>
+	<author>Miwisoft LLC</author>
+    <creationDate>May 2013</creationDate>
+    <authorEmail>info@miwisoft.com</authorEmail>
+    <authorUrl>http://miwisoft.com</authorUrl>
+    <copyright>2009-2014 Miwisoft LLC</copyright>
+    <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
+    <version>1.0.0</version>
+	<description>This plugin is used to embed events into Joomla articles. Syntax: {miwoevents id=X}</description>
+	
+	<files>
+		<filename plugin="miwoevents">miwoevents.php</filename>
+	</files>	
+</extension>

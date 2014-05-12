@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+	<name>MiwoEvents - Mini Calendar</name>
+	<author>Miwisoft LLC</author>
+    <creationDate>May 2013</creationDate>
+    <authorEmail>info@miwisoft.com</authorEmail>
+    <authorUrl>http://miwisoft.com</authorUrl>
+    <copyright>2009-2014 Miwisoft LLC</copyright>
+    <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
+    <version>1.0.0</version>
+	<description>This module shows a monthly calendar with events highlighted.</description>
+	
+	<files>
+		<filename module="mod_miwoevents_minicalendar">mod_miwoevents_minicalendar.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<folder>tmpl</folder>
+	</files>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="moduleclass_sfx" type="text" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />	
+				<field name="default_month" type="list" default="0" label="Default Month" description="Select the month you want to display the events from.">
+						<option value="0">Current Month</option>
+						<option value="1">January</option>
+						<option value="2">February</option>
+						<option value="3">March</option>
+						<option value="4">April</option>
+						<option value="5">May</option>
+						<option value="6">June</option>
+						<option value="7">July</option>
+						<option value="8">August</option>
+						<option value="9">September</option>
+						<option value="10">October</option>
+						<option value="11">November</option>
+						<option value="12">December</option>
+				</field>
+				<field name="background_color" type="text" default="214865" label="Background Color" description="Enter the HEX color code you want to have as backround of the calendar." />
+				<field name="item_id" type="text" default="" label="ItemID" description="Menu Item ID" />
+			</fieldset>
+		</fields>
+	</config>		
+</extension>

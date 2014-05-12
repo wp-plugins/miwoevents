@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+	<name>MiwoEvents - Events</name>
+	<author>Miwisoft LLC</author>
+    <creationDate>May 2013</creationDate>
+    <authorEmail>info@miwisoft.com</authorEmail>
+    <authorUrl>http://miwisoft.com</authorUrl>
+    <copyright>2009-2014 Miwisoft LLC</copyright>
+    <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
+    <version>1.0.0</version>
+	<description>This module is used to show the up-coming events.</description>
+	
+	<files>
+		<filename module="mod_miwoevents_events">mod_miwoevents_events.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+		<folder>css</folder>	
+	</files>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="moduleclass_sfx" type="text" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+				<field name="category_ids" type="text" default="" label="Category IDs" description="Enter the IDs of the categories which you want to display events, comma seperated. Leave empty for all categories." />
+				<field name="show_category" type="list" default="1" label="Show Category Name" description="Choose whether to show or hide category name.">
+					<option value="1">Yes</option>	
+					<option value="0">No</option>	
+				</field>		
+				<field name="show_location" type="list" default="0" label="Show Location" description="Choose whether to show or hide location of events.">
+					<option value="1">Yes</option>	
+					<option value="0">No</option>	
+				</field>		
+				<field name="number_events" type="text" default="6" label="Number of Events" description="Number of events to be shown." />
+				<field name="item_id" type="text" default="" label="ItemID" description="Menu Item ID" />
+			</fieldset>
+		</fields>		
+	</config>	
+</extension>

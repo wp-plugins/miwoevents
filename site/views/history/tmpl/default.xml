@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Registration History">
+		<message>Shows the list of events that the user logged in has been registered.</message>
+	</layout>
+	<state>
+		<name>Registration History</name>
+		<description>Shows the list of events that the user logged in has been registered.</description>
+	</state>
+</metadata>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Location">
+		<message>Display any location in details including it's map.</message>
+	</layout>
+	<state>
+		<name>Location</name>
+		<fields name="request">
+			<fieldset name="request" addfieldpath="/miwoevents/library/elements">
+				<field name="location_id" type="miwoeventslocations" size="3" default="0" label="Location" description="Choose the location which you want to display." />
+			</fieldset>
+		</fields>	
+	</state>
+</metadata>

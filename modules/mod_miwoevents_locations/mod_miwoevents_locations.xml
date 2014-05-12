@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+	<name>MiwoEvents - Locations</name>
+	<author>Miwisoft LLC</author>
+    <creationDate>May 2013</creationDate>
+    <authorEmail>info@miwisoft.com</authorEmail>
+    <authorUrl>http://miwisoft.com</authorUrl>
+    <copyright>2009-2014 Miwisoft LLC</copyright>
+    <license>GNU/GPL, http://www.gnu.org/licenses/gpl-2.0.html</license>
+    <version>1.0.0</version>
+	<description>This module is used to show the list of locations or events based on location.</description>
+	
+	<files>
+		<filename module="mod_miwoevents_locations">mod_miwoevents_locations.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+	</files>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="moduleclass_sfx" type="text" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+				<field name="number_locations" type="text" default="5" label="Number of Locations" description="Number of locations to be shown." />
+				<field name="show_number_events" type="list" default="1" label="Show number of events" description="If set to Yes, it will show the number of events next to the location.">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="link_type" type="list" default="0" label="Link target" description="Select whether the link will show the location details or events based on location.">
+					<option value="0">Location Details</option>
+					<option value="1">Events by Location</option>
+				</field>
+				<field name="item_id" type="text" default="" label="ItemID" description="Menu Item ID" />					
+			</fieldset>
+		</fields>
+	</config>			
+</extension>
