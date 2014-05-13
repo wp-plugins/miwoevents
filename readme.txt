@@ -1,4 +1,4 @@
-=== MiwoEvents Lite - Manage & Book Events ===
+=== MiwoEvents - Manage & Book Events ===
 Contributors: miwisoft, gilbertlici
 Tags: event, events, calendar, booking, registration, admin, plugin, event registration, wordpress events, event management
 Donate link: http://miwisoft.com
