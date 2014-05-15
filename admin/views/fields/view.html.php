@@ -17,6 +17,6 @@ class MiwoEventsViewFields extends MiwoeventsView {
     protected function addToolbar() {
         $acl = MiwoEvents::get('acl');
         MToolBarHelper::title(MText::_('COM_MIWOEVENTS_CPANEL_FIELDS'), 'miwoevents');
-        $this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/miwoevents/user-manual/fields?tmpl=component', 650, 500);
+        $this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/wordpress/miwoevents/user-manual/fields?tmpl=component', 650, 500);
     }
 }

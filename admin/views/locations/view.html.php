@@ -75,6 +75,6 @@ class MiwoEventsViewLocations extends MiwoeventsView {
 
 
 
-        $this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/miwoevents/user-manual/locations?tmpl=component', 650, 500);
+        $this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/wordpress/miwoevents/user-manual/locations?tmpl=component', 650, 500);
     }
 }

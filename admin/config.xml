@@ -2,7 +2,7 @@
 <config>
 	<!-- General -->
 	<fieldset name="COM_MIWOEVENTS_GENERAL" label="COM_MIWOEVENTS_GENERAL" description="" addfieldpath="/miwoevents/library/elements">
-		<field name="pid" type="password" default="" label="COM_MIWOEVENTS_CONFIG_PERSONAL_ID" description="COM_MIWOEVENTS_CONFIG_PERSONAL_ID_HELP" ></field>
+		<field name="pid" type="password" readonly="true" default="" label="COM_MIWOEVENTS_CONFIG_PERSONAL_ID" description="COM_MIWOEVENTS_CONFIG_PERSONAL_ID_HELP" ></field>
 		
 		
 		<field name="version_checker" type="radio" class="btn-group" default="1" label="COM_MIWOEVENTS_CONFIG_VERSION_CHECKER" description="COM_MIWOEVENTS_CONFIG_VERSION_CHECKER_HELP" >

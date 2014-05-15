@@ -22,14 +22,14 @@ defined('MIWI') or die('Restricted access');
             <div style="text-align: center;"><a href="http://www.miwisoft.com/support/search" target="_blank"><strong>Find Solutions</strong></a></div>
 		</td>
 		<td class="column-css">
-            <a href="http://www.miwisoft.com/support/docs/miwoevents" target="_blank"><img src="http://www.miwisoft.com/images/support/documentation.png" class="image-css" /></a>
+            <a href="http://www.miwisoft.com/support/docs/wordpress/miwoevents" target="_blank"><img src="http://www.miwisoft.com/images/support/documentation.png" class="image-css" /></a>
             <br />
-            <div style="text-align: center;"><a href="http://www.miwisoft.com/support/docs/miwoevents" target="_blank"><strong>Documentation</strong></a></div>
+            <div style="text-align: center;"><a href="http://www.miwisoft.com/support/docs/wordpress/miwoevents" target="_blank"><strong>Documentation</strong></a></div>
 		</td>
 		<td class="column-css">
-            <a href="http://www.miwisoft.com/support/docs/miwoevents/video-tutorials" target="_blank"><img src="http://www.miwisoft.com/images/support/videos.png" class="image-css" /></a>
+            <a href="http://www.miwisoft.com/support/docs/wordpress/miwoevents/video-tutorials" target="_blank"><img src="http://www.miwisoft.com/images/support/videos.png" class="image-css" /></a>
             <br />
-            <div style="text-align: center;"><a href="http://www.miwisoft.com/support/docs/miwoevents/video-tutorials" target="_blank"><strong>Video Tutorials (VIP)</strong></a></div>
+            <div style="text-align: center;"><a href="http://www.miwisoft.com/support/docs/wordpress/miwoevents/video-tutorials" target="_blank"><strong>Video Tutorials (VIP)</strong></a></div>
 		</td>
 	</tr>
 	<tr>

@@ -15,7 +15,7 @@ class MiwoeventsViewRestoreMigrate extends MiwoeventsView {
         }
 
         MToolBarHelper::title(MText::_('COM_MIWOEVENTS_CPANEL_RESTORE'), 'miwoevents');
-		$this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/miwoevents/user-manual/restore-migrate?tmpl=component', 650, 500);
+		$this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/wordpress/miwoevents/user-manual/restore-migrate?tmpl=component', 650, 500);
 		
 		parent::display($tpl);
 	}

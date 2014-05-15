@@ -27,7 +27,7 @@ class MiwoEventsViewCategories extends MiwoeventsView {
             MToolBarHelper::save2new();
             MToolBarHelper::cancel();
             MToolBarHelper::divider();
-            $this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/miwoevents/user-manual/categories?tmpl=component', 650, 500);
+            $this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/wordpress/miwoevents/user-manual/categories?tmpl=component', 650, 500);
         }
 
         MHtml::_('behavior.tooltip');

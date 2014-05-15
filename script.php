@@ -61,7 +61,13 @@ class com_MiwoeventsInstallerScript {
 		}
 		if (MFolder::copy(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/plugins'), MPath::clean(MPATH_MIWI . '/plugins'), null, true)) {
 			MFolder::delete(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/plugins'));
+		}		
+		
+		//@TODO Delete this code next version(Current Version 1.0.1)
+		if ($type == 'upgrade') {
+			return;
 		}
+		########
 		
 		if ($this->_is_new_installation == true) {
 			$this->_installMiwoevents();

@@ -17,7 +17,7 @@ class MiwoeventsViewMiwoevents extends MiwoeventsView {
 			MToolBarHelper::divider();
 		}
 		
-		$this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/miwoevents/user-manual/control-panel?tmpl=component', 650, 500);
+		$this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/wordpress/miwoevents/user-manual/control-panel?tmpl=component', 650, 500);
 
         $this->info = $this->get('Info');
 		$this->stats = $this->get('Stats');
