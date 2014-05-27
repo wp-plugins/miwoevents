@@ -7,7 +7,7 @@
 # No Permission
 defined('MIWI') or die('Restricted Access');
 
-define('MIWOEVENTS_PACK', 'calendar');
+define('MIWOEVENTS_PACKAGE', 'calendar');
 define('MPATH_MIWOEVENTS', MPATH_WP_PLG.'/miwoevents/site');
 define('MPATH_MIWOEVENTS_ADMIN', MPATH_WP_PLG.'/miwoevents/admin');
 define('MPATH_MIWOEVENTS_LIB', MPATH_MIWOEVENTS_ADMIN.'/library');

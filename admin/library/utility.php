@@ -63,7 +63,7 @@ class MiwoeventsUtility {
 	}
 
     public function checkRequirements($src = 'all') {
-        if ((MIWOEVENTS_PACK == 'booking') and !file_exists(MPATH_WP_PLG.'/miwoshop/site/miwoshop/miwoshop.php')) {
+        if ((MIWOEVENTS_PACKAGE == 'booking') and !file_exists(MPATH_WP_PLG.'/miwoshop/site/miwoshop/miwoshop.php')) {
             MError::raiseWarning(404, MText::_('MiwoShop component is not installed. Please, install MiwoShop in order to use MiwoEvents Booking version.'));
             return false;
         }
@@ -1302,7 +1302,7 @@ class MiwoeventsUtility {
    	    $decimals = isset($this->MiwoeventsConfig->decimals) ?  $this->MiwoeventsConfig->decimals : 2;
         $dec_point = isset($this->MiwoeventsConfig->dec_point) ? $this->MiwoeventsConfig->dec_point : '.';
         $thousands_sep = isset($this->MiwoeventsConfig->thousands_sep) ? $this->MiwoeventsConfig->thousands_sep : ',';
-        $symbol = (MIWOEVENTS_PACK != 'booking' and !empty($currency_symbol)) ? $currency_symbol : $this->MiwoeventsConfig->currency_symbol;
+        $symbol = (MIWOEVENTS_PACKAGE != 'booking' and !empty($currency_symbol)) ? $currency_symbol : $this->MiwoeventsConfig->currency_symbol;
 
         return $this->MiwoeventsConfig->currency_position ? (number_format($amount, $decimals, $dec_point, $thousands_sep).$symbol) : ($symbol.number_format($amount, $decimals, $dec_point, $thousands_sep));
    	}
