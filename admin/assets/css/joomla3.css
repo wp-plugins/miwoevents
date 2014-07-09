@@ -95,18 +95,18 @@ div.panel h3 a {
 }
 
 /* Icons */
-.cpanel, #cpanel { clear:both; margin:-1px 0 8px; padding:8px 0; position:relative; z-index:0; min-height: 95px; }
-.cpanel, #cpanel div.icon-wrapper { float:left; display: block !important; width: auto !important; height :auto!important; line-height:12px !important; background-image: none !important; }
+.cpanel_miwoevents, #cpanel_miwoevents { clear:both; margin:-1px 0 8px; padding:8px 0; position:relative; z-index:0; min-height: 95px; }
+.cpanel_miwoevents, #cpanel_miwoevents div.icon-wrapper { float:left; display: block !important; width: auto !important; height :auto!important; line-height:12px !important; background-image: none !important; }
 
-.cpanel div.icon,
-#cpanel div.icon {
+.cpanel_miwoevents div.icon,
+#cpanel_miwoevents div.icon {
     float: left;
     margin: 0px 15px 0px 0px;
     text-align: center;
 }
 
-.cpanel div.icon a,
-#cpanel div.icon a {
+.cpanel_miwoevents div.icon a,
+#cpanel_miwoevents div.icon a {
     background-color: #FFFFFF;
     background-position: -30px center;
     border: 1px solid #CCCCCC;
@@ -122,24 +122,24 @@ div.panel h3 a {
     width: 108px;
 }
 
-.cpanel div.icon a:hover,
-#cpanel div.icon a:hover,
-.cpanel div.icon a:focus,
-#cpanel div.icon a:focus,
-.cpanel div.icon a:active,
-#cpanel div.icon a:active {
+.cpanel_miwoevents div.icon a:hover,
+#cpanel_miwoevents div.icon a:hover,
+.cpanel_miwoevents div.icon a:focus,
+#cpanel_miwoevents div.icon a:focus,
+.cpanel_miwoevents div.icon a:active,
+#cpanel_miwoevents div.icon a:active {
     border-bottom-left-radius: 50% 20px;
     box-shadow: -5px 10px 15px rgba(0, 0, 0, 0.25);
 }
 
-.cpanel img,
-#cpanel img {
+.cpanel_miwoevents img,
+#cpanel_miwoevents img {
     margin: 0 auto;
     padding: 10px 0;
 }
 
-.cpanel span,
-#cpanel span {
+.cpanel_miwoevents span,
+#cpanel_miwoevents span {
     display: block;
     text-align: center;
 }

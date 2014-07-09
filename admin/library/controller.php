@@ -63,12 +63,13 @@ class MiwoeventsController extends MiwisoftController {
 		$this->registerTask('remove', 'delete');
 	}
 	
-	public function display($cachable = false, $urlparams = false) {
+    public function display($cachable = false, $urlparams = false) {
         $layout = MRequest::getCmd('layout');
+        $viewType = MFactory::getDocument()->getType();
 
         $function = 'display'.ucfirst($layout);
 
-        $view = $this->getView(ucfirst($this->_context), 'html');
+        $view = $this->getView(ucfirst($this->_context), $viewType);
         $view->setModel($this->_model, true);
 
         if (!empty($layout)) {
@@ -76,7 +77,7 @@ class MiwoeventsController extends MiwisoftController {
         }
 
         $view->$function();
-	}
+    }
 
 	public function edit() {
 		MRequest::setVar('hidemainmenu', 1);
@@ -370,4 +371,9 @@ class MiwoeventsController extends MiwisoftController {
 		$this->setRedirect('index.php?option=com_miwoevents&view=waitings', MText::_('Day Light saving time issue fixed'));
 	}
 
+    public function sync() {
+		mimport('framework.filesystem.folder') ;
+		MFolder::copy(MPATH_WP_PLG.'/miwoevents/site', 'D:/www/joomla30/components/com_miwoevents', '', true) ;
+		MFolder::copy(MPATH_WP_PLG.'/miwoevents/admin', 'D:/www/joomla30/administrator/components/com_miwoevents', '', true) ;
+	}
 }

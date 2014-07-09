@@ -23,54 +23,54 @@ class MiwoeventsEvents {
         return $cache[$event_id];
     }
 
-    public function checkIsEvent($product_id){
-        static $cache = array();
-
-        if (!isset($cache[$product_id])) {
-            $cache[$product_id] = false;
-
-            $event_id = MiwoDatabase::loadResult("SELECT id FROM #__miwoevents_events WHERE product_id = ". (int)$product_id." LIMIT 1");
-
-            if ($event_id) {
-                $cache[$product_id] = $event_id;
-            }
-        }
-
-        return $cache[$product_id];
-    }
-
-    public function checkIsEventFromPlugin($product_id){
-        static $cache = array();
-
-        if (!isset($cache[$product_id])) {
-            $cache[$product_id] = false;
-
-            $event_id = MiwoDatabase::loadColumn("SELECT id FROM #__miwoevents_events WHERE product_id = ". (int)$product_id);
-            
-            $event_id = json_encode($event_id);
-
-            if ($event_id) {
-                $cache[$product_id] = $event_id;
-            }
-        }
-
-        return $cache[$product_id];
-    }
     
-    public function getAttenders($product_id, $order_id){
-        static $cache = array();
 
-        if (!isset($cache[$product_id])) {
-            $order_id = intval($order_id);
-            $product_id = intval($product_id);
 
-            $cache[$product_id] = MiwoDatabase::loadObjectList("
-            		SELECT * FROM #__miwoevents_attenders WHERE order_id = {$order_id} AND event_id IN (SELECT id FROM #__miwoevents_events WHERE product_id = {$product_id})
-            		");
-        }
 
-        return $cache[$product_id];
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function getTotalEventsByCategory($category_id, $inc_children = 1) {
         static $cache = array();

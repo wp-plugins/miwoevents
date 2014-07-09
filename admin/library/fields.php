@@ -136,6 +136,9 @@ class MiwoeventsFields {
 			if (empty($rows)){ return; }
 
 			foreach ($rows as $row){
+					if($row->name=="miwi_password"){
+					$row->field_type="password";
+					}
 				$x[] = $this->getCustomField($row->name, $row->default_values, $row->values, $row->field_type, $row->title, $row->description, $name_is_array);
 			}
 

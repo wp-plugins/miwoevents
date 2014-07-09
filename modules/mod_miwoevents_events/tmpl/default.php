@@ -8,7 +8,7 @@
 defined('MIWI') or die('Restricted access');
 
 if ($showLocation) {
-	$greyBox = MUri::base().'components/com_miwoevents/assets/js/greybox/';
+	$greyBox = MURL_MIWOEVENTS.'/site/assets/js/greybox/';
 ?>
 	<script type="text/javascript">
 	    var GB_ROOT_DIR = "<?php echo $greyBox ; ?>";

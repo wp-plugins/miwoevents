@@ -17,12 +17,22 @@ defined('MIWI') or die('Restricted access');
 
 <form name="adminForm" id="adminForm" action="<?php echo MRoute::_('admin.php?page=miwoevents&amp;option=com_miwoevents'); ?>" method="post">
 	<table cellspacing="0" cellpadding="0" border="0" width="100%">
-		<tr>
+			<tr>
+
+
+
+
+
+
+
+
+
+
 			<td valign="top" width="58%">
 				<table>
 					<tr>
 						<td>
-							<div id="miwoevents_cpanel" width="30%">
+							<div id="cpanel_miwoevents" width="30%">
 							<?php
 							$option = MRequest::getWord('option');
 
@@ -102,17 +112,21 @@ defined('MIWI') or die('Restricted access');
 								<tr height="70">
 									<td width="%25">
 										<?php
-											$icon = 'help';
-											if ($this->info['version_enabled'] == 0) {
-												$icon = 'noinfo';
-											} elseif ($this->info['version_status'] == 0) {
-												$icon = 'latest';
-											}
+                                            $template = 'bluestork';
+                                            if (MiwoEvents::is30()) {
+                                                $template = 'hathor';
+                                            }
 
-											$img_path = MURL_MIWOEVENTS.'/admin/assets/images/icon-48-v-'.$icon.'.png';
+											if ($this->info['version_enabled'] == 0) {
+												echo MHtml::_('image', 'administrator/templates/'.$template.'/images/header/icon-48-info.png', null);
+											} elseif ($this->info['version_status'] == 0) {
+												echo MHtml::_('image', 'administrator/templates/'.$template.'/images/header/icon-48-checkin.png', null);
+											} elseif($this->info['version_status'] == -1) {
+												echo MHtml::_('image', 'administrator/templates/'.$template.'/images/header/icon-48-help_header.png', null);
+											} else {
+												echo MHtml::_('image', 'administrator/templates/'.$template.'/images/header/icon-48-help_header.png', null);
+											}
 										?>
-										
-										<img src="<?php echo $img_path; ?>" />
 									</td>
 									<td width="%35">
 										<?php
@@ -129,12 +143,23 @@ defined('MIWI') or die('Restricted access');
 									</td>
 									<td align="center" style="vertical-align: middle;" rowspan="<?php echo $rowspan; ?>">
 										<a href="http://www.miwisoft.com/wordpress-plugins/miwoevents" target="_blank">
-										<img src="<?php echo MURL_WP_CNT; ?>/plugins/miwoevents/admin/assets/images/logo.png" width="140" height="140" style="display: block; margin: auto;" alt="MiwoEvents" title="MiwoEvents" align="middle" border="0">
+										<img src="<?php echo MURL_MIWOEVENTS; ?>/site/assets/images/logo.png" width="140" height="140" style="display: block; margin: auto;" alt="MiwoEvents" title="MiwoEvents" align="middle" border="0">
 										</a>
 									</td>
 								</tr>
 								
-								<tr height="40">
+
+
+
+
+
+
+
+
+
+
+
+
 									<td>
 										<?php
 											if($this->info['version_status'] == 0 || $this->info['version_enabled'] == 0) {

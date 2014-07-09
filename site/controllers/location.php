@@ -13,7 +13,30 @@ class MiwoeventsControllerLocation extends MiwoEventsController {
 		parent::__construct('location', 'locations');
 	}
 
-    public function save() {}
+    public function save() {
+        # Check token
+        MRequest::checkToken() or mexit('Invalid Token');
 
-    public function cancel() {}
+   		$post = MRequest::get('post', MREQUEST_ALLOWRAW);
+   		$cid = $post['cid'];
+   		$post['id'] = (int) $cid[0];
+
+        $_lang = MFactory::getLanguage();
+        $_lang->load('com_miwoevents', MPATH_ADMINISTRATOR, 'en-GB', true);
+        $_lang->load('com_miwoevents', MPATH_ADMINISTRATOR, $_lang->getDefault(), true);
+        $_lang->load('com_miwoevents', MPATH_ADMINISTRATOR, null, true);
+
+   		if ($this->_model->store($post)) {
+   			$msg = MText::_('COM_MIWOEVENTS_LOCATION_SAVED');
+   		}
+           else {
+   			$msg = MText::_('COM_MIWOEVENTS_LOCATION_SAVE_ERROR');
+   		}
+
+   		parent::routeFront($msg, $post);
+   	}
+
+    public function cancel() {
+        parent::setRedirect('index.php?option='.$this->_option.'&view=category');
+    }
 }

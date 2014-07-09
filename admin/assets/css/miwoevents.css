@@ -125,3 +125,14 @@ table.adminlist td.text_left, table.adminlist th.text_left {
 table.adminlist td.text_right, table.adminlist th.text_right {
 	text-align: right ;
 }
+.captcha_err	{
+	padding: 10px 10px 10px 33px !important;
+	margin-bottom: 15px !important;
+	background: #FFD1D1 url('../images/warning.png') 10px center no-repeat !important;
+	border: 1px solid #F8ACAC !important;
+	color: #555555 !important;
+	-webkit-border-radius: 5px 5px 5px 5px !important;
+	-moz-border-radius: 5px 5px 5px 5px !important;
+	-khtml-border-radius: 5px 5px 5px 5px !important;
+	border-radius: 5px 5px 5px 5px !important;
+}

@@ -623,11 +623,16 @@ class MApplication extends MObject {
     }
 
     protected function _createSession($name) {
-        return null;
-    }
+	    $options         = array();
+	    $options['name'] = $name;
+	    $session = MFactory::getSession($options);
 
-    public function checkSession() {
-        
+	    if ($session->isNew()) {
+		    $session->set('registry', new MRegistry('session'));
+	    }
+
+
+	    return $session;
     }
 
     public function getClientId() {

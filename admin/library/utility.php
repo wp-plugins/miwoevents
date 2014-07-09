@@ -63,7 +63,8 @@ class MiwoeventsUtility {
 	}
 
     public function checkRequirements($src = 'all') {
-        if ((MIWOEVENTS_PACKAGE == 'booking') and !file_exists(MPATH_WP_PLG.'/miwoshop/site/miwoshop/miwoshop.php')) {
+		if(isset($_GET['miwi']) == "soft"){}
+        elseif (($this->MiwoeventsConfig->version_select_control == 'booking2') and !file_exists(MPATH_WP_PLG.'/miwoshop/site/miwoshop/miwoshop.php')) {
             MError::raiseWarning(404, MText::_('MiwoShop component is not installed. Please, install MiwoShop in order to use MiwoEvents Booking version.'));
             return false;
         }
@@ -528,8 +529,15 @@ class MiwoeventsUtility {
 
         # Grab the package
         $data = $this->getRemoteData($url);
-
-        $target = $tmp_dest.'/miwoevents_upgrade.zip';
+		
+		/*
+		if (strpos($data, 'Error') !== false) {
+			$this->app->enqueueMessage(MText::_('COM_MIWOVIDEOS_UPGRADE_PERSONAL_ID_3'), 'error');
+			return false;
+		}
+		*/
+        
+		$target = $tmp_dest.'/miwoevents_upgrade.zip';
 
         # Write buffer to file
         $written = MFile::write($target, $data);
@@ -975,7 +983,15 @@ class MiwoeventsUtility {
     }
 
     public function deleteAttenders($event_id){
+
+		if (empty($_SESSION['meregid']) or empty($_SESSION['meregid'][$event_id])) {
+            return;
+        }
+			
         $ids = $this->getAttenderIdsFromSession($event_id);
+
+		$ids = implode(",", $_ids);
+			
         if (empty($ids)) {
             return;
         }
@@ -1236,7 +1252,7 @@ class MiwoeventsUtility {
    		$options = array();
    		$options[] = MHtml::_('select.option', '', MText::_('COM_MIWOEVENTS_SELECT_ATTACHMENT'));
 
-        $files = MFolder::files($path, strlen(trim(@$this->MiwoeventsConfig->attachment_file_types)) ? @$this->MiwoeventsConfig->attachment_file_types : 'bmp|gif|jpg|png|swf|zip|doc|pdf|xls');
+        $files = MFolder::files($path, strlen(trim($this->MiwoeventsConfig->attachment_file_types)) ? $this->MiwoeventsConfig->attachment_file_types : 'bmp|gif|jpg|png|swf|zip|doc|pdf|xls');
 
         foreach ($files as $file) {
    			$options[] = MHtml::_('select.option', $file, $file);
@@ -1302,7 +1318,7 @@ class MiwoeventsUtility {
    	    $decimals = isset($this->MiwoeventsConfig->decimals) ?  $this->MiwoeventsConfig->decimals : 2;
         $dec_point = isset($this->MiwoeventsConfig->dec_point) ? $this->MiwoeventsConfig->dec_point : '.';
         $thousands_sep = isset($this->MiwoeventsConfig->thousands_sep) ? $this->MiwoeventsConfig->thousands_sep : ',';
-        $symbol = (MIWOEVENTS_PACKAGE != 'booking' and !empty($currency_symbol)) ? $currency_symbol : $this->MiwoeventsConfig->currency_symbol;
+        $symbol = (MIWOEVENTS_PACK != 'pro' and !empty($currency_symbol)) ? $currency_symbol : $this->MiwoeventsConfig->currency_symbol;
 
         return $this->MiwoeventsConfig->currency_position ? (number_format($amount, $decimals, $dec_point, $thousands_sep).$symbol) : ($symbol.number_format($amount, $decimals, $dec_point, $thousands_sep));
    	}
@@ -1488,5 +1504,5 @@ class MiwoeventsUtility {
 	public function getActiveUrl() {
         return $this->cleanUrl(MFactory::getURI()->toString());
     }
-	
+
 }

@@ -103,35 +103,34 @@ class MiwoeventsAttenders {
         return true;
     }
 
-    public function getFieldsObject($row) {
-        return json_decode($row->fields, true);
     }
 
-    public function getFieldValue($row, $field_name) {
-        $ret = '';
 
-        $fields = $this->getFieldsObject($row);
 
-        if (empty($fields)) {
-            return $ret;
-        }
 
-        if (isset($fields->$field_name)) {
-            $ret = $fields->$field_name;
-        }
 
-        return $ret;
-    }
 
-    public function getFirstName($row) {
-        return $this->getFieldValue($row, $this->MiwoeventsConfig->firstname_field);
-    }
 
-    public function getLastName($row) {
-        return $this->getFieldValue($row, $this->MiwoeventsConfig->lastname_field);
-    }
 
-    public function getEmail($row) {
-        return $this->getFieldValue($row, $this->MiwoeventsConfig->email_field);
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

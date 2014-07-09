@@ -136,7 +136,7 @@ if (($this->params->get('show_page_heading', '0') == '1') && !empty($page_title)
 									?>
 									<div style="border: 0; width: 100%;">
 										<a class="miwoevents_event_link" href="<?php echo MRoute::_('index.php?option=com_miwoevents&view=event&event_id='.$val->id.$Itemid); ?>" title="<?php echo $val->title; ?>" <?php if ($color) echo 'style="background-color:#'.$color.'";' ; ?>>
-											<img border="0" align="top" title="<?php echo MText::_("Event")?>" src="<?php echo MUri::root()?>components/com_miwoevents/assets/images/calendar_event.png">
+											<img border="0" align="top" title="<?php echo MText::_("Event")?>" src="<?php echo MURL_MIWOEVENTS; ?>/site/assets/images/calendar_event.png">
 											<?php
 											if ($this->MiwoeventsConfig->show_event_time) {
 												echo $val->title.' ('.MHtml::_('date', $val->event_date, $this->MiwoeventsConfig->event_date_format, null).')';

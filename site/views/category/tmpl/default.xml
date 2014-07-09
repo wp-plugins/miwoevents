@@ -8,7 +8,7 @@
 		<description>Displays events from a category.</description>
 		<fields name="request">			
 			<fieldset name="request"
-				addfieldpath="/miwoevents/library/elements">
+				addfieldpath="/miwoevents/admin/library/elements">
 				<field name="category_id" type="miwoeventscategories" size="3" default="0" label="Category" description="Choose the category which you want to display events." />
 			</fieldset>
 		</fields>

@@ -161,7 +161,7 @@ defined('MIWI') or die('Restricted access');
 												
 												if ($class_event == 'mod_miwoevents_mincalendar_event'){		                    		
 												?>	
-													<a class="miwi_minical_link" href="<?php echo $link; ?>" title="<?php echo  ($numberEvents > 1 ? $numberEvents.MText::_('EB_EVENTS') :  $val->title) ; ?>">
+													<a class="eb_minical_link" href="<?php echo $link; ?>" title="<?php echo  ($numberEvents > 1 ? $numberEvents.MText::_('EB_EVENTS') :  $val->title) ; ?>">
 														<span class="<?php echo $class?>"><?php echo $currentDay['d'];?></span> 
 													</a>
 												<?php 

@@ -41,7 +41,7 @@ MText::_('COM_MIWOEVENTS_AUG'), MText::_('COM_MIWOEVENTS_SEP'), MText::_('COM_MI
 MText::_('COM_MIWOEVENTS_DEC'));
 
 $document->addStyleSheet(MUri::base(true).'modules/mod_miwoevents_events/css/style.css');
-$document->addStylesheet(MUri::base(true).'/components/com_miwoevents/assets/css/themes/'.$config->calendar_theme.'.css', 'text/css', null, null);
+$document->addStylesheet(MURL_MIWOEVENTS.'/site/assets/css/themes/'.$config->calendar_theme.'.css', 'text/css', null, null);
 
 $module_title = $module->title;
 

@@ -353,7 +353,6 @@ class MiwoeventsModelCalendar extends MiwoeventsModel {
 
         return $where;
     }
-	public function getCalCategories(){
-        return $categoryColors = MiwoDatabase::loadAssocList("SELECT title,color_code FROM `#__miwoevents_categories`");
-    }
-}
+	 }
+
+

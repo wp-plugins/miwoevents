@@ -21,9 +21,9 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 			<td class="miwi_search">
 				<?php echo MText::_('Filter'); ?>:
 				<input type="text" name="search" id="search" value="<?php echo $this->lists['search']; ?>" class="text_area search-query" onchange="document.adminForm.submit();"/>
-				<button onclick="this.form.submit();" class="btn"><?php echo MText::_('Go'); ?></button>
-				<button onclick="document.getElementById('search').value='';this.form.submit();" class="btn"><?php echo MText::_('Reset'); ?></button>
-				<button class="btn" onclick="if (window.parent) window.parent.<?php echo $this->escape($function); ?>('', '<?php echo MText::_('MLIB_FORM_SELECT_USER') ?>');"><?php echo MText::_('MOPTION_NO_USER') ?></button>
+				<button onclick="this.form.submit();" class="button"><?php echo MText::_('Go'); ?></button>
+				<button onclick="document.getElementById('search').value='';this.form.submit();" class="button"><?php echo MText::_('Reset'); ?></button>
+				<button class="button" onclick="if (window.parent) window.parent.<?php echo $this->escape($function); ?>('', '<?php echo MText::_('MLIB_FORM_SELECT_USER') ?>');"><?php echo MText::_('MOPTION_NO_USER') ?></button>
 			</td>
 		</tr>
 	</table>

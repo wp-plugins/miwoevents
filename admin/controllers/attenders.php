@@ -13,7 +13,25 @@ class MiwoeventsControllerAttenders extends MiwoEventsController {
 		parent::__construct('attenders');
 	}
 
-    public function save() {}
+    public function save() {
+   		$post = MRequest::get('post', MREQUEST_ALLOWRAW);
+   		$cid = $post['cid'];
+   		$post['id'] = (int) $cid[0];
+
+        $ret = $this->_model->store($post);
+   		if ($ret) {
+   			$msg = MText::_('COM_MIWOEVENTS_REGISTRANT_SAVED');
+   		}
+           else {
+   			$msg = MText::_('COM_MIWOEVENTS_REGISTRANT_SAVE_ERROR');
+   		}
+
+   		parent::route($msg, $post);
+   	}
    	
-   	public function exportCSV() {}
+   	public function exportCSV() {
+   		if (!$this->_model->exportCSV()) {
+            parent::route('No records.');
+        }
+   	}
 }

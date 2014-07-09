@@ -114,7 +114,7 @@ $timeFormat = $this->MiwoeventsConfig->event_time_format ? $this->MiwoeventsConf
 	                                    ?>
 	                                        <div style="border:0;width:100%;">
 	                                            <a class="miwoevents_event_link" href="<?php echo MText::_('index.php?option=com_miwoevents&view=event&event_id='.$val->id.$this->Itemid); ?>" title="<?php echo $val->title; ?>">
-	                                                <img border="0" align="top" title="<?php echo MText::_("Event")?>" src="<?php echo MUri::root()?>components/com_miwoevents/assets/images/calendar_event.png">
+	                                                <img border="0" align="top" title="<?php echo MText::_("Event")?>" src="<?php echo MURL_MIWOEVENTS; ?>/site/assets/images/calendar_event.png">
 	                                                <?php
 	                                                    if ($this->MiwoeventsConfig->show_event_time) {
 	                                                        echo $val->title.' ('.MHtml::_('date', $val->event_date, $timeFormat, $param).')';
@@ -142,15 +142,17 @@ $timeFormat = $this->MiwoeventsConfig->event_time_format ? $this->MiwoeventsConf
 	    <input type="hidden" name="Itemid" value="<?php echo $this->Itemid ; ?>" />
 	</form>
 	<!-- content // -->
-	<?php
-        foreach ($this->calCat as $item) {
-            ?>
-          &nbsp;<div style="float: left;">
-              <div class="showCategoriesColors" style="background-color:<?php echo "#".$item['color_code'];?>;"></div>
-              <div style="padding-left: 12px; padding-right: 15px;"><?php echo $item['title'];?></div>
-          </div>
-		  &nbsp;&nbsp;
-        <?php } ?>
-	</div>
+			</div>
+			
+
+
+
+
+
+
+
+
+
+
 	<div class="clr"></div>
 </div>

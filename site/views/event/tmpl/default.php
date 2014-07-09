@@ -9,7 +9,7 @@ defined('MIWI') or die ;
 
 $url = MRoute::_('index.php?option=com_miwoevents&view=event&event_id='.$this->item->id.$this->Itemid);
 $canRegister = MiwoEvents::get('events')->canRegister($this->item->id);
-$greyBox = MUri::base().'components/com_miwoevents/assets/js/greybox/';
+$greyBox = MURL_MIWOEVENTS.'/site/assets/js/greybox/';
 
 $socialUrl = MUri::base().$url;
 
@@ -20,6 +20,7 @@ $socialUrl = MUri::base().$url;
 <script type="text/javascript" src="<?php echo $greyBox; ?>/AJS.js"></script>
 <script type="text/javascript" src="<?php echo $greyBox; ?>/AJS_fx.js"></script>
 <script type="text/javascript" src="<?php echo $greyBox; ?>/gb_scripts.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,300' rel='stylesheet' type='text/css'>
 <link href="<?php echo $greyBox; ?>/gb_styles.css" rel="stylesheet" type="text/css" />
 
 <div name="adminForm" id="adminForm">
@@ -84,11 +85,55 @@ $socialUrl = MUri::base().$url;
                         </script>
                     </div>
                 </div>
-                <div class="clear"></div>
                 <?php } ?>
                 <!--//end FB / Twitter / Gplus sharing -->
             </div>
+		<?php if(isset($this->MiwoeventsConfig->early_bird_discount_date) AND ($this->MiwoeventsConfig->early_bird_discount_date == 1) AND @($this->item->individual_price != $this->item->discounted_price) AND @($this->item->discounted_price > 0)){ ?>	
+            <div class="miwoevents_box_content_cont">
+                <?php if (isset($this->item->earl_bird_day_date_Timestamp) AND $this->item->earl_bird_day_date_Timestamp > 0) { ?>
+                    <section>
+						<div class="big-countdown">
+                            <div>
+                            <div class="earl_price_show">
+                               <span class="orjinal">
+                                   <del>
+                                <?php if ($this->show_price) { ?>
+                                    <?php
+                                    if ($this->item->individual_price > 0 and $this->MiwoeventsConfig->show_individual_price) {
+                                        echo MiwoEvents::get('utility')->getAmount($this->item->individual_price, $this->MiwoeventsConfig->currency_symbol);
+                                    } else {
+                                        echo '<span class="miwoevents_free">'.MText::_('COM_MIWOEVENTS_FREE').'</span>';
+                                    }
+                                    ?>
+                                   </del>
+                               </span>
+                                &nbsp;&nbsp;
+                                <span class="discount">
+                                    <?php if ($this->MiwoeventsConfig->show_discounted_price and ($this->item->individual_price != $this->item->discounted_price)) { ?>
+                                        <?php
+                                    if ($this->item->individual_price > 0) {
+                                        echo MiwoEvents::get('utility')->getAmount($this->item->discounted_price, $this->MiwoeventsConfig->currency_symbol);
+                                    } else {
+                                        echo '<span class="miwoevents_free">'.MText::_('COM_MIWOEVENTS_FREE').'</span>';
+                                    }
+                                    ?>
+                                    <?php } } ?>
+                                </span>
 
+                            </div>
+                            </div>
+                        </div>
+                        <div class="clearfixDiscont"></div>
+                        <div class="big-countdown">
+                            <div>
+                                <span data-time="<?php echo $this->item->earl_bird_day_date_Timestamp; ?>" class="miwoevents_earl_bird_day"></span>
+                            </div>
+                        </div>
+                    </section>
+                <?php }  ?>
+            </div>
+            <div class="clear"></div>
+		<?php } ?>
             <div class="miwoevents_box_content_cont2">
                 <div class="miwoevents_box_content_info">
                     <span class="miwoevents_box_content_40">
@@ -127,33 +172,33 @@ $socialUrl = MUri::base().$url;
                     </span>
                     <?php } ?>
 
-                    <?php if ($this->MiwoeventsConfig->show_registered) { ?>
-                    <span class="miwoevents_box_content_40">
-                       <?php echo MText::_('COM_MIWOEVENTS_REGISTERED'); ?>
-                    </span>
-                    <span class="miwoevents_box_content_60">
-                    	&nbsp;:&nbsp;
-                        <?php echo $this->item->total_attenders; ?>
-                        <?php
-                        if ($this->MiwoeventsConfig->show_list_of_attenders and ($this->item->total_attenders > 0) and MiwoEvents::get('acl')->canAccessAttenders('component')) {
-                            $this->Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'event', 'event_id' => $this->item->id), null, true);
-                            ?>
-                            &nbsp;&nbsp;&nbsp;<a href="index.php?option=com_miwoevents&view=attenders&event_id=<?php echo $this->item->id.$this->Itemid; ?>&tmpl=component" rel="gb_page_center[600, 600]" class="registrant_list_link"><span class="view_list"><?php echo MText::_("COM_MIWOEVENTS_VIEW_LIST"); ?></span></a>
-                            <?php
-                        }
-                        ?>
-                    </span>
-                    <?php } ?>
+                    
 
-                    <?php if ($this->MiwoeventsConfig->show_available_place and $this->item->event_capacity) { ?>
-                    <span class="miwoevents_box_content_40">
-                       <?php echo MText::_('COM_MIWOEVENTS_AVAILABLE_PLACE'); ?>
-                    </span>
-                    <span class="miwoevents_box_content_60">
-                    	&nbsp;:&nbsp;
-                        <?php echo $this->registration_diff; ?>
-                    </span>
-                    <?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
 
                     <?php if (($this->nullDate != $this->item->cut_off_date) and ($this->MiwoeventsConfig->show_cut_off_date)) { ?>
                     <span class="miwoevents_box_content_40">
@@ -177,6 +222,8 @@ $socialUrl = MUri::base().$url;
                     <span class="miwoevents_box_content_60">
                     	&nbsp;:&nbsp;
                         <?php
+
+
                         if ($this->item->individual_price > 0) {
                             echo MiwoEvents::get('utility')->getAmount($this->item->individual_price, $this->MiwoeventsConfig->currency_symbol);
                         } else {
@@ -199,9 +246,8 @@ $socialUrl = MUri::base().$url;
                         ?>
                     </span>
                     <?php } } ?>
-                    
+
                     <?php
-                    /*
                         if(!empty($this->fields)) {
                             foreach ($this->fields as $field) {
                             ?>
@@ -214,7 +260,6 @@ $socialUrl = MUri::base().$url;
                             <?php
                             }
                         }
-                        */
                     ?>
                    
                     <?php if (count($this->item->group_rates)) { ?>
@@ -244,8 +289,12 @@ $socialUrl = MUri::base().$url;
                 </div>
 
                 <?php if ($this->item->location_id) { ?>
+			    <?php  if(1==$this->MiwoeventsConfig->hide_location_maps){ ?>
+                <div class="miwoevents_box_content_map" style="display: none;">
+				<?php }else{ ?>
                 <div class="miwoevents_box_content_map">
-                    <?php
+                <?php } ?>
+                     <?php
                     $event 								= $this->item;
                     $this->item 						= $this->location;
                     include MPATH_MIWOEVENTS.'/views/location/tmpl/map.php';
@@ -258,22 +307,95 @@ $socialUrl = MUri::base().$url;
             <div class="miwoevents_box_content_cont2">
                 <?php
                 $this->Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'event', 'event_id' => $this->item->id), null, true);
+
                 
-				$createduserid   = $event->created_by;
-                $userid          = @$_SESSION['__default']['user']->id;
-                ?>
+					if (MiwoEvents::get('acl')->canEdit()) {
+                    $edit_itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'event', 'layout' => 'submit'), null, true);
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    $edit_url = MRoute::_('index.php?option=com_miwoevents&view=event&layout=submit&event_id='.$this->item->id.$edit_itemid, false);
+                    ?>
+                    <a class="<?php echo MiwoEvents::getButtonClass(); ?>" href="<?php echo $edit_url; ?>"><strong><?php echo MText::_('COM_MIWOEVENTS_EDIT'); ?></strong></a>
+                    <?php
+                }
+
+                if (MiwoEvents::get('acl')->canEditState()) {
+                    $unpublish_url = MRoute::_('index.php?option=com_miwoevents&view=event&task=updatestatus&event_id='.$this->item->id.$this->Itemid, false);
+                    ?>
+                    <a class="<?php echo MiwoEvents::getButtonClass(); ?>" href="<?php echo $unpublish_url; ?>"><strong><?php echo MText::_('COM_MIWOEVENTS_UNPUBLISH'); ?></strong></a>
+                    <?php
+                }
+
+                 ?>
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
-			<script language="javascript">
-				function cancelRegistration(registrant_id) {
-					var form = document.adminForm;
-					if (confirm("<?php echo MText::_('COM_MIWOEVENTS_CANCEL_REGISTRATION_CONFIRM'); ?>")) {
-						form.view.value = 'registration';
-						form.task.value = 'cancel';
-						form.id.value = registrant_id;
-						form.submit() ;
-					}
-				}
-			</script>
+			
+
+
+
+
+
+
+
+
+
+
 
 			<input type="hidden" name="option" value="com_miwoevents" />
 			<input type="hidden" name="view" value="event" />
@@ -282,8 +404,60 @@ $socialUrl = MUri::base().$url;
 			<input type="hidden" name="id" value="0" />
 			</form>
 
+
+            <?php if ($this->MiwoeventsConfig->comments != 0) { ?>
+            <div class="miwoevents_box_content_cont3">
+                <?php
+                if ($this->MiwoeventsConfig->comments == 1) {
+                    require_once(MPATH_SITE.'/components/com_jcomments/jcomments.php');
+
+                    echo JComments::showComments($this->item->id, 'com_miwoevents', $this->item->title);
+                }
+                else if ($this->MiwoeventsConfig->comments == 2) {
+                    require_once(MPATH_SITE.'/components/com_komento/bootstrap.php');
+
+					mimport('framework.html.parameter');
+					//$p_options = array('params' => new MInput());
+                    $p_options = array('params' => new JParameter('')); //2013-07-24 Lodos
+                    $p_object = new stdClass();
+                    $p_object->id = $this->item->id;
+                    $p_object->title = $this->item->title;
+
+                    echo Komento::commentify('com_miwoevents', $p_object, $p_options);
+                }
+                else if ($this->MiwoeventsConfig->comments == 3) {
+                    MLoader::discover('ccommentHelper', MPATH_SITE . '/components/com_comment/helpers');
+                    ccommentHelperUtils::commentInit('com_miwoevents', $this->item, null);
+                }
+                else if ($this->MiwoeventsConfig->comments == 4) {
+                    ?>
+                    <div class="jwDisqusForm">
+                        <?php echo Miwoevents::get('utility')->renderDisqus($this->item)->comments; ?>
+                        <div id="jwDisqusFormFooter">
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                    <?php
+                } ?>
+            </div>
+            <?php } ?>
         </div>
         <div class="clr"></div>
     </div>
 </div>
 
+<?php if(isset($this->MiwoeventsConfig->early_bird_discount_date) AND ($this->MiwoeventsConfig->early_bird_discount_date == 1)){ ?>
+	   <script>
+            $(document).ready(function(){
+                $(".miwoevents_earl_bird_day").miwoevents_earl_bird_day({
+                    dayText     : '<?php echo MText::_('COM_MIWOEVENTS_EARL_BIRD_DAY'); ?> ',
+                    daysText    : '<?php echo MText::_('COM_MIWOEVENTS_EARL_BIRD_DAYS'); ?> ',
+                    hoursText   : '<?php echo MText::_('COM_MIWOEVENTS_EARL_BIRD_HOUR'); ?> ',
+                    minutesText : '<?php echo MText::_('COM_MIWOEVENTS_EARL_BIRD_MINUTE'); ?> ',
+                    secondsText : '<?php echo MText::_('COM_MIWOEVENTS_EARL_BIRD_SECOND'); ?> ',
+                    displayZeroDays : true,
+                    rusNumbers  :   false
+                });
+            });
+        </script>
+<?php } ?>		

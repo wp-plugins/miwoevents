@@ -19,10 +19,10 @@ class plgMiwoshopMiwoevents extends MPlugin {
 		require_once(MPATH_WP_PLG.'/miwoevents/admin/library/miwoevents.php');
 	}
 	
-	public function __destruct() {
+/*	public function __destruct() {
 		$_SESSION['meregid'] = NULL;
 	}
-	
+*/	
     public function onMiwoshopAfterOrderSave($data, $products, $vouchers, $totals, $order_id, $notify) {
         if (!isset($_SESSION['meregid'])) {
 			return;

@@ -22,6 +22,30 @@ class MiwoeventsViewMiwoevents extends MiwoeventsView {
         $this->info = $this->get('Info');
 		$this->stats = $this->get('Stats');
 		
+		$config = MiwoEvents::getConfig();
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		parent::display($tpl);
 	}
 	

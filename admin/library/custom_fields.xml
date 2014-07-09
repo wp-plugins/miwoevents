@@ -2,7 +2,7 @@
 <metadata>
     <config>
         <fields name="custom_fields">
-            <fieldset name="custom_fields" addfieldpath="/miwoevents/library/elements">
+            <fieldset name="custom_fields" addfieldpath="/miwoevents/admin/library/elements">
             </fieldset>
         </fields>
     </config>

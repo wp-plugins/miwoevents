@@ -74,27 +74,29 @@ defined('MIWI') or die ('Restricted access');
                         </div>
                     <?php
                     }
-                    if ($this->MiwoeventsConfig->show_registered) {
-                    ?>
-                        <div class="miwoevents_prop">
-                            <span class="miwoevents_label">
-                                <?php echo MText::_('COM_MIWOEVENTS_REGISTERED'); ?>
-                            </span>
-                            <span class="miwoevents_content">:&nbsp;
-                                <?php echo (int) $item->total_attenders; ?>
-                                <?php
-                                    if ($this->MiwoeventsConfig->show_list_of_attenders and ($item->total_attenders > 0) and MiwoEvents::get('acl')->canAccessAttenders('component')) {
-                                        $this->Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'event', 'event_id' => $item->id), null, true);
-                                    ?>
-                                        &nbsp;&nbsp;&nbsp;<a href="index.php?option=com_miwoevents&view=attenders&event_id=<?php echo $item->id.$this->Itemid; ?>&tmpl=component" rel="gb_page_center[600, 600]" class="registrant_list_link"><span class="view_list"><?php echo MText::_("COM_MIWOEVENTS_VIEW_LIST"); ?></span></a>
-                                    <?php
-                                    }
-                                ?>
-                            </span>
-                        </div>
-                    <?php
-                    }
-                    if ($this->MiwoeventsConfig->show_available_place && $item->event_capacity) {
+                    
+			if ($this->MiwoeventsConfig->show_available_place && $item->event_capacity) {
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     ?>
                         <div class="miwoevents_prop">
                             <span class="miwoevents_label">
@@ -106,7 +108,7 @@ defined('MIWI') or die ('Restricted access');
                         </div>
                     <?php
                     }
-					if ($item->individual_price > 0) {
+					if ($item->individual_price > 0 and $this->MiwoeventsConfig->show_individual_price) {
                         $showPrice = true;
                     } else {
                         $showPrice = false;
@@ -121,7 +123,7 @@ defined('MIWI') or die ('Restricted access');
                                 </span>
                                 <span class="miwoevents_content miwoevents_price">:&nbsp;
                                     <?php
-                                        if ($item->individual_price > 0) {
+                                        if ($item->individual_price > 0 and $this->MiwoeventsConfig->show_individual_price) {
                                             echo MiwoEvents::get('utility')->getAmount($item->individual_price, $this->MiwoeventsConfig->currency_symbol);
                                         }  else {
                                             echo '<span class="miwoevents_price">'.MText::_('COM_MIWOEVENTS_FREE').'</span>' ;
@@ -136,15 +138,18 @@ defined('MIWI') or die ('Restricted access');
                                 <span class="miwoevents_content miwoevents_price">:&nbsp;
                                     <?php
                                         if ($item->discounted_price > 0) {
-                                            if($item->early_bird_discount_type==0){
-                                            $disc_amountper=$item->individual_price*$item->early_bird_discount_amount/100;
-                                            $resultt=$item->individual_price-$disc_amountper;
-                                            echo MiwoEvents::get('utility')->getAmount($resultt, $this->MiwoeventsConfig->currency_symbol);
-                                            }else{
-                                                $disc_amountfix=$item->individual_price-$item->early_bird_discount_amount;
-                                                echo MiwoEvents::get('utility')->getAmount($disc_amountfix, $this->MiwoeventsConfig->currency_symbol);
-                                            }
-                                        }  else {
+                                            
+											echo MiwoEvents::get('utility')->getAmount($item->discounted_price, $this->MiwoeventsConfig->currency_symbol);
+							}  else {
+			
+
+
+
+
+
+
+
+
                                             echo '<span class="miwoevents_price">'.MText::_('COM_MIWOEVENTS_FREE').'</span>' ;
                                         }
                                     ?>
@@ -161,7 +166,7 @@ defined('MIWI') or die ('Restricted access');
                                 </span>
                                 <span class="miwoevents_content miwoevents_price">:&nbsp;
                                     <?php
-                                        if ($item->individual_price > 0) {
+                                        if ($item->individual_price > 0 and $this->MiwoeventsConfig->show_individual_price) {
                                             echo MiwoEvents::get('utility')->getAmount($item->individual_price, $this->MiwoeventsConfig->currency_symbol);
                                         }  else {
                                             echo '<span class="miwoevents_price">'.MText::_( 'COM_MIWOEVENTS_FREE').'</span>' ;
@@ -174,7 +179,6 @@ defined('MIWI') or die ('Restricted access');
                     }
                     
                     # Custom Fields
-                    /*
                     ########################################################################################################################
                     if (MiwoEvents::getConfig()->show_fields_in_category == 1) {
                    	$this->fields  = MiwoEvents::get('fields')->getEventFields($item->id,"yes");
@@ -191,7 +195,6 @@ defined('MIWI') or die ('Restricted access');
                             <?php } ?>
                     </div>
                    <?php } }
-                   */
                     ########################################################################################################################
                     
                     if (isset($item->paramData)) {
@@ -233,17 +236,82 @@ defined('MIWI') or die ('Restricted access');
         
         </div>
         
+        
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="clr"></div>
         <div class="miwoevents_box_content_bottom">
-            <?php
-           
-            $url = MRoute::_('index.php?option=com_miwoevents&view=event&event_id='.$item->id.$this->Itemid, false);
+            <?php 
+           	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
-			$createduserid  = $item->created_by;
-            $userid         = @$_SESSION['__default']['user']->id;
+            				if (MiwoEvents::get('acl')->canEdit()) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                $edit_url = MRoute::_('index.php?option=com_miwoevents&view=event&layout=submit&event_id='.$item->id.$edit_itemid, false);
             ?>
-            
+            <a class="<?php echo MiwoEvents::getButtonClass(); ?>" href="<?php echo $edit_url; ?>"><strong><?php echo MText::_('COM_MIWOEVENTS_EDIT'); ?></strong></a>
+            <?php } ?>
+            <?php
+            if (MiwoEvents::get('acl')->canEditState()) {
+                $unpublish_url = MRoute::_('index.php?option=com_miwoevents&view=event&task=updatestatus&event_id='.$item->id.$this->Itemid, false);
+            ?>
+            <a class="<?php echo MiwoEvents::getButtonClass(); ?>" href="<?php echo $unpublish_url; ?>"><strong><?php echo MText::_('COM_MIWOEVENTS_UNPUBLISH'); ?></strong></a>
+            <?php } ?>
             <a class="<?php echo MiwoEvents::getButtonClass(); ?>" href="<?php echo $url; ?>"><?php echo MText::_('COM_MIWOEVENTS_DETAILS'); ?></a>
         </div>
         <div class="clr"></div>

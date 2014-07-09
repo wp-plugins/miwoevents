@@ -21,6 +21,19 @@ class MiwoeventsViewCategory extends MiwoeventsView {
 		$events 			= $this->get('Events');
         $categories 		= $this->get('Categories');
 		$category 			= Miwoevents::get('utility')->getCategory($category_id);
+        $jinput		= MFactory::getApplication()->input;
+        $config		= MFactory::getConfig();
+        $document = MFactory::getDocument();
+        
+        // Add feed
+        if (true) { //$this->getParams()->get('rss',1)
+            $link	= '&format=feed';
+            $attribs = array('type' => 'application/rss+xml', 'title' => 'RSS 2.0');
+            $document->addHeadLink(MRoute::_($link.'&type=rss'), 'alternate', 'rel', $attribs);
+            $attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');
+            $document->addHeadLink(MRoute::_($link.'&type=atom'), 'alternate', 'rel', $attribs);
+        }
+
 
         if (is_object($category) and !MiwoEvents::get('acl')->canAccess($category->access)) {
             MFactory::getApplication()->redirect(MRoute::_('index.php?option=com_miwoevents&view=category'), MText::_('JERROR_ALERTNOAUTHOR'), 'error');
@@ -98,6 +111,10 @@ class MiwoeventsViewCategory extends MiwoeventsView {
 		parent::display($tpl);
 	}
 
+    public function rss(){
+
+    }
+
 	public function displayCalendar($tpl = null) {
         $Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'calendar'), null, true);
 
@@ -108,7 +125,7 @@ class MiwoeventsViewCategory extends MiwoeventsView {
             $theme = 'default';
         }
 
-        $styleUrl = MUri::base(true).'/components/com_miwoevents/assets/css/themes/'.$theme.'.css';
+        $styleUrl = MURL_MIWOEVENTS.'/site/assets/css/themes/'.$theme.'.css';
         $this->document->addStylesheet($styleUrl, 'text/css', null, null);
 
         
@@ -116,8 +133,7 @@ class MiwoeventsViewCategory extends MiwoeventsView {
         
 		$category 	= Miwoevents::get('utility')->getCategory($category_id);
 		$calendar 	= MiwoeventsModel::getInstance('Calendar', 'MiwoeventsModel', array());
-		$calCat     = $calendar->getCalCategories();
-		
+
 		list($year, $month, $day) = $calendar->getYMD();
 
 		$this->data 	= $calendar->getMonthlyEvents();
@@ -146,8 +162,7 @@ class MiwoeventsViewCategory extends MiwoeventsView {
 		
 		$this->Itemid 	= $Itemid;
         $this->params   = $this->_mainframe->getParams();
-		$this->calCat   = $calCat;
-			
+
 		parent::display($tpl);			
 	}
 
@@ -155,5 +170,32 @@ class MiwoeventsViewCategory extends MiwoeventsView {
         $this->display($tpl);
     }
 
-    public function displaySubmit($tpl = null) {}
+    public function displaySubmit($tpl = null) {
+        if (!MiwoEvents::get('acl')->canEdit() and !MiwoEvents::get('acl')->canCreate()) {
+            MFactory::getApplication()->redirect('index.php?option=com_miwoevents&view=category', MText::_('JERROR_ALERTNOAUTHOR'));
+        }
+
+        $_lang = MFactory::getLanguage();
+        $_lang->load('com_miwoevents', MPATH_ADMINISTRATOR, 'en-GB', true);
+        $_lang->load('com_miwoevents', MPATH_ADMINISTRATOR, $_lang->getDefault(), true);
+        $_lang->load('com_miwoevents', MPATH_ADMINISTRATOR, null, true);
+
+        if (MiwoEvents::is30()) {
+            MHtml::_('formbehavior.chosen', 'select');
+        }
+
+        $this->document->addStyleSheet(MURL_MIWOEVENTS.'/site/assets/css/submit.css');
+        $this->document->addStyleSheet(MURL_MIWOEVENTS.'/admin/assets/css/joomla3.css');
+
+        require_once(MPATH_MIWOEVENTS_ADMIN.'/views/categories/view.edit.php');
+
+        $options['name'] = 'categories';
+        $options['layout'] = 'default_edit';
+        $options['base_path'] = MPATH_MIWOEVENTS_ADMIN;
+        $view = new MiwoEventsViewCategories($options);
+
+        $view->setModel($this->getModel(), true);
+
+        $view->display();
+    }
 }

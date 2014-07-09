@@ -10,7 +10,7 @@ defined('MIWI') or die ;
 $param = null;
 
 //Load greybox lib
-$greyBox = MUri::base().'components/com_miwoevents/assets/js/greybox/';
+$greyBox = MURL_MIWOEVENTS.'/site/assets/js/greybox/';
 ?>
 <script type="text/javascript">
     var GB_ROOT_DIR = "<?php echo $greyBox ; ?>";
@@ -35,7 +35,11 @@ $greyBox = MUri::base().'components/com_miwoevents/assets/js/greybox/';
 	<div class="miwoevents_cat">
         <?php if (!empty($this->category->introtext) or !empty($this->category->fulltext)) { ?>
             <div class="miwi_description"><?php echo $this->category->introtext.$this->category->fulltext; ?></div>
+			
         <?php } ?>
+		
+
+
 	</div>
     <div class="clr"></div>
 <?php 
@@ -100,16 +104,16 @@ if (!empty($this->categories)) {
                 $n = count($this->items);
 		        for ($i = 0; $i < $n; $i++) {
 		        	$item = $this->items[$i];
-		        	$canRegister = MiwoEvents::get('events')->canRegister($item->id);
-
-                    $waitingList = false;
-
 		        	$url = MRoute::_('index.php?option=com_miwoevents&view=event&event_id='.$item->id.$this->Itemid);
-		        	
-		        	if (($item->event_capacity > 0) and ($item->event_capacity <= $item->total_attenders) and $this->MiwoeventsConfig->waitinglist_enabled and !$item->user_registered) {
-		        	    $waitingList = true;
-		        	    $waitinglistUrl = MRoute::_('index.php?option=com_miwoevents&view=waitinglist&task=waitinglist_form&id='.$item->id.$this->Itemid);
-		        	}
+
+
+
+
+
+
+
+
+
 
                     $template = MFactory::getApplication()->getTemplate();
                     $ovrr_path = MPATH_WP_CNT.'/themes/'.$template.'/html/com_miwoevents/event/common.php';

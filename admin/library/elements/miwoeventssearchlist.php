@@ -45,6 +45,11 @@ class MFormFieldMiwoeventsSearchlist extends MFormField {
         }
 		
 		foreach ($rows as $row) {
+			# Don't shwo Password field
+			if ($row->name == "miwi_password") {
+				continue;
+			}
+			
 			$_name = $row->name;
 
             if (!isset($config->$fieldName->search->$_name)) {

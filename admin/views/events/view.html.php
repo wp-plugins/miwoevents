@@ -95,7 +95,33 @@ class MiwoEventsViewEvents extends MiwoeventsView {
         if ($acl->canCreate()) {
             MToolBarHelper::addNew();
         }
+
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $this->toolbar->appendButton('Popup', 'help1', MText::_('Help'), 'http://miwisoft.com/support/docs/wordpress/miwoevents/user-manual/fields?tmpl=component', 650, 500);
     }
 }

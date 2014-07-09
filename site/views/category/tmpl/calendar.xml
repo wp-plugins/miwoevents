@@ -8,7 +8,7 @@
 		<description>Displays events from a category in calendar view.</description>
 		<fields name="request">			
 			<fieldset name="request"
-				addfieldpath="/miwoevents/library/elements">
+				addfieldpath="/miwoevents/admin/library/elements">
 				<field name="category_id" type="miwoeventscategories" size="3" default="0" label="Select Category" description="Choose the category which you want to display events" />				
 				<field name="default_month" type="list" default="0" label="Default Month" description="Choose the month you want to display events from. If you don't choose any month, the current month will be used">
 					<option value="0">Current Month</option>

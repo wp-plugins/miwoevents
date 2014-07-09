@@ -13,23 +13,20 @@ table.adminlist td.ordering span {
     background-repeat: no-repeat;
     height: 13px;
 }
-table.adminlist td.ordering span {
-    background-repeat: no-repeat;
-    height: 13px;
-}
 
-.miwoevents_cpanel, #miwoevents_cpanel { clear:both; margin:-1px 0 8px; padding:8px 0; position:relative; z-index:0; min-height: 95px; }
-.miwoevents_cpanel, #miwoevents_cpanel div.icon-wrapper { float:left; display: block !important; width: auto !important; height :auto!important; line-height:12px !important; background-image: none !important; }
+/* Icons */
+.cpanel_miwoevents, #cpanel_miwoevents { clear:both; margin:-1px 0 8px; padding:8px 0; position:relative; z-index:0; min-height: 95px; }
+.cpanel_miwoevents, #cpanel_miwoevents div.icon-wrapper { float:left; display: block !important; width: auto !important; height :auto!important; line-height:12px !important; background-image: none !important; }
 
-.miwoevents_cpanel div.icon,
-#miwoevents_cpanel div.icon {
+.cpanel_miwoevents div.icon,
+#cpanel_miwoevents div.icon {
     float: left;
     margin: 0px 15px 0px 0px;
     text-align: center;
 }
 
-.miwoevents_cpanel div.icon a,
-#miwoevents_cpanel div.icon a {
+.cpanel_miwoevents div.icon a,
+#cpanel_miwoevents div.icon a {
     background-color: #FFFFFF;
     background-position: -30px center;
     border: 1px solid #CCCCCC;
@@ -45,24 +42,77 @@ table.adminlist td.ordering span {
     width: 108px;
 }
 
-.miwoevents_cpanel div.icon a:hover,
-#miwoevents_cpanel div.icon a:hover,
-.miwoevents_cpanel div.icon a:focus,
-#miwoevents_cpanel div.icon a:focus,
-.miwoevents_cpanel div.icon a:active,
-#miwoevents_cpanel div.icon a:active {
+.cpanel_miwoevents div.icon a:hover,
+#cpanel_miwoevents div.icon a:hover,
+.cpanel_miwoevents div.icon a:focus,
+#cpanel_miwoevents div.icon a:focus,
+.cpanel_miwoevents div.icon a:active,
+#cpanel_miwoevents div.icon a:active {
     border-bottom-left-radius: 50% 20px;
     box-shadow: -5px 10px 15px rgba(0, 0, 0, 0.25);
 }
 
-.miwoevents_cpanel img,
-#miwoevents_cpanel img {
+.cpanel_miwoevents img,
+#cpanel_miwoevents img {
     margin: 0 auto;
     padding: 10px 0;
 }
 
-.miwoevents_cpanel span,
-#miwoevents_cpanel span {
+.cpanel_miwoevents span,
+#cpanel_miwoevents span {
+    display: block;
+    text-align: center;
+}
+table.adminlist td.ordering span {
+    background-repeat: no-repeat;
+    height: 13px;
+}
+
+.cpanel_miwoevents, #cpanel_miwoevents { clear:both; margin:-1px 0 8px; padding:8px 0; position:relative; z-index:0; min-height: 95px; }
+.cpanel_miwoevents, #cpanel_miwoevents div.icon-wrapper { float:left; display: block !important; width: auto !important; height :auto!important; line-height:12px !important; background-image: none !important; }
+
+.cpanel_miwoevents div.icon,
+#cpanel_miwoevents div.icon {
+    float: left;
+    margin: 0px 15px 0px 0px;
+    text-align: center;
+}
+
+.cpanel_miwoevents div.icon a,
+#cpanel_miwoevents div.icon a {
+    background-color: #FFFFFF;
+    background-position: -30px center;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    color: #565656;
+    display: block;
+    float: left;
+    height: 97px;
+    text-decoration: none;
+    transition-duration: 0.8s;
+    transition-property: background-position, -moz-border-radius-bottomleft, -moz-box-shadow;
+    vertical-align: middle;
+    width: 108px;
+}
+
+.cpanel_miwoevents div.icon a:hover,
+#cpanel_miwoevents div.icon a:hover,
+.cpanel_miwoevents div.icon a:focus,
+#cpanel_miwoevents div.icon a:focus,
+.cpanel_miwoevents div.icon a:active,
+#cpanel_miwoevents div.icon a:active {
+    border-bottom-left-radius: 50% 20px;
+    box-shadow: -5px 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+.cpanel_miwoevents img,
+#cpanel_miwoevents img {
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.cpanel_miwoevents span,
+#cpanel_miwoevents span {
     display: block;
     text-align: center;
 }

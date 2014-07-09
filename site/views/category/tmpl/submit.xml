@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Submit a Category">
+		<message>Display the category creation form.</message>
+	</layout>
+	<state>
+		<name>Submit a Category</name>
+		<description>Display the category creation form.</description>
+	</state>
+</metadata>

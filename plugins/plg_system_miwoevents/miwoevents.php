@@ -191,9 +191,13 @@ class plgSystemMiwoevents extends MPlugin {
 		SELECT a.id, a.fields, a.register_date, b.id AS event_id, b.title AS event_title, b.event_date
 		FROM #__miwoevents_attenders AS a INNER JOIN #__miwoevents_events AS b
 		ON a.event_id = b.id
-		WHERE a.reminder_sent = 0 AND b.enable_auto_reminder=1 AND (b.remind_before_x_days =< DATEDIFF(b.event_date, NOW())) AND (DATEDIFF(b.event_date, NOW()) >=0) ORDER BY b.event_date, a.register_date
+		WHERE a.reminder_sent = 0 AND b.enable_auto_reminder=1 AND (b.remind_before_x_days =< DATEDIFF(b.event_date, NOW())) AND (DATEDIFF(b.event_date, NOW()) >=0) 
+		ORDER BY b.event_date, a.register_date
 		LIMIT {$number_attenders}
 		";
+		
+//		SELECT a.id, a.fields, a.register_date, b.id AS event_id, b.title AS event_title, b.event_date, DATEDIFF(b.event_date, NOW()) as rx, b.remind_before_x_days	
+//		WHERE a.reminder_sent = 0 AND b.enable_auto_reminder=1 AND b.remind_before_x_days <= rx
 		
 		$db->setQuery($sql);
 		$rows = $db->loadObjectList();
@@ -226,7 +230,7 @@ class plgSystemMiwoevents extends MPlugin {
 				$mailer->sendMail($fromEmail, $fromName, $fields->email, $emailSubject, $emailBody, 1);
 			}
 			else {
-				JUtility::sendMail($fromEmail, $fromName, $fields->email, $emailSubject, $emailBody, 1);
+				MUtility::sendMail($fromEmail, $fromName, $fields->email, $emailSubject, $emailBody, 1);
 			}							 		
 		}	
 		

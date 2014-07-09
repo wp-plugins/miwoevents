@@ -49,6 +49,9 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
 				$this->_db->setQuery($sql);
 				
 				$row->categories = implode(' | ', $this->_db->loadColumn());
+				if(empty($row->categories)){
+                    $row->categories =  MText::_('COM_MIWOEVENTS_UNRELATED_CATEGORY');
+                }
 			}
 			
 			$this->_data = $rows;									
@@ -192,7 +195,7 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
 		$data['title'] 			= $data['title']." Copy";
 		$data['alias']			= $data['alias']."-copy";
 		$data["product_id"]		= 0;
-		$this->saveEventShopData($data, $row, $db);
+		
 		
     	# Get Product ID
 		$row->product_id =$data["product_id"];
@@ -229,7 +232,18 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
 		return $productID ;
 	}
 	
-	public function autoComplete($query){}
+	public function autoComplete($query){
+        if (!empty($query)) {
+            $sql = "SELECT id, name FROM #__miwoevents_fields WHERE display_in = 2 AND LOWER(name) LIKE '%".strtolower($query)."%' ORDER BY name DESC";
+            $this->_db->setQuery($sql);
+            $events = $this->_db->loadAssocList();
+        }
+        else {
+            $events = array();
+        }
+
+        return $events;
+    }
     
     public function getFields() {
     	return MiwoDatabase::loadObjectList("SELECT * FROM #__miwoevents_fields WHERE display_in = 1 AND published = 1 ORDER BY ordering");
@@ -366,9 +380,7 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
 		$row->params = $prm->toString();
 		
 		# Custom Fields for Events
-		$data['custom_fields'] = array("0","1");
 		$data['fields'] = json_encode($data['custom_fields']);
-		
 		
 		$row->event_date = "{$data['event_date']} {$data['event_date_hour']}:{$data['event_date_minute']}:00";
 		$data['event_date'] = $row->event_date;
@@ -394,6 +406,12 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
 		}
 		
 		
+
+
+
+
+
+
 		# ReSet Group Rates
 		$group_rates = array();
 		if (!empty($data['registrant_number'])) {
@@ -420,9 +438,214 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
 		MiwoEvents::get('utility')->trigger('onMiwoeventsAfterSaveEvent', array($row, $data, $isNew));
     }
     
-	public function saveEventShopData(&$data,$row,$db) {}
+	
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function saveNormalEvent(&$data, $row, $isNew) {
 		
 		$group_rates = array();
@@ -487,13 +710,13 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
 			return false;
 		}
 		
-		$days = NULL;
-		foreach($data['weekdays'] as $day){ $days = $days.",".$day; }
-		$days = substr($days, 1);
-		MiwoDatabase::query("UPDATE #__miwoevents_events SET weekdays='{$days}' where id=".$data['id']);
 		
-		//$row->event_type		= 1;
-		
+
+
+
+
+
+
 		# Adjust event start date and event end date
 		if ($data['recurring_type'] == 1) {
 			$eventDates = MiwoEvents::get('events')->getDailyRecurringEventDates($row->event_date, $data['recurring_end_date'], (int)$data['number_days'], (int)$data['recurring_occurrencies']);
@@ -641,6 +864,10 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
 		$this->process = true;
 	}
 
-    public function getOptionValueID($name){}
-	######################################################################################################################################################################################################
+    
+
+
+
+
+
 }

@@ -139,7 +139,7 @@ class MiwoeventsViewCalendar extends MiwoeventsView {
             $theme = 'default';
         }
 
-        $styleUrl = MUri::base(true).'/components/com_miwoevents/assets/css/themes/'.$theme.'.css';
+        $styleUrl = MURL_MIWOEVENTS.'/site/assets/css/themes/'.$theme.'.css';
         $this->document->addStylesheet($styleUrl, 'text/css', null, null);
     }
 }

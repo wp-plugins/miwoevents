@@ -11,7 +11,7 @@ $col = 2;
 
 if ($this->MiwoeventsConfig->show_location_in_category_view) {
 //Load greybox lib
-$greyBox = MUri::base().'components/com_miwoevents/assets/js/greybox/';
+$greyBox = MURL_MIWOEVENTS.'/site/assets/js/greybox/';
 ?>
 <script type="text/javascript">
     	var GB_ROOT_DIR = "<?php echo $greyBox ; ?>";
@@ -25,6 +25,23 @@ $width = 600;
 $height = 350;
 }
 MHtml::_('behavior.modal');
+
+		if ($this->MiwoeventsConfig->show_cat_decription_in_calendar_layout) {
+		if($this->category->title != '') {
+		?>
+		<div class="miwoevents_box">
+			<div class="miwoevents_box_heading">
+				<h1 class="miwoevents_box_h1"><?php echo $this->category->title; ?></h1>
+			</div>
+			
+			<div class="miwoevents_box_content">
+			<?php echo $this->category->description;?>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<?php }
+		} else {
+			
 ?>
 
 <div class="miwoevents_box">
@@ -88,15 +105,15 @@ MHtml::_('behavior.modal');
 				</th>	
 			<?php	
 			}
-			if ($this->MiwoeventsConfig->show_registered) {
-				$col++ ;
 			?>
-				<th class="sectiontableheader registered_col">
-					<?php echo MText::_('COM_MIWOEVENTS_REGISTERED'); ?>
-				</th>
-			<?php	
-			}
-			?>										
+
+
+
+
+
+
+
+
 			</tr>
 			</thead>
 			<tbody>
@@ -107,16 +124,16 @@ MHtml::_('behavior.modal');
 
 				for ($i = 0; $i < $n; $i++) {
 					$item = $this->items[$i];
-					$canRegister = MiwoEvents::get('events')->canRegister($item->id);
+					
                     $this->Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'event', 'event_id' => $item->id), null, true);
 
-				    if (($item->event_capacity > 0) and ($item->event_capacity <= $item->total_attenders) and $this->MiwoeventsConfig->waitinglist_enabled and !$item->user_registered) {
-		        	    $waitingList = true;
-		        	    $waitinglistUrl = MRoute::_('index.php?option=com_miwoevents&task=waitinglist_form&event_id='.$item->id.$this->Itemid);
-		        	}
-                    else {
-		        	    $waitingList = false;
-		        	}
+				    
+
+
+
+
+
+
 
 		        	$k = 1 - $k;
 				?>
@@ -128,7 +145,7 @@ MHtml::_('behavior.modal');
 									<?php
 										if ($item->thumb) {
 										?>
-											<a href="<?php echo MURL_MEDIA.'/com_miwoevents/images/'.$item->thumb; ?>" class="modal"><img src="<?php echo MURL_MEDIA.'/com_miwoevents/images/thumbs/'.$item->thumb; ?>" class="miwoevents_thumb-left" height="<?php echo $this->MiwoeventsConfig->thumb_width?>" width="<?php echo $this->MiwoeventsConfig->thumb_height?>"/></a>
+											<a href="<?php echo MURI::base().'media/com_miwoevents/images/'.$item->thumb; ?>" class="modal"><img src="<?php echo MURI::base().'media/com_miwoevents/images/thumbs/'.$item->thumb; ?>" class="miwoevents_thumb-left"/></a>
 										<?php	
 										} else {
 											echo ' ';
@@ -193,86 +210,85 @@ MHtml::_('behavior.modal');
 								</td>
 							<?php	
 							}
-							if ($this->MiwoeventsConfig->show_registered) {
 							?>
-								<td style="text-align: center;">
-									<?php
-										echo $item->total_attenders ;
-									?>
-								</td>
-							<?php	
-							}
-						?>																											
+
+
+
+
+
+
+
+
+
 					</tr>
 					<?php
-						if ($waitingList or $canRegister or ($item->registration_type != 3 and $this->MiwoeventsConfig->display_message_for_full_event)) {
-						?>					
-							<tr class="<?php echo @$tab; ?>">					
-								<td colspan="<?php echo $col; ?>">
-									<?php
-										if ($canRegister or $waitingList) {
-										?>
-											<div class="miwoevents_taskbar" style="float: right;">
-											    	<?php
-                                                        $this->Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'event', 'event_id' => $item->id), null, true);
+						$k = 1 - $k ;
 
-											    		if ($item->registration_type == 0 or $item->registration_type == 1) {
-										    				$url = MRoute::_('index.php?option=com_miwoevents&task=individual_registration&event_id='.$item->id.$this->Itemid);
-										    				$text = MText::_('COM_MIWOEVENTS_REGISTER_INDIVIDUAL');
 
-                                                            if ($waitingList) {
-                                                                $url = $waitinglistUrl;
-                                                            }
-                                                            ?>
-                                                                <a class="<?php echo MiwoEvents::getButtonClass(); ?>" href="<?php echo MRoute::_('index.php?option=com_miwoevents&view=registration&layout=individual&event_id='.$item->id.$this->Itemid); ?>"><?php echo $text; ?></a>
-                                                            <?php
-											    		}								    	
-											    		if (($item->registration_type == 0 or $item->registration_type == 2)) {
-											    		?>
-													    	<a class="<?php echo MiwoEvents::getButtonClass(); ?>" href="<?php echo $waitingList ? $waitinglistUrl : MRoute::_('index.php?option=com_miwoevents&view=registration&layout=group&event_id='.$item->id.$this->Itemid); ?>"><?php echo MText::_( 'COM_MIWOEVENTS_REGISTER_GROUP'); ?></a>
-											    		<?php	
-											    		}								    		
-											    	?>								    									   						 			
-											   
-											    <div class="clr"></div>
-											</div>		
-										<?php	
-										} elseif($item->registration_type != 3 and $this->MiwoeventsConfig->display_message_for_full_event and !$waitingList) {
-										    if (@$item->user_registered) {
-										    	$msg = MText::_('COM_MIWOEVENTS_YOU_REGISTERED_ALREADY');
-										    }
-                                            elseif (!in_array($item->registration_access, $this->view_levels)) {
-										    	$msg = MText::_('COM_MIWOEVENTS_LOGIN_TO_REGISTER');
-										    }
-                                            else {
-										    	$msg = MText::_('COM_MIWOEVENTS_NO_LONGER_ACCEPT_REGISTRATION');
-										    }
-										?>	
-											<div class="miwoevents_notice_table">
-												<?php echo $msg ; ?>
-											</div>
-										<?php
-										}
-									?>
-								</td>
-							</tr>
-						<?php
-						}
-					$k = 1 - $k ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				}
 				
 			?>
 			</tbody>
 			<?php
-			//if ($this->pagination->total > $this->pagination->limit) { 
-			$this->pagination->limit = 0;
+			if ($this->pagination->total > $this->pagination->limit) { 
 			?>
 			<tfoot>
 				<tr>
 					<td colspan="<?php echo $col ; ?>"><div align="center" class="pagination"><?php echo $this->pagination->getListFooter(); ?></div></td>
 				</tr>
 			</tfoot>
-			<?php //} ?>
+			<?php } ?>
 		</table>
 	
 		<input type="hidden" name="Itemid" value="<?php echo $this->Itemid; ?>" />	
@@ -285,3 +301,6 @@ MHtml::_('behavior.modal');
 	</div>
 	<div class="clr"></div>
 </div>
+
+<?php } ?>
+			

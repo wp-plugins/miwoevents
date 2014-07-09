@@ -1,21 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
 	<!-- General -->
-	<fieldset name="COM_MIWOEVENTS_GENERAL" label="COM_MIWOEVENTS_GENERAL" description="" addfieldpath="/miwoevents/library/elements">
-		<field name="pid" type="password" readonly="true" default="" label="COM_MIWOEVENTS_CONFIG_PERSONAL_ID" description="COM_MIWOEVENTS_CONFIG_PERSONAL_ID_HELP" ></field>
+	<fieldset name="COM_MIWOEVENTS_GENERAL" label="COM_MIWOEVENTS_GENERAL" description="" addfieldpath="/miwoevents/admin/library/elements">
+		<field name="pid" readonly="true" type="password" default="" label="COM_MIWOEVENTS_CONFIG_PERSONAL_ID" description="COM_MIWOEVENTS_CONFIG_PERSONAL_ID_HELP" ></field>
 		
 		
-		<field name="version_checker" type="radio" class="btn-group" default="1" label="COM_MIWOEVENTS_CONFIG_VERSION_CHECKER" description="COM_MIWOEVENTS_CONFIG_VERSION_CHECKER_HELP" >
+
+
+
+
+
+		<field name="cb_integration" type="list" default="" label="COM_MIWOEVENTS_INTEGRATION" description="" >
+			<option value="0">COM_MIWOEVENTS_NO_INTEGRATION</option>
+			<option value="1">Community Builder</option>
+			<option value="2">JomSocial</option>
+		</field>
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <field name="version_checker" type="radio" class="btn-group" default="1" label="COM_MIWOEVENTS_CONFIG_VERSION_CHECKER" description="COM_MIWOEVENTS_CONFIG_VERSION_CHECKER_HELP" >
 			<option value="0">MNO</option>
 	        <option value="1">MYES</option>
 		</field>
 		
+		<field name="early_bird_discount_date" type="radio" class="btn-group" default="0" label="COM_MIWOEVENTS_EARLY_BIRD_DISCOUNT_DATE" description="COM_MIWOEVENTS_EARLY_BIRD_DISCOUNT_DATE_DESC" >
+			<option value="0">MNO</option>
+			<option value="1">MYES</option>
+		</field>
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<field name="activate_recurring_event" type="radio" class="btn-group" default="0" label="COM_MIWOEVENTS_ACTIVATE_RECURRING_EVENT" description="COM_MIWOEVENTS_ACTIVATE_RECURRING_EVENT_EXPLAIN" >
 			<option value="0">MNO</option>
 			<option value="1">MYES</option>
 		</field>
 		
 		<field name="hide_past_events" type="radio" class="btn-group" default="0" label="COM_MIWOEVENTS_HIDE_PAST_EVENTS" description="COM_MIWOEVENTS_HIDE_PAST_EVENTS_EXPLAIN" >
+			<option value="0">MNO</option>
+			<option value="1">MYES</option>
+		</field>
+		
+		<field name="hide_location_maps" type="radio" class="btn-group" default="0" label="COM_MIWOEVENTS_HIDE_LOCATION_MAPS" description="COM_MIWOEVENTS_HIDE_LOCATION_MAPS_EXPLAIN" >
 			<option value="0">MNO</option>
 			<option value="1">MYES</option>
 		</field>
@@ -32,14 +100,24 @@
 		<field name="event_date_format" type="text" default="d-m-Y g:i a" label="COM_MIWOEVENTS_EVENT_DATE_FORMAT" description="COM_MIWOEVENTS_EVENT_DATE_FORMAT_EXPLAIN" ></field>
 		
 		<field name="event_time_format" type="text" default="g:i a" label="COM_MIWOEVENTS_TIME_FORMAT" description="COM_MIWOEVENTS_TIME_FORMAT_EXPLAIN" ></field>
+
+		<field name="currency_symbol" type="text" default="$" label="COM_MIWOEVENTS_CURRENCY_SYMBOL" description="" ></field>
+
+        <field name="decimals" type="text" default="2" label="COM_MIWOEVENTS_DECIMALS" description="COM_MIWOEVENTS_DECIMALS_EXPLAIN" ></field>
+
+        <field name="dec_point" type="text" default="." label="COM_MIWOEVENTS_DECIMAL_POINT" description="COM_MIWOEVENTS_DECIMAL_POINT_EXPLAIN" ></field>
+
+        <field name="thousands_sep" type="text" default="," label="COM_MIWOEVENTS_THOUNSANDS_SEP" description="COM_MIWOEVENTS_THOUNSANDS_SEP_EXPLAIN" ></field>	
+			
 		
-		<field name="currency_symbol" type="miwoeventscurrencies" default="$" label="COM_MIWOEVENTS_CURRENCY_SYMBOL" description="" ></field>
+		<field name="currency_symbol" type="text" default="$" label="COM_MIWOEVENTS_CURRENCY_SYMBOL" description="" ></field>
 		
 		<field name="currency_position" type="list" default="0" label="COM_MIWOEVENTS_CURRENCY_POSITION" description="" >
 			<option value="0">COM_MIWOEVENTS_BEFORE_AMOUNT</option>
 			<option value="1">COM_MIWOEVENTS_AFTER_AMOUNT</option>
 		</field>
 
+        <field name="csv_delimiter" type="text" default="," label="COM_MIWOEVENTS_CSV_DELIMITTER" description="" ></field>
 	</fieldset>
 	
 	<!-- Frontend -->
@@ -63,15 +141,39 @@
 	        <option value="2">COM_MIWOEVENTS_EVENT_DATE</option>
 		</field>
 		
+		<field name="comments" type="list" default="0" label="COM_MIWOEVENTS_CONFIG_COMMENTS" description="">
+            <option value="0">COM_MIWOEVENTS_CONFIG_COMMENTS_DISABLED</option>
+            <option value="1">JComments</option>
+            <option value="2">Komento</option>
+            <!-- <option value="3">CComment</option> -->
+            <option value="4">DISQUS</option>
+        </field>
+        
+        <field name="disqus_domain" type="text" default="" label="COM_MIWOEVENTS_CONFIG_COMMENTS_DISQUS_DOMAIN" description="COM_MIWOEVENTS_CONFIG_COMMENTS_DISQUS_DOMAIN_HELP"></field>
+        
         <field name="button_class" type="text" default="miwoevents_button" label="COM_MIWOEVENTS_BUTTON_CLASS" description="COM_MIWOEVENTS_BUTTON_CLASS_EXPLAIN" ></field>
 
 		<field name="number_categories" type="text" default="7" label="COM_MIWOEVENTS_CATEGORIES_PER_PAGE" description="" ></field>
 		
 		<field name="number_events" type="text" default="5" label="COM_MIWOEVENTS_EVENTS_PER_PAGE" description="" ></field>
 		
-		<field name="thumb_width" type="text" default="120" label="COM_MIWOEVENTS_THUMB_WIDTH" description="" ></field>
 		
-		<field name="thumb_height" type="text" default="120" label="COM_MIWOEVENTS_THUMB_HEIGHT" description="" ></field>
+
+
+
+		
+
+
+
+
+
+
+
+
+		  <field name="group_registration_appearance" type="radio" class="btn-group" default="0" label="COM_MIWOEVENTS_GROUP_REGISTRATION_APPEARANCE" description="" >
+            <option value="0">General</option>
+            <option value="1">Limited</option>
+        </field>
 		
 		<field name="show_multiple_days_event_in_calendar" type="radio" class="btn-group" default="1" label="COM_MIWOEVENTS_SHOW_MULTIPLE_DAYS_EVENT_IN_CALENDAR" description="" >
 			<option value="0">MNO</option>
@@ -108,11 +210,21 @@
 	        <option value="1">MYES</option>
 		</field>
 		
+		
+
+
+
+
 		<field name="show_available_place" type="radio" class="btn-group" default="1" label="COM_MIWOEVENTS_SHOW_AVAILABLE_PLACES" description="" >
 			<option value="0">MNO</option>
 	        <option value="1">MYES</option>
 		</field>
 		
+		
+
+
+
+
 		<field name="show_location_in_category_view" type="radio" class="btn-group" default="1" label="COM_MIWOEVENTS_SHOW_LOCATION_IN_CATEGORY_VIEW" description="" >
 			<option value="0">MNO</option>
 	        <option value="1">MYES</option>
@@ -173,6 +285,11 @@
 	        <option value="1">MYES</option>
 		</field>
 		
+		
+
+
+
+
 		<field name="activate_weekly_calendar_view" type="radio" class="btn-group" default="1" label="COM_MIWOEVENTS_ACTIVATE_WEEKLY_CALENDAR_VIEW" description="" >
 			<option value="0">MNO</option>
 	        <option value="1">MYES</option>
@@ -188,33 +305,132 @@
 	        <option value="1">MYES</option>
 		</field>
 	</fieldset>
-	
-	<!-- E-Mails -->
-	<fieldset name="COM_MIWOEVENTS_EMAILS" label="COM_MIWOEVENTS_EMAILS" description="This feature is only available in MiwoEvents PRO version">
-		<field name="feature" type="radio" class="btn-group" default="0" label="This feature is only available in MiwoEvents PRO version" description="" >
-			<option value="0"></option>
-		</field>
-	</fieldset>
 
+    <!-- E-Mails -->
+    
+			<fieldset name="COM_MIWOEVENTS_EMAILS" label="COM_MIWOEVENTS_EMAILS" description="This feature is only available in Booking version">
+			</fieldset>
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 	<!-- Individual Fields -->
 	<fieldset name="COM_MIWOEVENTS_INDIVIDUAL_FIELDS" label="COM_MIWOEVENTS_INDIVIDUAL_FIELDS" description="This feature is only available in Booking version">
-		<field name="feature1" type="radio" class="btn-group" default="0" label="This feature is only available in MiwoEvents PRO version" description="" >
-			<option value="0"></option>
-		</field>
-	</fieldset>
 
+
+	</fieldset>
+	
 	<!-- Group Fields -->
 	<fieldset name="COM_MIWOEVENTS_GROUP_FIELDS" label="COM_MIWOEVENTS_GROUP_FIELDS" description="This feature is only available in Booking version">
-		<field name="feature2" type="radio" class="btn-group" default="0" label="This feature is only available in MiwoEvents PRO version" description="" >
-			<option value="0"></option>
-		</field>
-	</fieldset>
 
+
+	</fieldset>
+	
 	<!-- Search / List Fields -->
 	<fieldset name="COM_MIWOEVENTS_SEARCH_LIST_FIELDS" label="COM_MIWOEVENTS_SEARCH_LIST_FIELDS" description="This feature is only available in Booking version">
-		<field name="feature3" type="radio" class="btn-group" default="0" label="This feature is only available in MiwoEvents PRO version" description="" >
-			<option value="0"></option>
-		</field>
+
+
 	</fieldset>
 	
 	<!-- Permission Fix The Bottom -->

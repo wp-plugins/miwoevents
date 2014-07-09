@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `#__miwoevents_categories` (
   `parent` 		int(11) 		DEFAULT NULL,
   `title` 		varchar(255) 	DEFAULT NULL,
   `alias` 		varchar(255) 	DEFAULT NULL,
-  `description` text 			DEFAULT NULL,
+  
   `introtext`	mediumtext,
   `fulltext` 	mediumtext,
   `ordering` 	int(11) 		DEFAULT NULL,

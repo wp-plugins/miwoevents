@@ -8,7 +8,7 @@
 		<description>Display detail information about the event.</description>
 		<fields name="request">			
 			<fieldset name="request"
-				addfieldpath="/miwoevents/library/elements">
+				addfieldpath="/miwoevents/admin/library/elements">
 				<field name="event_id" type="miwoeventsevents" size="3" default="0" label="Event" description="Select Event which you want to link to" />
 			</fieldset>	
 		</fields>			

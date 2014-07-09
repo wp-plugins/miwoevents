@@ -1,0 +1,97 @@
+.font-light, section h2, section .big-countdown > div > span {
+	font-family: 'Open Sans', sans-serif;
+    font-weight: normal
+}
+
+.font-bold, section .countdown input[type="text"], section .countdown .miwoevents_earl_bird_day-2 {
+	font-family: 'Open Sans', sans-serif;    
+	font-weight: normal;
+}
+
+.font-italic {
+	font-family: 'Open Sans', sans-serif;
+    font-weight: normal
+}
+
+.font-regular, body, section .countdown .miwoevents-days-text, section .countdown .miwoevents-hours-text, section .countdown .miwoevents-min-text, section .countdown .miwoevents-sec-text {
+	font-family: 'Open Sans', sans-serif;
+    font-weight: normal
+}
+
+section {
+	border-radius: 0px 2em 0px 0px;
+    background: #f1f1f1;
+    padding: 30px 0px 1px;
+}
+
+section h2 {
+    font-size: 32px;
+    margin: 0 0 45px;
+    text-align: center;
+    text-transform: uppercase
+}
+
+section .big-countdown h3 {
+    font-weight: normal;
+    font-size: 13px;
+    text-align: center;
+    margin: 0
+}
+
+section .big-countdown > div {
+    text-align: center;
+    margin: 0 0 25px 0
+}
+
+section .big-countdown > div > span {
+    font-size: 52px;
+    text-shadow: 1px 1px 0 #ffffff;
+    color: #3767b9
+}
+
+section .big-countdown .miwoevents-days-text, section .big-countdown .miwoevents-hours-text, section .big-countdown .miwoevents-min-text, section .big-countdown .miwoevents-sec-text {
+    font-size: 28px;
+    margin-right: 10px;
+    color: #666
+}
+section .big-countdown .earl_price_show .orjinal {
+    font-size: 32px;
+    text-shadow: 1px 1px 0 #ffffff;
+}
+section .big-countdown .earl_price_show  {
+	text-align: center;
+}
+section .big-countdown .earl_price_show .discount {
+	font-size: 32px;
+    text-shadow: 1px 1px 0 #ffffff;
+    color: #AA001E;
+}
+section .clearfixDiscont {
+	clear:both;
+}
+section .countdown {
+    font-size: 20px
+}
+
+section .countdown input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 24px;
+    text-align: center;
+    color: #3767b9
+}
+
+section .countdown .button {
+    top: -4px;
+    position: relative
+}
+
+section .countdown .miwoevents_earl_bird_day-2 {
+    color: #3767b9
+}
+
+section .countdown .miwoevents-days-text, section .countdown .miwoevents-hours-text, section .countdown .miwoevents-min-text, section .countdown .miwoevents-sec-text {
+    font-size: 16px;
+    margin: 0 2px;
+    color: #666
+}

@@ -24,10 +24,7 @@ class plgSearchMiwoevents extends MPlugin {
 		return $areas;
 	}
 
-	public function onContentSearch($text, $phrase = '', $ordering = '', $areas = null, $context = null) {
-        if ($context != 'miwoevents') {
-            return array();
-        }
+	public function onContentSearch($text, $phrase = '', $ordering = '', $areas = null) {
 		if (is_array($areas)) {
 			if (!array_intersect($areas, array_keys($this->onContentSearchAreas()))) {
 				return array();
@@ -93,9 +90,9 @@ class plgSearchMiwoevents extends MPlugin {
 				$order = 'a.ordering';
 		}
 		
-		$query = 'SELECT a.id AS ID, a.category_id AS cat_id, a.title AS post_title, a.introtext AS post_content, event_date AS post_date, '.$db->Quote($section).' AS section, "0" AS browsernav '
+		$query = 'SELECT a.id, a.category_id AS cat_id, a.title AS title, a.introtext AS text, event_date AS `created`, '.$db->Quote($section).' AS section, "0" AS browsernav '
 				.'FROM #__miwoevents_events AS a '
-				.'WHERE ('.$where.') AND a.published = 1 '
+				.'WHERE ('.$where.') AND (a.access = 0 OR a.access IN ('.implode(',', $user->getAuthorisedViewLevels()).')) AND a.published = 1 '
 				.'ORDER BY '.$order;
 				
 		$db->setQuery($query, 0, $limit);
@@ -103,9 +100,7 @@ class plgSearchMiwoevents extends MPlugin {
 		
 		if (count($rows)) {
 			foreach($rows as $key => $row) {
-				$rows[$key]->href = MRoute::_('index.php?option=com_miwoevents&view=event&event_id='.$row->ID.$Itemid);
-                $rows[$key]->post_title   = html_entity_decode($row->post_title);
-                $rows[$key]->post_content = html_entity_decode($row->post_content);
+				$rows[$key]->href = MRoute::_('index.php?option=com_miwoevents&view=event&event_id='.$row->id.$Itemid);
 			}
 		}
 		

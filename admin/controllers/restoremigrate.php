@@ -14,10 +14,34 @@ class MiwoeventsControllerRestoreMigrate extends MiwoeventsController {
     }
 
     public function backup() {
-    	MError::raiseWarning(500, MText::_('COM_MIWOEVENTS_RESTOREMIGRATE_MSG_BACKUP_NO'));
+		MRequest::checkToken() or mexit('Invalid Token');
+
+		if(!$this->_model->backup()){
+			MError::raiseWarning(500, MText::_('COM_MIWOEVENTS_RESTOREMIGRATE_MSG_BACKUP_NO'));
+		}
     }
 
-    public function restore() {}
+    public function restore() {
+		MRequest::checkToken() or mexit('Invalid Token');
 
-    public function migrate() {}
+		if(!$this->_model->restore()){
+			$msg = MText::_('COM_MIWOEVENTS_RESTOREMIGRATE_MSG_RESTORE_NO');
+		} else {
+			$msg = MText::_('COM_MIWOEVENTS_RESTOREMIGRATE_MSG_RESTORE_OK');
+		}
+
+		parent::route($msg);
+    }
+
+    public function migrate() {
+        MRequest::checkToken() or mexit('Invalid Token');
+
+        if(!$this->_model->migrate()){
+            $msg = MText::_('COM_MIWOEVENTS_RESTOREMIGRATE_MSG_RESTORE_NO');
+        } else {
+            $msg = MText::_('COM_MIWOEVENTS_RESTOREMIGRATE_MSG_RESTORE_OK');
+        }
+
+        parent::route($msg);
+    }
 }

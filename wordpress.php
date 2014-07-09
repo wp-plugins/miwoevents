@@ -37,7 +37,8 @@ class MWordpress {
 			add_action('admin_menu', array($this, 'menu'));
 			add_action('admin_init', array($this, 'preDisplayAdmin'));
 			$pack = strtoupper($this->context).'_PACK';
-			if (constant($pack) == 'pro') {
+			if (MRequest::getWord('option') != 'com_'.$this->context and constant($pack) == 'pro') {
+				add_filter('media_buttons_context', array($this, 'shortcodeButton'));
 				add_action('admin_footer', array($this, 'shortcodePopup'));
 			}
             add_action('admin_enqueue_scripts', array($this,'safelyAddScript'),999);
@@ -231,7 +232,7 @@ class MWordpress {
         foreach($modules as $module){
             foreach($sidebars_widgets as $_sidebars_widgets){
 
-                $is_in = preg_grep("/".$module->id."./", $_sidebars_widgets);
+	            $is_in = preg_grep("/".$module->id."_widget./", $_sidebars_widgets);
 
                 if(!empty($is_in)) {
                     MModuleHelper::renderModule($module);
@@ -277,11 +278,6 @@ class MWordpress {
 	}
 	
 	public function preDisplayAdmin($args = null) {
-		$pack = strtoupper($this->context).'_PACK';
-		if (constant($pack) == 'pro') {
-			add_filter('media_buttons_context', array($this, 'shortcodeButton'));
-		}
-
 		$page = MRequest::getCmd('page');
 		if ($page != $this->context) {
 			return;
@@ -701,14 +697,14 @@ class MWordpress {
 	
     public function miwiFrontendRewrite( $rules ) {
         $newrules = array();
-        $newrules['([a-z]+)/'] =  'index.php?pagename=$matches[1]';
+        $newrules['([a-z0-9-_]+)/'] =  'index.php?pagename=$matches[1]';
 
         return $rules + $newrules;
     }
 
     public function miwiFlushRewriteRules(){
 		$rules = MFactory::getWOption('rewrite_rules');
-        if (!isset( $rules['([a-z]+)/'] ) ) {
+        if (!isset( $rules['([a-z0-9-_]+)/'] ) ) {
             global $wp_rewrite;
             $wp_rewrite->flush_rules();
         }

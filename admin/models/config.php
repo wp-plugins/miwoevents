@@ -41,8 +41,8 @@ class MiwoeventsModelConfig extends MiwoeventsModel {
 //		$config->thousands_sep                          = ',';
 		$config->currency_position                      = MRequest::getInt('currency_position', '0');
 //		$config->default_country                        = 'United States';
-		$config->from_name                              = MRequest::getWord('from_name', '');
-		$config->from_email                             = MRequest::getWord('from_email', '');
+		$config->from_name                              = MRequest::getString('from_name', '');
+		$config->from_email                             = MRequest::getString('from_email', '');
 		$config->notification_emails                    = MRequest::getString('notification_emails', '');;
 		$config->admin_email_subject                    = MRequest::getString('admin_email_subject', 'New Registration For Event : [EVENT_TITLE]');
 		$config->admin_email_body                       = MRequest::getVar('admin_email_body', '<p>Dear administrator</p><p>User [FIRST_NAME] [LAST_NAME] has just registered for event <strong>[EVENT_TITLE]</strong>. The registration detail is as follow :</p><p>[REGISTRATION_DETAIL]</p><p>Regards,</p><p>Events management team</p>', 'default', 'none', MREQUEST_ALLOWHTML);
@@ -51,7 +51,7 @@ class MiwoeventsModelConfig extends MiwoeventsModel {
 		$config->registration_form_message              = MRequest::getVar('registration_form_message', '<p>Please enter information in the form below to process registration for event <strong>[EVENT_TITLE]</strong>.</p>', 'default', 'none', MREQUEST_ALLOWHTML);
 		$config->registration_form_message_group        = MRequest::getVar('registration_form_message_group', '<p>Please enter information in the form below to complete group registration for event <strong>[EVENT_TITLE]</strong>.</p>', 'default', 'none', MREQUEST_ALLOWHTML);
 		$config->number_members_form_message            = MRequest::getVar('number_members_form_message', '<p>Please enter number of members for your group registration. Number of members need to be greater than or equal 2. You can enter detail information of these members in the next step.</p>', 'default', 'none', MREQUEST_ALLOWHTML);
-		$config->member_information_form_message        = MRequest::getVar('member_information_form_message', '<p>Please enter the information of the group members in the following forms. Fields marked with (<span class="required">*</span>) are required.</p>', 'default', 'none', MREQUEST_ALLOWHTML);
+		$config->member_information_form_message        = MRequest::getVar('member_information_form_message', '<p>Please enter the information of the group members in the following forms. Fields marked with (*) are required.</p>', 'default', 'none', MREQUEST_ALLOWHTML);
 		$config->thanks_message                         = MRequest::getVar('thanks_message', '<p>Thanks for registering for event <strong>[EVENT_TITLE]</strong>. Your registration detail is as follow :</p><p>[REGISTRATION_DETAIL]</p><p>Regards,</p><p>Events management Team</p>', 'default', 'none', MREQUEST_ALLOWHTML);
 		$config->cancel_message                         = MRequest::getVar('cancel_message', '<p>Your registration for event [EVENT_TITLE] was cancelled.</p>', 'default', 'none', MREQUEST_ALLOWHTML);
 		$config->registration_cancel_message_free       = MRequest::getVar('registration_cancel_message_free', '<p>You have just cancel your registration for event [EVENT_TITLE]</p><p>Thanks,</p><p>Event Registration Team</p>', 'default', 'none', MREQUEST_ALLOWHTML);
@@ -65,7 +65,7 @@ class MiwoeventsModelConfig extends MiwoeventsModel {
 		$config->registration_cancel_email_subject      = MRequest::getString('registration_cancel_email_subject', 'Registration Cancel for even [EVENT_TITLE]');
 		$config->registration_cancel_email_body         = MRequest::getVar('registration_cancel_email_body', '<p>Dear administrator</p><p>User <strong>[FIRST_NAME] [LAST_NAME]</strong> has just cancel their registration for event <strong>[EVENT_TITLE]</strong> . You can login to back-end of your site to see the detail and process the refund if needed .</p><p>Regards,</p><p>Administrator Team</p>', 'default', 'none', MREQUEST_ALLOWHTML);
 		$config->watinglist_confirmation_subject        = MRequest::getString('watinglist_confirmation_subject', 'Waitinglist confirmation');
-		$config->watinglist_confirmation_body           = MRequest::getVar('watinglist_confirmation_body', '<p>Dear <strong>[FIRST_NAME] [LAST_NAME]</strong></p><p>Thanks for joining waitinglist of our event [EVENT_TITLE] . We will inform you as if there is someone cancel their registration and you can attend the event.</p><p>Regards,</p><p>Events management team<span style="white-space: pre;"> </span></p>', 'default', 'none', MREQUEST_ALLOWHTML);
+		$config->watinglist_confirmation_body           = MRequest::getVar('watinglist_confirmation_body', '<p>Dear <strong>[FIRST_NAME] [LAST_NAME]</strong></p><p>Thanks for joining waitinglist of our event [EVENT_TITLE] . We will inform you as if there is someone cancel their registration and you can attend the event.</p><p>Regards,</p><p>Events management team</p>', 'default', 'none', MREQUEST_ALLOWHTML);
 		$config->watinglist_notification_subject        = MRequest::getString('watinglist_notification_subject', 'Waitinglist Notification');
 		$config->watinglist_notification_body           = MRequest::getVar('watinglist_notification_body', '<p>Dear Administrator</p><p>User <strong>[FIRST_NAME] [LAST_NAME] </strong>has just joined waitinglist for event <strong>[EVENT_TITLE] . </strong></p><p>Regards,</p><p>Events management team</p>', 'default', 'none', MREQUEST_ALLOWHTML);
 		$config->calendar_theme                         = MRequest::getWord('calendar_theme', 'default');
@@ -101,7 +101,7 @@ class MiwoeventsModelConfig extends MiwoeventsModel {
 		$config->firstname_field                        = MRequest::getWord('firstname_field', 'miwi_firstname');
 		$config->lastname_field                         = MRequest::getWord('lastname_field', 'miwi_lastname');
 		$config->email_field                            = MRequest::getWord('email_field', 'miwi_email');
-		$config->button_class                           = MRequest::getString('button_class', MiwoEvents::is30() ? 'btn btn-primary' : 'miwoevents_button');
+		$config->button_class                           = MRequest::getString('button_class', MiwoEvents::is30() ? 'btn button-primary' : 'miwoevents_button');
 
 		$config->show_fields_in_category  = MRequest::getInt('show_fields_in_category', '0');
 		$config->paid_order_status        = MRequest::getInt('paid_order_status', '5');
@@ -111,7 +111,67 @@ class MiwoeventsModelConfig extends MiwoeventsModel {
 		$config->show_map_info            = MRequest::getInt('show_map_info', '0');
 		$config->show_price_in_mod_events = MRequest::getInt('show_price_in_mod_events', '1');
 		$config->cart_or_checkout         = MRequest::getInt('cart_or_checkout', '1');
+		
+				# Individual Fields
+		$config->individual_fields = new stdClass();
+		$config->individual_fields = MRequest::getInt('miwi_firstname', '2');
+		$config->individual_fields = MRequest::getInt('miwi_lastname', '2');
+		$config->individual_fields = MRequest::getInt('miwi_email', '2');
+		$config->individual_fields = MRequest::getInt('miwi_address', '1');
+		$config->individual_fields = MRequest::getInt('miwi_organization', '0');
+		$config->individual_fields = MRequest::getInt('miwi_phone', '1');
+		$config->individual_fields = MRequest::getInt('miwi_fax', '0');
+		$config->individual_fields = MRequest::getInt('miwi_zip', '0');
+		$config->individual_fields = MRequest::getInt('miwi_city', '0');
+		$config->individual_fields = MRequest::getInt('miwi_state', '0');
+		$config->individual_fields = MRequest::getInt('miwi_country', '1');
+		$config->individual_fields = MRequest::getInt('miwi_comment', '1');
+		
+		# Group Fields
+		$config->group_fields = new stdClass();
+		$config->group_fields = MRequest::getInt('miwi_firstname', '2');
+		$config->group_fields = MRequest::getInt('miwi_lastname', '2');
+		$config->group_fields = MRequest::getInt('miwi_email', '2');
+		$config->group_fields = MRequest::getInt('miwi_address', '1');
+		$config->group_fields = MRequest::getInt('miwi_organization', '1');
+		$config->group_fields = MRequest::getInt('miwi_phone', '0');
+		$config->group_fields = MRequest::getInt('miwi_fax', '0');
+		$config->group_fields = MRequest::getInt('miwi_zip', '0');
+		$config->group_fields = MRequest::getInt('miwi_city', '0');
+		$config->group_fields = MRequest::getInt('miwi_state', '0');
+		$config->group_fields = MRequest::getInt('miwi_country', '1');
+		$config->group_fields = MRequest::getInt('miwi_comment', '1');
+		
+		# Search / List Fields
+		$config->search_list_fields = new stdClass();
+		$config->search_list_fields->search =  new stdClass();
+		$config->search_list_fields->search = MRequest::getInt('miwi_firstname', '1');
+		$config->search_list_fields->search = MRequest::getInt('miwi_lastname', '1');
+		$config->search_list_fields->search = MRequest::getInt('miwi_email', '1');
+		
+		$config->search_list_fields->list = new stdClass();
+		$config->search_list_fields->list = MRequest::getInt('miwi_firstname', '1');
+		$config->search_list_fields->list = MRequest::getInt('miwi_lastname', '1');
+		$config->search_list_fields->list = MRequest::getInt('miwi_email', '1');
+		
 
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
 		$mforms = MRequest::getVar('mform');
 		foreach ($mforms as $key => $mform) {
 			if (is_array($mform)) {

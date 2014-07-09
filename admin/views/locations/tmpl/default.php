@@ -77,9 +77,9 @@ defined('MIWI') or die ;
 
 		$checked = MHtml::_('grid.id', $i, $row->id );
 
-        /** Burak **/
         $published = $this->getIcon($i, $task = $row->published == '0' ? 'publish' : 'unpublish', $row->published ? 'publish_y.png' : 'publish_x.png', true);
-		/** Burak **/
+
+
 		?>
 		<tr class="<?php echo "row$k"; ?>">
 

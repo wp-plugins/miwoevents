@@ -24,7 +24,7 @@ class com_MiwoeventsInstallerScript {
 		if (! empty($config)) {
 			$this->_is_new_installation = false;
 			
-			$miwoevents_xml = ABSPATH . 'wp-content/plugins/miwoevents/admin/miwoevents.xml';
+			$miwoevents_xml = MPATH_WP_CNT.'/plugins/miwoevents/admin/miwoevents.xml';
 			
 			if (MFile::exists($miwoevents_xml)) {
 				$xml = simplexml_load_file($miwoevents_xml, 'SimpleXMLElement');
@@ -42,32 +42,26 @@ class com_MiwoeventsInstallerScript {
 			MFile::delete(MPATH_ROOT . '/media/miwoevents/.htaccess');
 		}
 		
-		require_once (ABSPATH . 'wp-content/plugins/miwoevents/admin/library/miwoevents.php');
+		require_once (MPATH_WP_CNT.'/plugins/miwoevents/admin/library/miwoevents.php');
 		
-		if (MFolder::copy(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/languages'), MPath::clean(MPATH_MIWI . '/languages'), null, true)) {
-			MFolder::delete(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/languages'));
+		if (MFolder::copy(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/languages'), MPath::clean(MPATH_MIWI . '/languages'), null, true)) {
+			MFolder::delete(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/languages'));
 		}
-		if (MFolder::copy(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/languages'), MPath::clean(MPATH_MIWI . '/languages'), null, true)) {
-			MFolder::delete(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/languages'));
+		if (MFolder::copy(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/languages'), MPath::clean(MPATH_MIWI . '/languages'), null, true)) {
+			MFolder::delete(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/languages'));
 		}
-		if (MFolder::copy(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/media'), MPath::clean(ABSPATH.'wp-content/uploads/miwoevents'), null, true)) {
-			MFolder::delete(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/media'));
+		if (MFolder::copy(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/media'), MPath::clean(MPATH_WP_CNT.'/uploads/miwoevents'), null, true)) {
+			MFolder::delete(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/media'));
 		}
 		if (! MFolder::exists(MPATH_MIWI . '/media/miwoevents/events')) {
 			MFolder::create(MPATH_ROOT . '/media/miwoevents/events');
 		}
-		if (MFolder::copy(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/modules'), MPath::clean(MPATH_MIWI . '/modules'), null, true)) {
-			MFolder::delete(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/modules'));
+		if (MFolder::copy(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/modules'), MPath::clean(MPATH_MIWI . '/modules'), null, true)) {
+			MFolder::delete(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/modules'));
 		}
-		if (MFolder::copy(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/plugins'), MPath::clean(MPATH_MIWI . '/plugins'), null, true)) {
-			MFolder::delete(MPath::clean(ABSPATH . 'wp-content/plugins/miwoevents/plugins'));
-		}		
-		
-		//@TODO Delete this code next version(Current Version 1.0.1)
-		if ($type == 'upgrade') {
-			return;
+		if (MFolder::copy(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/plugins'), MPath::clean(MPATH_MIWI . '/plugins'), null, true)) {
+			MFolder::delete(MPath::clean(MPATH_WP_CNT.'/plugins/miwoevents/plugins'));
 		}
-		########
 		
 		if ($this->_is_new_installation == true) {
 			$this->_installMiwoevents();
@@ -82,7 +76,7 @@ class com_MiwoeventsInstallerScript {
 		
 		$config = new stdClass();
 		$config->pid = '';
-		$config->version_checker = '1';
+		$config->version_checker = '0';
 		$config->show_db_errors = '0';
 		$config->cb_integration = '0';
 		$config->waitinglist_enabled = '0';
@@ -110,31 +104,31 @@ class com_MiwoeventsInstallerScript {
 		$config->from_name = '';
 		$config->from_email = '';
 		$config->notification_emails = '';
-		$config->admin_email_subject = '';
-		$config->admin_email_body = '';
-		$config->registrant_email_subject = '';
-		$config->registrant_email_body = '';
-		$config->registration_form_message = '';
-		$config->registration_form_message_group = '';
-		$config->number_members_form_message = '';
-		$config->member_information_form_message = '';
-		$config->thanks_message = '';
-		$config->cancel_message = '';
-		$config->registration_cancel_message_free = '';		
-		$config->registration_cancel_message_paid = '';
-		$config->invitation_form_message = '';
-		$config->invitation_email_subject = '';
-		$config->invitation_email_body = '';
-		$config->invitation_complete = '';
-		$config->reminder_email_subject = '';
-		$config->reminder_email_body = '';
-		$config->registration_cancel_email_subject = '';
-		$config->registration_cancel_email_body = '';
-		$config->watinglist_confirmation_subject = '';
-		$config->watinglist_confirmation_body = '';
-		$config->watinglist_notification_subject = '';
-		$config->watinglist_notification_body = '';
-		$config->calendar_theme = 'default';
+		$config->admin_email_subject 						= 'New Registration For Event : [EVENT_TITLE]';
+        $config->admin_email_body 							= '<p>Dear administrator</p><p>User [FIRST_NAME] [LAST_NAME] has just registered for event <strong>[EVENT_TITLE]</strong>. The registration detail is as follow :</p><p>[REGISTRATION_DETAIL]</p><p>Regards,</p><p>Events management team</p>';
+        $config->registrant_email_subject 					= 'Event registration confirmation';
+        $config->registrant_email_body 						= '<p>Dear <strong>[FIRST_NAME] [LAST_NAME]</strong></p><p>You have just registered for event <strong>[EVENT_TITLE]</strong>. The registration detail is as follow :</p><p>[REGISTRATION_DETAIL]</p><p>Regards,</p><p>Events management Team</p>';
+        $config->registration_form_message                  = '<p>Please enter information in the form below to process registration for event <strong>[EVENT_TITLE]</strong>.</p>';
+        $config->registration_form_message_group			= '<p>Please enter information in the form below to complete group registration for event <strong>[EVENT_TITLE]</strong>.</p>';
+        $config->number_members_form_message                = '<p>Please enter number of members for your group registration. Number of members need to be greater than or equal 2. You can enter detail information of these members in the next step.</p>';
+        $config->member_information_form_message            = '<p>Please enter the information of the group members in the following forms. Fields marked with (*) are required.</p>';
+        $config->thanks_message 							= '<p>Thanks for registering for event <strong>[EVENT_TITLE]</strong>. Your registration detail is as follow :</p><p>[REGISTRATION_DETAIL]</p><p>Regards,</p><p>Events management Team</p>';
+        $config->cancel_message 							= '<p>Your registration for event [EVENT_TITLE] was cancelled.</p>';
+        $config->registration_cancel_message_free 			= '<p>You have just cancel your registration for event [EVENT_TITLE]</p><p>Thanks,</p><p>Event Registration Team</p>';
+        $config->registration_cancel_message_paid 			= '<p>Your registration for event <strong>[EVENT_TITLE]</strong> has successfully cancelled. Our event registration team will check your registration and process the refund within 24 hours from now .</p><p>Thanks,</p><p>Registration Team</p>';
+        $config->invitation_form_message 					= '<p>Please enter information in the form below to send invitation to your friends to invite them to register for the event <strong>[EVENT_TITLE]</strong></p>';
+        $config->invitation_email_subject 					= 'Invitation to register for event [EVENT_TITLE]';
+        $config->invitation_email_body 						= '<p>Dear <strong>[NAME]</strong></p><p>Your friend <strong>[SENDER_NAME]</strong> has suggested you to view and register for the event <strong>[EVENT_TITLE]</strong> in our site. Please access to <strong>[EVENT_DETAIL_LINK]</strong> to view and register for the event.</p><p>Note from [SENDER_NAME] :</p><p><em>[PERSONAL_MESSAGE]</em></p><p>Regards,</p><p>Events manager team</p>';
+        $config->invitation_complete 						= '<p>The invitation was sent to your friends. Thank you !</p>';
+        $config->reminder_email_subject 					= 'Reminder for event [EVENT_TITLE]';
+        $config->reminder_email_body 						= '<p>Dear <strong>[FIRST_NAME] [LAST_NAME]</strong></p><p>This email is used to remind you that you have registered for event [EVENT_TITLE]. The event will occur on <strong>[EVENT_DATE]</strong>, so please come and attend the event on time.</p><p>Regards,</p><p>Website administrator tea</p>';
+        $config->registration_cancel_email_subject 			= 'Registration Cancel for even [EVENT_TITLE]';
+        $config->registration_cancel_email_body 			= '<p>Dear administrator</p><p>User <strong>[FIRST_NAME] [LAST_NAME]</strong> has just cancel their registration for event <strong>[EVENT_TITLE]</strong> . You can login to back-end of your site to see the detail and process the refund if needed .</p><p>Regards,</p><p>Administrator Team</p>';
+        $config->watinglist_confirmation_subject			= 'Waitinglist confirmation';
+        $config->watinglist_confirmation_body 				= '<p>Dear <strong>[FIRST_NAME] [LAST_NAME]</strong></p><p>Thanks for joining waitinglist of our event [EVENT_TITLE] . We will inform you as if there is someone cancel their registration and you can attend the event.</p><p>Regards,</p><p>Events management team</p>';
+        $config->watinglist_notification_subject			= 'Waitinglist Notification';
+        $config->watinglist_notification_body 				= '<p>Dear Administrator</p><p>User <strong>[FIRST_NAME] [LAST_NAME] </strong>has just joined waitinglist for event <strong>[EVENT_TITLE] . </strong></p><p>Regards,</p><p>Events management team</p>';
+  		$config->calendar_theme = 'default';
 		$config->show_multiple_days_event_in_calendar = '1';
 		$config->show_event_time = '0';
 		$config->show_empty_cat = '1';
@@ -164,10 +158,10 @@ class com_MiwoeventsInstallerScript {
 		$config->activate_daily_calendar_view = '0';
 		$config->calendar_start_date = '1';
 		$config->comments = '0';
-		$config->firstname_field = 'mijo_firstname';
-		$config->lastname_field = 'mijo_lastname';
-		$config->email_field = 'mijo_email';
-		$config->button_class = MiwoEvents::is30() ? 'btn btn-primary' : 'miwoevents_button';
+		$config->firstname_field = 'miwi_firstname';
+		$config->lastname_field = 'miwi_lastname';
+		$config->email_field = 'miwi_email';
+		$config->button_class = MiwoEvents::is30() ? 'btn button-primary' : 'miwoevents_button';
 		
 		$config->show_fields_in_category = '0';
 		$config->paid_order_status = '5';
@@ -180,13 +174,61 @@ class com_MiwoeventsInstallerScript {
 		
 		# Individual Fields
 		$config->individual_fields = new stdClass();
+		$config->individual_fields->miwi_firstname = '2';
+		$config->individual_fields->miwi_lastname = '2';
+		$config->individual_fields->miwi_email = '2';
+		$config->individual_fields->miwi_address = '1';
+		$config->individual_fields->miwi_organization = '0';
+		$config->individual_fields->miwi_phone = '1';
+		$config->individual_fields->miwi_fax = '0';
+		$config->individual_fields->miwi_zip = '0';
+		$config->individual_fields->miwi_city = '0';
+		$config->individual_fields->miwi_state = '0';
+		$config->individual_fields->miwi_country = '1';
+		$config->individual_fields->miwi_comment = '1';
 		
 		# Group Fields
 		$config->group_fields = new stdClass();
+		$config->group_fields->miwi_firstname = '2';
+		$config->group_fields->miwi_lastname = '2';
+		$config->group_fields->miwi_email = '2';
+		$config->group_fields->miwi_address = '1';
+		$config->group_fields->miwi_organization = '1';
+		$config->group_fields->miwi_phone = '0';
+		$config->group_fields->miwi_fax = '0';
+		$config->group_fields->miwi_zip = '0';
+		$config->group_fields->miwi_city = '0';
+		$config->group_fields->miwi_state = '0';
+		$config->group_fields->miwi_country = '1';
+		$config->group_fields->miwi_comment = '1';
 		
 		# Search / List Fields
 		$config->search_list_fields = new stdClass();
 		$config->search_list_fields->search = new stdClass();
+		$config->search_list_fields->search->miwi_firstname = '1';
+		$config->search_list_fields->search->miwi_lastname = '1';
+		$config->search_list_fields->search->miwi_email = '1';
+		
+		$config->search_list_fields->list = new stdClass();
+		$config->search_list_fields->list->miwi_firstname = '1';
+		$config->search_list_fields->list->miwi_lastname = '1';
+		$config->search_list_fields->list->miwi_email = '1';
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 		$reg = new MRegistry($config);
 		$config = $reg->toString();
@@ -209,21 +251,25 @@ class com_MiwoeventsInstallerScript {
 		
 		# Fields
 		$db->setQuery("INSERT IGNORE INTO `#__miwoevents_fields` (`id`, `name`, `title`, `description`, `field_type`, `values`, `default_values`, `display_in`, `rows`, `cols`, `size`, `css_class`, `field_mapping`, `ordering`, `access`, `language`, `published`) VALUES 
-        		(13, 'mijo_organiser', 'Organised by', '', 'text', '', '', 2, 0, 0, 25, 'inputbox', '', 13, 1, '*', 1),
-        		(14, 'mijo_website', 'Website', '', 'text', '', '', 2, 0, 0, 25, 'inputbox', '', 14, 1, '*', 1)");
+        		(13, 'miwi_organiser', 'Organised by', '', 'text', '', '', 2, 0, 0, 25, 'inputbox', '', 13, 1, '*', 1),
+        		(14, 'miwi_website', 'Website', '', 'text', '', '', 2, 0, 0, 25, 'inputbox', '', 14, 1, '*', 1)");
 		$db->query();
 		
 		# Events
 		$db->setQuery("INSERT IGNORE INTO `#__miwoevents_events` (`id`, `parent_id`, `category_id`, `location_id`, `product_id`, `title`, `alias`, `event_type`, `event_date`, `event_end_date`, `introtext`, `fulltext`, `article_id`, `access`, `registration_access`, `individual_price`, `event_capacity`, `created_by`, `cut_off_date`, `registration_type`, `max_group_number`, `early_bird_discount_type`, `early_bird_discount_date`, `early_bird_discount_amount`, `group_rates`, `enable_cancel_registration`, `cancel_before_date`, `enable_auto_reminder`, `remind_before_x_days`, `recurring_type`, `recurring_frequency`, `weekdays`, `monthdays`, `recurring_end_date`, `recurring_occurrencies`, `attachment`, `notification_emails`, `registrant_email_body`, `thanks_message`, `params`, `ordering`, `published`, `meta_desc`, `meta_key`, `meta_author`, `fields`, `currency_symbol`, `thumb`, `registration_approved_email_body`, `language`) VALUES
-        		(1, 0, 0, 1, 0, 'J and Beyond 2013', 'j-and-beyond-2013', 0, '2013-05-31 02:00:00', '2013-06-02 02:00:00', '<p>Need a hot Joomla! tip? Make an investment in yourself and go to JandBeyond 2013.</p>\r\n', '\r\n<p>At JandBeyond all kinds of Joomla! experts share their knowledge, tricks, and experience in a spirit of open source friendlness and fun, and do Joomlers know how to have fun! Last years event was amazing and I wouldn''t miss this event.</p>', 0, 1, 1, '279.00', 500, 0, '2013-05-29 00:00:00', 0, '', 1, '2013-04-30 00:00:00', '200.00', '', 0, '2013-05-28 00:00:00', 0, 3, 0, 0, NULL, '', '0000-00-00 00:00:00', 0, '', '', '', '', '{\"if_mijo_address\":1,\"if_mijo_city\":0,\"if_mijo_comment\":1,\"if_mijo_country\":1,\"if_mijo_email\":2,\"if_mijo_fax\":0,\"if_mijo_firstname\":2,\"if_mijo_lastname\":2,\"if_mijo_organization\":0,\"if_mijo_phone\":1,\"if_mijo_state\":0,\"if_mijo_zip\":0,\"gf_mijo_address\":1,\"gf_mijo_city\":0,\"gf_mijo_comment\":1,\"gf_mijo_country\":1,\"gf_mijo_email\":2,\"gf_mijo_fax\":0,\"gf_mijo_firstname\":2,\"gf_mijo_lastname\":2,\"gf_mijo_organization\":1,\"gf_mijo_phone\":0,\"gf_mijo_state\":0,\"gf_mijo_zip\":0}', 17, 1, '', '', '', '{\"mijo_organiser\":\"Robert Deutz\",\"mijo_website\":\"http:\\/\\/jandbeyond.org\"}', '$', 'jab13.jpg', '', '*'),
-        		(2, 0, 0, 2, 0, 'Joomla Conference 2014', 'joomla-conference-2014', 0, '2014-05-23 02:00:00', '2014-05-25 02:00:00', '<p>This conference is a community meeting, and a great starting point for getting involved in the Joomla! community.</p>\r\n', '\r\n<p>You''ll get information about almost every aspect of the Joomla! CMS, the Joomla! Web Application Platform, and about the Joomla! Community.</p>', 0, 1, 1, '100.00', 0, 0, '2014-04-30 00:00:00', 0, '', 0, '2013-05-22 00:00:00', '0.00', '[{\"number\":\"10\",\"price\":\"90\"},{\"number\":\"20\",\"price\":\"80\"},{\"number\":\"30\",\"price\":\"60\"}]', 1, '2014-04-20 00:00:00', 0, 3, 0, 0, NULL, '', '0000-00-00 00:00:00', 0, '', '', '', '', '{\"if_mijo_address\":1,\"if_mijo_city\":0,\"if_mijo_comment\":1,\"if_mijo_country\":1,\"if_mijo_email\":2,\"if_mijo_fax\":0,\"if_mijo_firstname\":2,\"if_mijo_lastname\":2,\"if_mijo_organization\":0,\"if_mijo_phone\":1,\"if_mijo_state\":0,\"if_mijo_zip\":0,\"gf_mijo_address\":1,\"gf_mijo_city\":0,\"gf_mijo_comment\":1,\"gf_mijo_country\":1,\"gf_mijo_email\":2,\"gf_mijo_fax\":0,\"gf_mijo_firstname\":2,\"gf_mijo_lastname\":2,\"gf_mijo_organization\":1,\"gf_mijo_phone\":0,\"gf_mijo_state\":0,\"gf_mijo_zip\":0}', 19, 1, '', '', '', '{\"mijo_organiser\":\"OSM\"}', '$', 'jwc14.jpg', '', '*')");
+        		(1, 0, 0, 1, 0, 'J and Beyond 2013', 'j-and-beyond-2013', 0, '2013-05-31 02:00:00', '2013-06-02 02:00:00', '<p>Need a hot Joomla! tip? Make an investment in yourself and go to JandBeyond 2013.</p>\r\n', '\r\n<p>At JandBeyond all kinds of Joomla! experts share their knowledge, tricks, and experience in a spirit of open source friendlness and fun, and do Joomlers know how to have fun! Last years event was amazing and I wouldn''t miss this event.</p>', 0, 1, 1, '279.00', 500, 0, '2013-05-29 00:00:00', 0, '', 1, '2013-04-30 00:00:00', '200.00', '', 0, '2013-05-28 00:00:00', 0, 3, 0, 0, NULL, '', '0000-00-00 00:00:00', 0, '', '', '', '', '{\"if_miwi_address\":1,\"if_miwi_city\":0,\"if_miwi_comment\":1,\"if_miwi_country\":1,\"if_miwi_email\":2,\"if_miwi_fax\":0,\"if_miwi_firstname\":2,\"if_miwi_lastname\":2,\"if_miwi_organization\":0,\"if_miwi_phone\":1,\"if_miwi_state\":0,\"if_miwi_zip\":0,\"gf_miwi_address\":1,\"gf_miwi_city\":0,\"gf_miwi_comment\":1,\"gf_miwi_country\":1,\"gf_miwi_email\":2,\"gf_miwi_fax\":0,\"gf_miwi_firstname\":2,\"gf_miwi_lastname\":2,\"gf_miwi_organization\":1,\"gf_miwi_phone\":0,\"gf_miwi_state\":0,\"gf_miwi_zip\":0}', 17, 1, '', '', '', '{\"miwi_organiser\":\"Robert Deutz\",\"miwi_website\":\"http:\\/\\/jandbeyond.org\"}', '$', 'jab13.jpg', '', '*'),
+        		(2, 0, 0, 2, 0, 'Joomla Conference 2014', 'joomla-conference-2014', 0, '2014-05-23 02:00:00', '2014-05-25 02:00:00', '<p>This conference is a community meeting, and a great starting point for getting involved in the Joomla! community.</p>\r\n', '\r\n<p>You''ll get information about almost every aspect of the Joomla! CMS, the Joomla! Web Application Platform, and about the Joomla! Community.</p>', 0, 1, 1, '100.00', 0, 0, '2014-04-30 00:00:00', 0, '', 0, '2013-05-22 00:00:00', '0.00', '[{\"number\":\"10\",\"price\":\"90\"},{\"number\":\"20\",\"price\":\"80\"},{\"number\":\"30\",\"price\":\"60\"}]', 1, '2014-04-20 00:00:00', 0, 3, 0, 0, NULL, '', '0000-00-00 00:00:00', 0, '', '', '', '', '{\"if_miwi_address\":1,\"if_miwi_city\":0,\"if_miwi_comment\":1,\"if_miwi_country\":1,\"if_miwi_email\":2,\"if_miwi_fax\":0,\"if_miwi_firstname\":2,\"if_miwi_lastname\":2,\"if_miwi_organization\":0,\"if_miwi_phone\":1,\"if_miwi_state\":0,\"if_miwi_zip\":0,\"gf_miwi_address\":1,\"gf_miwi_city\":0,\"gf_miwi_comment\":1,\"gf_miwi_country\":1,\"gf_miwi_email\":2,\"gf_miwi_fax\":0,\"gf_miwi_firstname\":2,\"gf_miwi_lastname\":2,\"gf_miwi_organization\":1,\"gf_miwi_phone\":0,\"gf_miwi_state\":0,\"gf_miwi_zip\":0}', 19, 1, '', '', '', '{\"miwi_organiser\":\"OSM\"}', '$', 'jwc14.jpg', '', '*')");
 		$db->query();
 		
 		$db->setQuery("INSERT IGNORE INTO `#__miwoevents_event_categories` (`id`, `event_id`, `category_id`) VALUES 
         		(17, 1, 1),
         		(18, 2, 1)");
 		$db->query();		
-	
+		
+		$db->setQuery("INSERT IGNORE INTO `#__miwoevents_fields` (`id`, `name`, `title`, `description`, `field_type`, `values`, `default_values`, `display_in`, `rows`, `cols`, `size`, `css_class`, `field_mapping`, `ordering`, `access`, `language`, `published`) VALUES
+		(15, 'miwi_password','Password','Custom Field description', 'text','', '', 1, 0, 0, 25, 'inputbox', '',1, 1, '*', 1)");
+		$db->query();
+		
 		$this->addPage();
 	}
 
@@ -235,6 +281,7 @@ class com_MiwoeventsInstallerScript {
 		if ($this->_current_version == '1.0.0') {
 			return;
 		}
+
 	}
 
 	public function uninstall($parent) {

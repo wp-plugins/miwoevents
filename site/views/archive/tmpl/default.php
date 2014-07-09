@@ -9,7 +9,7 @@ defined('MIWI') or die ;
 MHtml::_('behavior.modal');	
 
 # Load greybox lib
-$greyBox = MUri::base().'components/com_miwoevents/assets/js/greybox/';
+$greyBox = MURL_MIWOEVENTS.'/site/assets/js/greybox/';
 ?>
 <script type="text/javascript">
     var GB_ROOT_DIR = "<?php echo $greyBox ; ?>";
@@ -41,16 +41,16 @@ if (($this->params->get('show_page_heading', '0') == '1') && !empty($page_title)
                 $item = $this->item[$i];
                 $Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'event', 'event_id' => $item->id), null, true);
 
-                $canRegister = MiwoEvents::get('events')->canRegister($item->id);
+                
                 $url = MRoute::_('index.php?option=com_miwoevents&view=event&event_id='.$item->id.$Itemid);
 
-                if (($item->event_capacity > 0) and ($item->event_capacity <= $item->total_attenders) and $this->MiwoeventsConfig->waitinglist_enabled) {
-                    $waitingList = true ;
-                    $waitinglistUrl = MRoute::_('index.php?option=com_miwoevents&task=waitinglist_form&event_id='.$item->id.$Itemid);
-                }
-                else {
-                    $waitingList = false;
-                }
+                
+
+
+
+
+
+
 
                 $template = MFactory::getApplication()->getTemplate();
                 $ovrr_path = MPATH_WP_CNT.'/themes/'.$template.'/html/com_miwoevents/event/common.php';

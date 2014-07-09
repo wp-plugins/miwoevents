@@ -14,7 +14,7 @@ class MiwoEventsViewCategories extends MiwoeventsView {
             MFactory::getApplication()->redirect('index.php?option=com_miwoevents', MText::_('JERROR_ALERTNOAUTHOR'));
         }
 
-        $this->document->addScript(MUri::root().'administrator/components/com_miwoevents/assets/js/colorpicker/jscolor.js');
+        $this->document->addScript(MURL_MIWOEVENTS.'/admin/assets/js/colorpicker/jscolor.js');
 
         $task = MRequest::getCmd('task');
         $text = ($task == 'edit') ? MText::_('COM_MIWOEVENTS_EDIT') : MText::_('COM_MIWOEVENTS_NEW');

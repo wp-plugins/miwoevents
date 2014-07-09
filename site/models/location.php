@@ -171,5 +171,7 @@ class MiwoeventsModelLocation extends MiwoeventsModel {
         return $this->_data;
     }
 
-    public function store(&$data) {}
+    public function store(&$data) {
+        return $this->_admin_model->store($data);
+    }
 } 

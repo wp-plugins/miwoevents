@@ -1,3 +1,8 @@
-/* MiwoEvents */.miwoevents_box a {
+/* MiwoEvents */
+section {
+	border-radius: 0px 2em 0px 0px;
+    background: #f1f1f1;
+    padding: 3px 0px 0px !important;
+}.miwoevents_box a {
     text-decoration: none;
 }

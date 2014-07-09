@@ -124,22 +124,7 @@ abstract class MFactory {
     }
 
     public static function getUser($id = null) {
-        if (is_null($id)) {
-            $instance = self::getSession()->get('user');
-            if (!($instance instanceof MUser)) {
-                $instance = MUser::getInstance();
-            }
-        }
-        else {
-            $current = self::getSession()->get('user');
-            if ($current->id != $id) {
-                $instance = MUser::getInstance($id);
-            }
-            else {
-                $instance = self::getSession()->get('user');
-            }
-        }
-
+	    $instance = MUser::getInstance($id);
         return $instance;
     }
 
@@ -408,7 +393,9 @@ abstract class MFactory {
     }
 
     protected static function createMailer() {
-        return MFactory::get('mail');
+        MLoader::register('MMail', MPATH_MIWI .'/proxy/mail/mail.php');
+	    $mail = new MMail();
+        return $mail;
     }
 
     protected static function createLanguage() {

@@ -157,7 +157,9 @@ class MiwoeventsModelEvent extends MiwoeventsModel {
    		return $this->_data;
    	}
 
-    public function store(&$data) {}
+    public function store(&$data) {
+        return $this->_admin_model->store($data);
+    }
 
     public function updateStatus($value = 0) {
         if (!MiwoDatabase::query("UPDATE #__{$this->_component}_{$this->_table} SET published = '{$value}' WHERE id = ".$this->event_id)) {

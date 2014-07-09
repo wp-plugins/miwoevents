@@ -13,13 +13,13 @@ class MiwoeventsEmail {
 		$this->MiwoeventsConfig = MiwoEvents::getConfig();
 	}
 
-    public function sendNewRegistration($order_id, $status_id) {
+    public function sendNewRegistration($order_id, $status_id, $group_id = null) {
         switch ($status_id) {
             case 3:
                 $registrant_mail = array('subject' => 'registrant_email_subject', 'body' => 'registrant_email_body');
                 $admin_mail = array('subject' => 'admin_email_subject', 'body' => 'admin_email_body');
 
-                $this->_send($order_id, $registrant_mail, true, true, $admin_mail);
+                $this->_send($order_id, $registrant_mail, true, true, $admin_mail, $group_id);
 
                 break;
             case 11:
@@ -97,54 +97,81 @@ class MiwoeventsEmail {
                 $mailer->sendMail($fromEmail, $fromName, $email, $subject, $body, 1);
             }
             else {
-                JUtility::sendMail($fromEmail, $fromName, $email, $subject, $body, 1);
+                MUtility::sendMail($fromEmail, $fromName, $email, $subject, $body, 1);
             }
         }
     }
 
-    public function _send($order_id, $registrant_mail = array(), $cc = false, $attachment = false, $admin_mail = array()) {
+    public function _send($order_id, $registrant_mail = array(), $cc = false, $attachment = false, $admin_mail = array(), $group_id = null) {
     	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     	$jconfig = MFactory::getConfig();
-    	$attenders = MiwoDatabase::loadObjectList("SELECT * FROM #__miwoevents_attenders WHERE order_id = {$order_id}");
+        if($order_id == 999999998 || $order_id==999999999){
+		// order_id 999999998 ve Individual olduğunu anlıyor. mail yollarken kullanılıyor. order_id 999999999 ve Individual olduğunu anlıyor.  
+			$attenders = MiwoDatabase::loadObjectList("SELECT * FROM #__miwoevents_attenders WHERE order_id = {$order_id} ORDER BY id DESC LIMIT 1");
+		}elseif($order_id == 999999997){
+			// order_id 999999997 ve Individual olduğunu anlıyor. mail yollarken kullanılıyor. 
+			$order_id = 999999998;
+			$attenders = MiwoDatabase::loadObjectList("SELECT * FROM #__miwoevents_attenders WHERE group_id = {$group_id}");
+		}else{
+			$attenders = MiwoDatabase::loadObjectList("SELECT * FROM #__miwoevents_attenders WHERE order_id = {$order_id}");
+		}
+  
+  //  	$attenders = MiwoDatabase::loadObjectList("SELECT * FROM #__miwoevents_attenders WHERE order_id = {$order_id}");
     	
     	if (empty($attenders)) {
             return;
         }
-    	
-        # MiwoShop
-        require_once(MPATH_WP_PLG.'/miwoshop/site/miwoshop/miwoshop.php');
-        
-        $user_id  = $attenders[0]->user_id;
-        $event_id = $attenders[0]->event_id;
-        $is_group = (count($attenders) > 1) ? true : false;
 
-        $user 				= MFactory::getUser($user_id);
-        $registrant 		= MiwoShop::get('user')->getOCustomerByEmail($user->get('email'));
-        $registrant_address = MiwoDatabase::loadObject("SELECT * FROM #__miwoshop_address WHERE address_id = {$registrant['address_id']}");
-        
-        
+        if($this->MiwoeventsConfig->version_select_control == "booking2"){
+            # MiwoShop
+            require_once(MPATH_WP_PLG.'/miwoshop/site/miwoshop/miwoshop.php');
+        }
+            $user_id  = $attenders[0]->user_id;
+            $event_id = $attenders[0]->event_id;
+            $is_group = (count($attenders) > 1) ? true : false;
+
+            $user 				= MFactory::getUser($user_id);
+
+
         $event = MiwoEvents::get('events')->getEvent($event_id);
-        
-        $fromName 	= !empty($this->MiwoeventsConfig->from_name) ? $this->MiwoeventsConfig->from_name : $jconfig->get('fromname');
-        $fromEmail 	= !empty($this->MiwoeventsConfig->from_email) ? $this->MiwoeventsConfig->from_email : $jconfig->get('mailfrom');
 
-        $registration_details = $this->_getRegistrationDetails($attenders, $event_id, $is_group);
+        if($this->MiwoeventsConfig->version_select_control == "booking2" and (!($this->MiwoeventsConfig->free_events_control) or $event->individual_price> 0)){
+            $registrant 		= MiwoShop::get('user')->getOCustomerByEmail($user->get('email'));
+            $registrant_address = MiwoDatabase::loadObject("SELECT * FROM #__miwoshop_address WHERE address_id = {$registrant['address_id']}");
+        }else{
+            $ids = $user->get('id') ;
+            if(!empty($ids)){
+                $evet_without_shop = MiwoDatabase::loadObject("SELECT * FROM #__miwoevents_attenders WHERE user_id = {$user->get('id')}");
+                $fields_ws = json_decode($evet_without_shop->fields);
+            }else{
+                $evet_without_shop = $attenders[0];
+                $fields_ws = json_decode($evet_without_shop->fields);
 
-        $replaces = array();
-        $replaces['event_title']	= $event->title;
-        $replaces['event_date'] 	= MHtml::_('date', $event->event_date, $this->MiwoeventsConfig->event_date_format, null);
-        $replaces['first_name'] 	= $registrant_address->firstname;
-        $replaces['last_name'] 		= $registrant_address->lastname;
-        $replaces['organization'] 	= $registrant_address->company;
-        $replaces['address'] 		= $registrant_address->address_1;
-        $replaces['address2'] 		= $registrant_address->address_2;
-        $replaces['city'] 			= $registrant_address->city;
-        $replaces['zip'] 			= $registrant_address->postcode;
-        $replaces['country'] 		= $registrant_address->country_id;
-        $replaces['phone'] 			= $registrant['telephone'];
-        $replaces['fax'] 			= $registrant['fax'];
-        $replaces['email'] 			= $registrant['email'];
-        
+            }
+        }
+
+         //   $event = MiwoEvents::get('events')->getEvent($event_id);
+
+            $fromName 	= !empty($this->MiwoeventsConfig->from_name) ? $this->MiwoeventsConfig->from_name : $jconfig->get('fromname');
+            $fromEmail 	= !empty($this->MiwoeventsConfig->from_email) ? $this->MiwoeventsConfig->from_email : $jconfig->get('mailfrom');
+
+            $registration_details = $this->_getRegistrationDetails($attenders, $event_id, $is_group);
+
+            $replaces = array();
+            $replaces['event_title']	= $event->title;
+            $replaces['event_date'] 	= MHtml::_('date', $event->event_date, $this->MiwoeventsConfig->event_date_format, null);
+            $replaces['first_name'] 	= (!empty ($fields_ws->miwi_firstname))? $fields_ws->miwi_fistname:$registrant_address->firstname;
+            $replaces['last_name'] 		= (!empty ($fields_ws->miwi_lastname))? $fields_ws->miwi_lastname:$registrant_address->lastname;
+            $replaces['organization'] 	= (!empty ($fields_ws->miwi_ordanizasyon))?'':$registrant_address->company;
+            $replaces['address'] 		= (!empty ($fields_ws->miwi_address))? $fields_ws->miwi_address:$registrant_address->address_1;
+            $replaces['address2'] 		= (!empty ($fields_ws->miwi_address2))? $fields_ws->miwi_address2:$registrant_address->address_2;
+            $replaces['city'] 			= (!empty ($fields_ws->miwi_city))? $fields_ws->miwi_city:$registrant_address->city;
+            $replaces['zip'] 			= (!empty ($fields_ws->miwi_zip))? $fields_ws->miwi_zip:$registrant_address->postcode;
+            $replaces['country'] 		= (!empty ($fields_ws->miwi_country))? $fields_ws->miwi_country:$registrant_address->country_id;
+            $replaces['phone'] 			= (!empty ($fields_ws->miwi_phone))? $fields_ws->miwi_phone:$registrant['telephone'];
+            $replaces['fax'] 			= (!empty ($fields_ws->miwi_fax))? $fields_ws->miwi_fax:$registrant['fax'];
+            $replaces['email'] 			= (!empty ($fields_ws->miwi_email))? $fields_ws->miwi_email:$registrant['email'];
+
     	//Add support for location tag
         $location = MiwoEvents::get('utility')->getLocation($event->location_id);
         if ($location) {
@@ -198,7 +225,7 @@ class MiwoeventsEmail {
 					$mailer->sendMail($fromEmail, $fromName, $email, $subject, $body, 1);
 				}
 				else {
-					JUtility::sendMail($fromEmail, $fromName, $email, $subject, $body, 1);
+					MUtility::sendMail($fromEmail, $fromName, $email, $subject, $body, 1);
 				}	
 	        }
         }
@@ -227,11 +254,19 @@ class MiwoeventsEmail {
                 $ccEmails = array();
 
                 foreach($attenders as $attender) {
-                    $attender_email = MiwoEvents::get('attenders')->getEmail($attender);
-
-                    if (!empty($attender_email) and ($attender_email != $registrant['email']) and !in_array($attender_email, $ccEmails)) {
-                        $ccEmails[] = $attender_email;
-                    }
+                    $fieldatt = $attender->fields;
+                    $fieldatt = json_decode($fieldatt);
+                    //$attender_email = MiwoEvents::get('attenders')->getEmail($attender);
+					$attender_email = $fieldatt->miwi_email;
+					if(!empty($registrant)){
+						if (!empty($attender_email) and ($attender_email != $registrant['email']) and !in_array($attender_email, $ccEmails)) {
+							$ccEmails[] = $attender_email;
+						}
+					}else{
+						if (!empty($attender_email) and ($attender_email != $fields_ws->miwi_email) and !in_array($attender_email, $ccEmails)) {
+							$ccEmails[] = $attender_email;
+						}
+					 }
                 }
             }
 			
@@ -240,27 +275,49 @@ class MiwoeventsEmail {
 				$subject = MHtml::_('content.prepare', $subject);
 				$body = MHtml::_('content.prepare', $body);
 			}
+			
+			if(!empty($registrant)){
+                $diffMail = $registrant['email'] ;
+            }else{
+                $diffMail =  $fields_ws->miwi_email;
+            }
             
             ## Send Attender Mail
             if ($attachment and $event->attachment) {
                 if (MiwoEvents::is30()) {
-                    $mailer->sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1, $ccEmails, null, MPATH_MEDIA.'/miwoevents/'.$event->attachment);
+                    $this->attenderMail($fromEmail, $fromName, $diffMail, $subject, $body, 1, $ccEmails, null, MPATH_MEDIA.'/miwoevents/'.$event->attachment);
                 }
                 else {
-                    JUtility::sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1, $ccEmails, null, MPATH_MEDIA.'/miwoevents/'.$event->attachment);
+                    MUtility::sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1, $ccEmails, null, MPATH_MEDIA.'/miwoevents/'.$event->attachment);
                 }
-            }
-            else {
+            }elseif (empty($ccEmails)) {
                 if (MiwoEvents::is30()) {
-                    $mailer->sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1, $ccEmails);
+                    $this->attenderMail($fromEmail, $fromName, $diffMail, $subject, $body, 1);
                 }
                 else {
-                    JUtility::sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1, $ccEmails);
+                    MUtility::sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1);
+                }
+            }else {
+                if (MiwoEvents::is30()) {
+                    $this->attenderMail($fromEmail, $fromName, $diffMail, $subject, $body, 1, $ccEmails);
+                }
+                else {
+                    MUtility::sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1, $ccEmails);
                 }
             }
         }
     }
 
+    public function attenderMail($fromEmail, $fromName, $diffMail, $subject, $body, $mode = false, $ccEmails = null, $attachment = null){
+        $mailer = MFactory::getMailer();
+        if(empty($ccEmails)){
+            $mailer->sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1);
+        }elseif(!empty($attachment)){
+            $mailer->sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1,$ccEmails,$attachment);
+        }else{
+            $mailer->sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1,$ccEmails);
+        }
+    }
     public function _getRegistrationDetails($attenders, $event_id, $is_group = false) {
         $old_option = MRequest::getCmd('option');
         $old_view = MRequest::getCmd('view');

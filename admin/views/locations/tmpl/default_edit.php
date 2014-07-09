@@ -140,8 +140,9 @@ if (MFactory::getUri()->isSSL() == true) { $http = "https://"; } else { $http = 
     <br/>
     <br/>
     <?php } ?>
-	<div class="width-60 fltlft">
-		<fieldset class="adminform">
+	<?php echo MHtml::_('tabs.start', 'miwoevents', array('useCookie' => 1)); ?>
+	<?php echo MHtml::_('tabs.panel', MText::_('COM_MIWOEVENTS_DETAILS'), 'sl_details'); ?>
+	<fieldset class="adminform">
 			<?php if (!MiwoEvents::is30()) { ?>
             <legend><?php echo MText::_('COM_MIWOEVENTS_DETAILS'); ?></legend>
             <?php } ?>
@@ -192,13 +193,11 @@ if (MFactory::getUri()->isSSL() == true) { $http = "https://"; } else { $http = 
                 </td>
             </tr>
         </table>
-		</fieldset>
-	</div>
+	</fieldset>
 	
-	<div class="width-40 fltrt">
-	<?php echo MHtml::_('sliders.start', 'miwoeventsright', array('useCookie'=>1)); ?>
+	
 	<!-- Google Maps -->
-	<?php echo MHtml::_('sliders.panel', MText::_('COM_MIWOEVENTS_GOOGLEMAPS_OPTIONS'), 'publishing'); ?>
+	<?php echo MHtml::_('tabs.panel', MText::_('COM_MIWOEVENTS_GOOGLEMAPS_OPTIONS'), 'publishing'); ?>
 	<div style="margin-left: 25px;">
         <br/>
 		<input type="button" onclick="getLocationFromAddress();" class="button btn button-primary" value="<?php echo MText::_('COM_MIWOEVENTS_PINPOINT'); ?> &raquo;" />
@@ -209,7 +208,7 @@ if (MFactory::getUri()->isSSL() == true) { $http = "https://"; } else { $http = 
 	<div class="clearfix"></div>
 	
 	<!-- Publishing Options -->
-	<?php echo MHtml::_('sliders.panel', MText::_('COM_MIWOEVENTS_PUBLISHING_OPTIONS'), 'publishing'); ?>
+	<?php echo MHtml::_('tabs.panel', MText::_('COM_MIWOEVENTS_PUBLISHING_OPTIONS'), 'publishing'); ?>
 	<table class="admintable" width="100%">
 	<tr>
 		<td class="key">
@@ -246,7 +245,7 @@ if (MFactory::getUri()->isSSL() == true) { $http = "https://"; } else { $http = 
 	
 	</table>
 	<!-- Meta Settings -->
-	<?php echo MHtml::_('sliders.panel', MText::_('COM_MIWOEVENTS_META_OPTIONS'), 'publishing'); ?>
+	<?php echo MHtml::_('tabs.panel', MText::_('COM_MIWOEVENTS_META_OPTIONS'), 'publishing'); ?>
 	<table class="admintable" width="100%">
 	<tr>
     	<td width="100" class="key">
@@ -273,7 +272,7 @@ if (MFactory::getUri()->isSSL() == true) { $http = "https://"; } else { $http = 
 		</td>
 	</tr>
 	</table>
-	<?php echo MHtml::_('sliders.end'); ?>
+	<?php echo MHtml::_('tabs.end'); ?>
 	</div>
 
     <div class="clearfix"></div>

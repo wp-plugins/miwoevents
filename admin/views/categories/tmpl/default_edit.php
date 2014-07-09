@@ -33,9 +33,9 @@ $editor = MFactory::getEditor();
     <br/>
     <br/>
     <?php } ?>
-	<div class="width-60 fltlft">
+	<?php echo MHtml::_('tabs.start', 'miwoevents', array('useCookie' => 1)); ?>
+	<?php echo MHtml::_('tabs.panel', MText::_('COM_MIWOEVENTS_DETAILS'), 'sl_details'); ?>
 		<fieldset class="adminform">
-            <legend><?php echo MText::_('COM_MIWOEVENTS_DETAILS'); ?></legend>
             <table class="admintable">
             <tr>
                 <td class="key2">
@@ -93,20 +93,17 @@ $editor = MFactory::getEditor();
                 </td>
             </tr>
         </table>
-		</fieldset>
-	</div>
-	
-	<div class="width-40 fltrt">
-        <?php echo MHtml::_('sliders.start', 'miwoeventsright', array('useCookie'=>1)); ?>
-        <!-- Publishing Options -->
-        <?php echo MHtml::_('sliders.panel', MText::_('COM_MIWOEVENTS_PUBLISHING_OPTIONS'), 'publishing'); ?>
-        <table class="admintable" width="100%">
-        <tr>
-            <td class="key2">
-                <?php echo MText::_('COM_MIWOEVENTS_PUBLISHED'); ?>
-            </td>
-            <td class="value2">
-                          <?php echo $this->lists['published']; ?>
+	</fieldset>
+
+    <!-- Publishing Options -->
+    <?php echo MHtml::_('tabs.panel', MText::_('COM_MIWOEVENTS_PUBLISHING_OPTIONS'), 'publishing'); ?>
+    <table class="admintable" width="100%">
+    <tr>
+        <td class="key2">
+            <?php echo MText::_('COM_MIWOEVENTS_PUBLISHED'); ?>
+        </td>
+        <td class="value2">
+                      <?php echo $this->lists['published']; ?>
             </td>
         </tr>
 
@@ -120,46 +117,45 @@ $editor = MFactory::getEditor();
 
 
 
-        <tr>
-            <td class="key2">
-                <?php echo MText::_('COM_MIWOEVENTS_LANGUAGE'); ?>
-            </td>
-            <td class="value2">
-                <?php echo $this->lists['language'] ; ?>
-            </td>
-        </tr>
-        </table>
+    <tr>
+        <td class="key2">
+            <?php echo MText::_('COM_MIWOEVENTS_LANGUAGE'); ?>
+        </td>
+        <td class="value2">
+            <?php echo $this->lists['language'] ; ?>
+        </td>
+    </tr>
+    </table>
 
-        <!-- Meta Settings -->
-        <?php echo MHtml::_('sliders.panel', MText::_('COM_MIWOEVENTS_META_OPTIONS'), 'publishing'); ?>
-        <table class="admintable" width="100%">
-        <tr>
-            <td class="key2">
-                <?php echo MText::_('COM_MIWOEVENTS_META_DESC'); ?>
-            </td>
-            <td class="value2">
-                <textarea name="meta_desc" id="meta_desc" cols="40" rows="3" class="" aria-invalid="false"><?php echo $this->item->meta_desc;?></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td class="key2">
-                <?php echo MText::_('COM_MIWOEVENTS_META_KEYWORDS'); ?>
-            </td>
-            <td class="value2">
-                <textarea name="meta_key" id="meta_key" cols="40" rows="3" class="" aria-invalid="false"><?php echo $this->item->meta_key;?></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td class="key2">
-                <?php echo MText::_('COM_MIWOEVENTS_META_AUTHOR'); ?>
-            </td>
-            <td class="value2">
-                <input class="text_area" type="text" name="meta_author" id="meta_author" size="40" maxlength="250" value="<?php echo $this->item->meta_author;?>" />
-            </td>
-        </tr>
-        </table>
-        <?php echo MHtml::_('sliders.end'); ?>
-	</div>
+    <!-- Meta Settings -->
+    <?php echo MHtml::_('tabs.panel', MText::_('COM_MIWOEVENTS_META_OPTIONS'), 'publishing'); ?>
+    <table class="admintable" width="100%">
+    <tr>
+        <td class="key2">
+            <?php echo MText::_('COM_MIWOEVENTS_META_DESC'); ?>
+        </td>
+        <td class="value2">
+            <textarea name="meta_desc" id="meta_desc" cols="40" rows="3" class="" aria-invalid="false"><?php echo $this->item->meta_desc;?></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="key2">
+            <?php echo MText::_('COM_MIWOEVENTS_META_KEYWORDS'); ?>
+        </td>
+        <td class="value2">
+            <textarea name="meta_key" id="meta_key" cols="40" rows="3" class="" aria-invalid="false"><?php echo $this->item->meta_key;?></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="key2">
+            <?php echo MText::_('COM_MIWOEVENTS_META_AUTHOR'); ?>
+        </td>
+        <td class="value2">
+            <input class="text_area" type="text" name="meta_author" id="meta_author" size="40" maxlength="250" value="<?php echo $this->item->meta_author;?>" />
+        </td>
+    </tr>
+    </table>
+    <?php echo MHtml::_('tabs.end'); ?>
 
     <div class="clearfix"></div>
 

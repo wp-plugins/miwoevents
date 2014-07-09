@@ -187,7 +187,18 @@ class MiwoeventsModelCategory extends MiwoeventsModel {
 		return $where;
 	}
 
-    public function getEditData($table = NULL) {}
+    public function getEditData($table = NULL) {
+        if (empty($this->_data)) {
+            $row = MiwoEvents::getTable('MiwoEventsCategories');
+            $row->load($this->_id);
 
-    public function store(&$data) {}
+            $this->_data = $row;
+        }
+
+        return $this->_data;
+    }
+
+    public function store(&$data) {
+        return $this->_admin_model->store($data);
+    }
 } 

@@ -149,14 +149,14 @@ class MiwoEventsModelCategories extends MiwoeventsModel {
 		$row->id = 0;
 		$row->title = $row->title.' Copy';
 		$row->alias = $row->alias.'-copy';
-		$row->description = "";
 		
-		$row->store();
-		return $row->id;
-	}
 
-    public function store(&$data) {
-        $row = MiwoEvents::getTable('MiwoeventsCategories');
+
+
+
+
+
+
 
         if ($data['id']) {
             $row->load($data['id']);

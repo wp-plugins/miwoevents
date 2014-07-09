@@ -6,7 +6,7 @@
 	<state>
 		<name>Events (by location)</name>
 		<fields name="request">
-			<fieldset name="request" addfieldpath="/miwoevents/library/elements">
+			<fieldset name="request" addfieldpath="/miwoevents/admin/library/elements">
 				<field name="location_id" type="miwoeventslocations" size="3" default="0" label="Location" description="Choose the location which you want to display events." />
 			</fieldset>
 		</fields>	

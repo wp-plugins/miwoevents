@@ -4,7 +4,7 @@ Plugin Name: MiwoEvents
 Plugin URI: http://miwisoft.com
 Description: MiwoEvents offers you an All-in-One platform to create Events (free or paid), Custom Fields (event or registration), Locations (with map) and allows your visitors to Register (individual or group) with and easy to use interface.
 Author: Miwisoft LLC
-Version: 1.0.3
+Version: 1.1.0
 Author URI: http://miwisoft.com
 */
 
@@ -20,12 +20,12 @@ final class MEvents extends MWordpress {
 		if (!defined('MURL_MIWOEVENTS')) {
 		    define('MURL_MIWOEVENTS', plugins_url('', __FILE__));
 	    }
-		
+
 		if (!defined('MIWOEVENTS_PACK')) {
 		    define('MIWOEVENTS_PACK', 'lite');
 	    }
 		
-		parent::__construct('miwoevents', '33.00032');
+		parent::__construct('miwoevents', '35.0032');
     }
 }
 
