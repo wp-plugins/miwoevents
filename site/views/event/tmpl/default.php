@@ -11,7 +11,7 @@ $url = MRoute::_('index.php?option=com_miwoevents&view=event&event_id='.$this->i
 $canRegister = MiwoEvents::get('events')->canRegister($this->item->id);
 $greyBox = MURL_MIWOEVENTS.'/site/assets/js/greybox/';
 
-$socialUrl = MUri::base().$url;
+$socialUrl = MiwoEvents::get('utility')->getActiveUrl();
 
 ?>
 <script type="text/javascript">
@@ -68,6 +68,18 @@ $socialUrl = MUri::base().$url;
                     <div style="float:left;" id="rsep_twitter">
                         <a href="https://twitter.com/share" class="twitter-share-button" data-text="<?php echo $this->item->title." ".$socialUrl; ?>">Tweet</a>
                         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+					
+					<!-- LinkedIN -->
+
+                    <div style="float:left;" id="rsep_linkedIN">
+                        <a id="linkedIN-link" onclick="linkedin_share();" >
+                            <span id="linkedIN-In">in</span>
+                            <span id="linkedIN-Share">
+                                <span id="linkedIN-empty"></span>
+                                <span id="linkedIN-Share-text">Share</span>
+                            </span>
+                        </a>
                     </div>
 
                     <!-- GPlus -->
@@ -460,4 +472,21 @@ $socialUrl = MUri::base().$url;
                 });
             });
         </script>
-<?php } ?>		
+<?php } ?>
+<script type="text/javascript">
+	function linkedin_share_send(adres, genislik, yukseklik)
+	{
+		var param = "width=" + genislik + "," + "height=" + yukseklik;
+		window.open(adres, "_blank", param);
+	}
+	function linkedin_share()
+	{
+		<?php
+			$desc = strip_tags($this->item->description);
+			$desc = str_replace("\r\n","",$desc);
+			$tit  = strip_tags($this->item->title);
+			$tit  = str_replace("\r\n","",$tit);
+		?>
+		linkedin_share_send("http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $socialUrl; ?>&title=<?php echo $tit; ?>&summary=<?php echo $desc;?>", 600, 500);
+	}
+</script>		

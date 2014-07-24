@@ -76,7 +76,7 @@ class com_MiwoeventsInstallerScript {
 		
 		$config = new stdClass();
 		$config->pid = '';
-		$config->version_checker = '0';
+		$config->version_checker = '1';
 		$config->show_db_errors = '0';
 		$config->cb_integration = '0';
 		$config->waitinglist_enabled = '0';
@@ -269,6 +269,8 @@ class com_MiwoeventsInstallerScript {
 		$db->setQuery("INSERT IGNORE INTO `#__miwoevents_fields` (`id`, `name`, `title`, `description`, `field_type`, `values`, `default_values`, `display_in`, `rows`, `cols`, `size`, `css_class`, `field_mapping`, `ordering`, `access`, `language`, `published`) VALUES
 		(15, 'miwi_password','Password','Custom Field description', 'text','', '', 1, 0, 0, 25, 'inputbox', '',1, 1, '*', 1)");
 		$db->query();
+		
+		MiwoDatabase::query("ALTER TABLE `#__miwoevents_locations` ADD `fields` VARCHAR( 500 ) NOT NULL AFTER `published` ");
 		
 		$this->addPage();
 	}

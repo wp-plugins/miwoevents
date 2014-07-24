@@ -221,4 +221,9 @@ class MiwoeventsFields {
 
         return $html;
     }
+	  public function getDataForField($fname){
+        $query = 'SELECT f.size,f.rows,f.cols FROM #__miwoevents_fields AS f WHERE f.name = "'.$fname.'"';
+        $sizeOfField = MiwoDatabase::loadObject($query);
+        return $sizeOfField;
+    }
 }

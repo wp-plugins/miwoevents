@@ -1017,7 +1017,7 @@ class MiwoeventsBackupRestore {
                 continue;
             }
 			
-			$media_path = MPATH_WP_CNT . '/miwi/media/miwoevents/images/';
+			$media_path = MPATH_WP_CNT.'/miwi/media/miwoevents/images/';
 
             if (file_exists('/'.$media_path . $image_name)) {
                 continue;
@@ -1040,11 +1040,11 @@ class MiwoeventsBackupRestore {
                 continue;
             }
 
-            if (!MFile::copy($filename, MPATH_WP_CNT . '/miwi/media/miwoevents/images/' . basename($filename))){
+            if (!MFile::copy($filename, MPATH_WP_CNT.'/miwi/media/miwoevents/images/' . basename($filename))){
                 echo 'Failed to copy <i>' . $filename . '</i> to image directory.<br />';
             }
 
-            if (!MFile::copy($filename, MPATH_WP_CNT . '/miwi/media/miwoevents/images/thumbs/' . basename($filename))){
+            if (!MFile::copy($filename, MPATH_WP_CNT.'/miwi/media/miwoevents/images/thumbs/' . basename($filename))){
                 echo 'Failed to copy <i>' . $filename . '</i> to image directory.<br />';
             }
         }

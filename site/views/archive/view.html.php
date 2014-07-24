@@ -16,21 +16,21 @@ class MiwoeventsViewArchive extends MiwoeventsView {
 		
 		$Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'category'), null, true);
 
-		if (!$category_id) {
-			$site = new JSite();
-			$menus = $site->getMenu();
-			$menu = $menus->getActive();
+		
 
-			if (is_object($menu)) {
-				$params = new MRegistry() ;
-				$params->loadString($menu->params);
 
-                $category_id = $params->get('category_id', 0);
-				if ($category_id) {
-					MRequest::setVar('category_id', $category_id);
-				}
-			}
-		}															
+
+
+
+
+
+
+
+
+
+
+
+
 		$item = $this->get('Item');
 
 		$this->document->setTitle(MText::_('COM_MIWOEVENTS_EVENTS_ARCHIVE'));

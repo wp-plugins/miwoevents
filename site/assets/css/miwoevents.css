@@ -1064,3 +1064,115 @@ select.miwoevents_span2 {
 	-khtml-border-radius: 5px 5px 5px 5px !important;
 	border-radius: 5px 5px 5px 5px !important;
 }
+
+ #linkedIN-In  {
+	background-image: url(https://www.linkedin.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;
+	background-position: 0px -276px !important;
+	background-repeat: no-repeat !important;
+	background-size: initial !important;
+	cursor: pointer !important;
+	border: 0 !important;
+	text-indent: -9999em !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	left: 0px !important;
+	top: 0px !important;
+	display: block !important;
+	width: 20px !important;
+	height: 20px !important;
+	float: left !important;
+	border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	border-top-right-radius: 2px !important;
+	border-bottom-right-radius: 2px !important;
+	-webkit-border-top-right-radius: 2px !important;
+	-webkit-border-bottom-right-radius: 2px !important;
+}
+
+#linkedIN-Share{
+	color: #333 !important;
+	cursor: pointer !important;
+	display: block !important;
+	white-space: nowrap !important;
+	float: left !important;
+	margin-left: -1px !important;
+	vertical-align: top !important;
+	overflow: hidden !important;
+	text-align: center !important;
+	height: 18px !important;
+	padding: 0 4px 0 10px !important;
+	border: 1px solid #000 !important;
+	border-top-color: #E2E2E2 !important;
+	border-right-color: #BFBFBF !important;
+	border-bottom-color: #B9B9B9 !important;
+	border-left-color: #E2E2E2 !important;
+	border-left: 0 !important;
+	text-shadow: #FFFFFF -1px 1px 0 !important;
+	line-height: 20px !important;
+	border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	border-top-right-radius: 2px !important;
+	border-bottom-right-radius: 2px !important;
+	-webkit-border-top-right-radius: 2px !important;
+	-webkit-border-bottom-right-radius: 2px !important;
+	background-color: #ECECEC !important;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FEFEFE), color-stop(100%,#ECECEC)) !important;
+	background-image: -webkit-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;
+}
+#linkedIN-Share-text * {
+	color: #333 !important;
+	font-size: 11px !important;
+	font-family: Arial, sans-serif !important;
+	font-weight: bold !important;
+	font-style: normal !important;
+	-webkit-font-smoothing: antialiased !important;
+	display: inline-block !important;
+	background: transparent none !important;
+	vertical-align: top !important;
+	height: 18px !important;
+	line-height: 20px !important;
+	float: none !important;
+}
+#linkedIN-link {
+	border: 0 !important;
+	height: 20px !important;
+	text-decoration: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	display: inline-block !important;
+}
+/* Group registration  */
+/**Form CSSS**/
+.miwoevents_attenders {
+	background: none repeat scroll 0 0 #F8F8F8;
+	border: 1px solid #DBDEE1;
+	color: #555555;
+	font-size: 13px;
+	font-weight: bold;
+	margin-bottom: 15px;
+	padding: 8px;
+}
+.miwoevents_attenders a {
+	float: right;
+	font-weight: normal;
+	margin-top: 1px;
+	text-decoration: none;
+	cursor: pointer;
+}
+.miwoevents_attenders_content {
+	display: none;
+	overflow: auto;
+	padding: 0 0 15px;
+}
+.miwoevents_attenders_content .left {
+	float: left;
+	width: 48%;
+}
+.miwoevents_attenders_content .right {
+	float: right;
+	width: 48%;
+}
+.miwoevents_attenders_content .buttons {
+	clear: both;
+}

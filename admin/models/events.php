@@ -781,14 +781,25 @@ class MiwoEventsModelEvents extends MiwoeventsModel {
         foreach ($categories AS $category_id) {
             MiwoDatabase::query("INSERT INTO #__miwoevents_event_categories (event_id, category_id) VALUES ({$row->id}, {$category_id})");
         }
-		
+
+        // MiwoEvents DayLight İssue solved start :)
+        if(empty($hideEventDate)){
+            $hideEventDate    =  date('H',strtotime($eventDates[0])) ;
+            $hideEventEndDate =  date('H',strtotime($eventDates[0]) + $eventDuration);
+        }
+        // MiwoEvents DayLight İssue solved finish :)
+
 		if (!$this->_id) {
             $n = count($eventDates);
 			for ($i = 1; $i < $n ; $i++) {
 				$rowChildEvent = clone($row);
 				$rowChildEvent->id = 0;
-				$rowChildEvent->event_date = $eventDates[$i];
-				$rowChildEvent->event_end_date = strftime('%Y-%m-%d %H:%M:%S', strtotime($eventDates[$i]) + $eventDuration);
+             //   MiwoEvents DayLight İssue solved there fixed:)
+                $rowChildEvent->event_date      = date("Y-m-d H:i:s",mktime($hideEventDate, date("i",strtotime($eventDates[$i])), 0, date("m",strtotime($eventDates[$i])), date("d",strtotime($eventDates[$i])), date("Y",strtotime($eventDates[$i]))));
+               // $rowChildEvent->event_date = $eventDates[$i];
+            //   MiwoEvents DayLight İssue solved there fixed:)
+                $rowChildEvent->event_end_date  = date("Y-m-d H:i:s",mktime($hideEventEndDate, date("i",strtotime($eventDates[$i])+ $eventDuration), 0, date("m",strtotime($eventDates[$i])+ $eventDuration), date("d",strtotime($eventDates[$i])+ $eventDuration), date("Y",strtotime($eventDates[$i])+ $eventDuration)));
+				//$rowChildEvent->event_end_date = strftime('%Y-%m-%d %H:%M:%S', strtotime($eventDates[$i]) + $eventDuration);
 
 				if ($cutOffDuration) {
 					$rowChildEvent->cut_off_date = strftime('%Y-%m-%d %H:%M:%S', strtotime($rowChildEvent->event_date) - $cutOffDuration);

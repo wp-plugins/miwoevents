@@ -29,6 +29,7 @@ class MiwoeventsViewLocations extends MiwoeventsView {
         $this->params       = $this->_mainframe->getParams();
         $this->Itemid       = $Itemid;
 						
+$this->page_title = $page_title;
 		parent::display($tpl);				
 	}	
 }

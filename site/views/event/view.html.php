@@ -31,7 +31,7 @@ class MiwoeventsViewEvent extends MiwoeventsView {
 
         ####Joomla####
 		if(isset($this->MiwoeventsConfig->early_bird_discount_date) AND ($this->MiwoeventsConfig->early_bird_discount_date == 1)){
-			$scriptUrl = MURL_MIWOEVENTS.'/site/assets/js/early_bird_date/jquery.js';
+			$scriptUrl = MURL_MIWOEVENTS.'/site/assets/js/jquery.min.js';
 			$this->document->addScript($scriptUrl, 'text/javascript', null, null);
 
 			$styleUrl = MURL_MIWOEVENTS.'/site/assets/js/early_bird_date/miwoevents_early_bird_date.css';

@@ -20,13 +20,13 @@ if (!MiwoEvents::get('utility')->checkRequirements('admin')) {
     return;
 }
 
-$task = MiwoEvents::getInput()->getCmd('task', '');
+$task = MRequest::getCmd('task', '');
 
 if (!(($task == 'add' or $task == 'edit') and MiwoEvents::is30())) {
     require_once(MPATH_MIWOEVENTS_ADMIN.'/toolbar.php');
 }
 
-if ($view = MiwoEvents::getInput()->getCmd('view', '')){
+if ($view = MRequest::getCmd('view', '')){
 	$path = MPATH_MIWOEVENTS_ADMIN.'/controllers/'.$view.'.php';
 
 	if (file_exists($path)) {
@@ -39,5 +39,5 @@ if ($view = MiwoEvents::getInput()->getCmd('view', '')){
 $class_name = 'MiwoeventsController'.$view;
 
 $controller = new $class_name();
-$controller->execute(MiwoEvents::getInput()->getCmd('task', ''));
+$controller->execute(MRequest::getCmd('task', ''));
 $controller->redirect();

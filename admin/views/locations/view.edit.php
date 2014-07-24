@@ -34,9 +34,10 @@ class MiwoEventsViewLocations extends MiwoeventsView {
 		$lists['language'] = MHtml::_('select.genericlist', MHtml::_('contentlanguage.existing', true, true), 'language', ' class="inputbox" ', 'value', 'text', $item->language);
 
         MHtml::_('behavior.tooltip');
-
-		$this->item = $item;
-		$this->lists = $lists;
+		
+        $this->fields  = $item->fields;
+		$this->item    = $item;
+		$this->lists   = $lists;
 
 		parent::display($tpl);				
 	}

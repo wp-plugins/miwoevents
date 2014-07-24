@@ -8,6 +8,7 @@
 defined('MIWI') or die ;
 
 $page_title = $this->params->get('page_title', '');
+if(empty($page_title) and !empty($this->page_title)){$page_title=$this->page_title;}
 if (($this->params->get('show_page_heading', '0') == '1') && !empty($page_title)) { $page_title; } ?>
 
 <div class="miwoevents_box">

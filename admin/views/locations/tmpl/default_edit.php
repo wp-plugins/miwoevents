@@ -9,7 +9,71 @@ defined('MIWI') or die ;
 $editor = MFactory::getEditor();
 if (MFactory::getUri()->isSSL() == true) { $http = "https://"; } else { $http = "http://"; }
 ?>
+<?php  if (!MiwoEvents::is30()){ $this->document->addScript(MURL_MIWOEVENTS.'/admin/assets/js/jquery-1.7.1.min.js'); } ?>
+<?php  $this->document->addScript(MURL_MIWOEVENTS.'/admin/assets/js/jquery-ui-1.8.16.custom.min.js'); ?>
+<?php  $this->document->addStylesheet(MURL_MIWOEVENTS.'/admin/assets/css/jquery-ui-1.8.16.custom.css'); ?>
+<script type="text/javascript">
+    jQuery(function() {
+        jQuery("#auto_event").autocomplete({
+            source: function( request, response ) {
+                var query = document.getElementById("auto_event").value;
 
+                <?php if (MFactory::getApplication()->isSite()) { ?>
+                var url = "<?php echo MURL_ADMIN; ?>/admin-ajax.php?action=miwoevents&client=admin&view=event&task=autocomplete&layout=submit&format=raw&tmpl=component&query="+ query;
+                <?php } else { ?>
+                var url = "<?php echo MURL_ADMIN; ?>/admin-ajax.php?action=miwoevents&client=admin&view=events&task=autocomplete&format=raw&tmpl=component&query="+ query;
+                <?php } ?>
+                jQuery.ajax({
+                    url: url,
+                    dataType: "json",
+                    success: function( data ) {
+                        response( jQuery.map( data, function( item ) {
+                            return {
+                                label: item.name,
+                                value: item.id
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 3,
+            select: function( event, ui ) {
+                //TODO: check if field was added before
+                var tr = document.getElementById('custom_fields_'+ui.item.label+'_tr');
+                if (typeof tr != 'undefined' &&  tr != null){
+                    return false;
+                }
+
+                <?php if (MFactory::getApplication()->isSite()) { ?>
+                var url = "<?php echo MURL_ADMIN; ?>/admin-ajax.php?action=miwoevents&client=admin&view=event&task=createAutoFieldHtml&layout=submit&format=raw&tmpl=component&fieldid="+ ui.item.value;
+                <?php } else { ?>
+                var url = "<?php echo MURL_ADMIN; ?>/admin-ajax.php?action=miwoevents&client=admin&view=events&task=createAutoFieldHtml&format=raw&tmpl=component&fieldid="+ ui.item.value;
+                <?php } ?>
+
+                jQuery.ajax({
+                    url: url,
+                    dataType: "html",
+                    success: function( html ) {
+                        jQuery('#custom_fields').append(html);
+                    }
+                });
+            },
+            open: function() {
+                jQuery( this ).removeClass("ui-corner-all" ).addClass( "ui-corner-top" );
+            },
+            close: function() {
+                jQuery( this ).removeClass("ui-corner-top" ).addClass( "ui-corner-all" );
+                document.getElementById("auto_event").value = '';
+            }
+        });
+    });
+
+    function removeField(value){
+        var row = document.getElementById(value);
+        row.parentNode.removeChild(row);
+    }
+
+</script>
 <script src="<?php echo $http; ?>maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -272,6 +336,36 @@ if (MFactory::getUri()->isSSL() == true) { $http = "https://"; } else { $http = 
 		</td>
 	</tr>
 	</table>
+    <?php echo MHtml::_('tabs.panel', MText::_('COM_MIWOEVENTS_EVENTS_SL_CF_TITLE'), 'sl_custom'); ?>
+    <table class="admintable" width="100%">
+        <tr>
+            <td class="key2">
+                <br/>
+                &nbsp;&nbsp;Search Field <input type="text" value="" name="auto_event" id="auto_event" class="ui-autocomplete-input" autocomplete="off">
+                <br /><br />
+                <table class="admintable" id="custom_fields" width="100%">
+                    <?php
+                    if (!empty($this->fields)) {
+                        foreach ($this->fields as $field){
+                            ?>
+                            <tr id="<?php echo $field->id.'tr'; ?>">
+                                <td class="key2" style="vertical-align: middle;">
+                                    <img style="vertical-align: middle;" src="<?php echo MURL_MIWOEVENTS.'/admin/assets/images/delete.png' ?>" onclick="removeField('<?php echo $field->id.'tr'; ?>');">
+                                    &nbsp;<?php echo $field->label; ?>
+                                </td>
+                                <td class="value2" style="vertical-align: middle;">
+                                    <?php echo $field->input; ?>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                    }
+                    ?>
+                </table>
+
+            </td>
+        </tr>
+    </table>
 	<?php echo MHtml::_('tabs.end'); ?>
 	</div>
 

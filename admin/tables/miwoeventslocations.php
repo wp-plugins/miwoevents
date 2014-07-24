@@ -24,6 +24,7 @@ class TableMiwoeventsLocations extends MTable {
     public $meta_key		= '';
     public $meta_author		= '';
     public $published		= 1;
+	public $fields			= null;
 
 	public function __construct(&$db) {
 		parent::__construct('#__miwoevents_locations', 'id', $db);

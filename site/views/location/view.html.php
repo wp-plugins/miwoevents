@@ -32,12 +32,13 @@ class MiwoeventsViewLocation extends MiwoeventsView {
 		if ($this->MiwoeventsConfig->load_plugins) {
             $item->description = MHtml::_('content.prepare', $item->description);
 		}
-
+        $this->fields   = $item->fields;
         $this->item     = $item;
         $this->Itemid   = $Itemid;
         $this->params   = $this->_mainframe->getParams();
         $this->view_levels	= $user->getAuthorisedViewLevels();
 
+$this->page_title = $page_title;
 		parent::display($tpl);
 	}
 

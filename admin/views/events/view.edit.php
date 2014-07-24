@@ -149,11 +149,11 @@ class MiwoEventsViewEvents extends MiwoeventsView {
 			$_name = $row->name;
 
             if (!isset($this->MiwoeventsConfig->individual_fields->$_name)) {
-                @$this->MiwoeventsConfig->individual_fields->$_name = 0;
+                $this->MiwoeventsConfig->individual_fields->$_name = 0;
             }
 
             if (!isset($this->MiwoeventsConfig->group_fields->$_name)) {
-                @$this->MiwoeventsConfig->group_fields->$_name = 0;
+                $this->MiwoeventsConfig->group_fields->$_name = 0;
             }
 
             $listNameIF = "if_{$row->name}";

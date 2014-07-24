@@ -343,7 +343,9 @@ abstract class MFactory {
         $handler = $conf->get('session_handler', 'none');
 
         // Config time is in minutes
-        $options['expire'] = ($conf->get('lifetime')) ? $conf->get('lifetime') * 60 : 900;
+        $options['id']      = 'miwisoft';
+        $options['name']    = 'miwisoft';
+        $options['expire']  = ($conf->get('lifetime')) ? $conf->get('lifetime') * 60 : 900;
 
         $session = MSession::getInstance($handler, $options);
         if ($session->getState() == 'expired') {

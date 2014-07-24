@@ -145,7 +145,7 @@ MHtml::_('behavior.modal');
 									<?php
 										if ($item->thumb) {
 										?>
-											<a href="<?php echo MURI::base().'media/com_miwoevents/images/'.$item->thumb; ?>" class="modal"><img src="<?php echo MURI::base().'media/com_miwoevents/images/thumbs/'.$item->thumb; ?>" class="miwoevents_thumb-left"/></a>
+											<a href="<?php echo MURL_MEDIA.'/miwoevents/images/'.$item->thumb; ?>" class="modal"><img src="<?php echo MURL_MEDIA.'/miwoevents/images/thumbs/'.$item->thumb; ?>" class="miwoevents_thumb-left" height="<?php echo $this->MiwoeventsConfig->thumb_width?>" width="<?php echo $this->MiwoeventsConfig->thumb_height?>"/></a>
 										<?php	
 										} else {
 											echo ' ';

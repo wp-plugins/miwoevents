@@ -184,8 +184,31 @@ class MiwoeventsEmail {
     	if (MiwoEvents::is30()) {
         	$mailer = MFactory::getMailer();
         }
-        
-        
+
+        # Get Clander Link
+        $exportcal = $this->exportCal($event,$this->Itemid);
+
+        # Calendar İcal Google and Microsoft
+        $calendarAdd  = '<span class="ecalex">';
+        $calendarAdd .= "\n";
+        $calendarAdd .= "<!-- ical -->\n";
+        $calendarAdd .= '<a style="text-decoration: none;" title="'.MText::_('COM_MIWOEVENTS_EXPORTCAL_ICAL').'" href="'.$exportcal['ical'].'" > ';
+        $calendarAdd .= "\n";
+        $calendarAdd .= '<img class="" src="'.MURL_MIWOEVENTS.'/site/assets/images/ical.png'.'"/> </a>';
+        $calendarAdd .= "\n";
+        $calendarAdd .= "<!-- google -->\n";
+        $calendarAdd .= '<a style="text-decoration: none;" title="'.MText::_('COM_MIWOEVENTS_EXPORTCAL_GOOGLE').'" href="'.$exportcal['google'].'" target="_blank">';
+        $calendarAdd .= "\n";
+        $calendarAdd .= '<img class="" src="'.MURL_MIWOEVENTS.'/site/assets/images/gcal.png'.'"/></a>';
+        $calendarAdd .= "\n";
+        $calendarAdd .= "<!-- microsoft -->\n";
+        $calendarAdd .= '<a style="text-decoration: none;" title="'.MText::_('COM_MIWOEVENTS_EXPORTCAL_MICROSOFT').'" href="'.$exportcal['microsoft'].'" target="_blank">';
+        $calendarAdd .= "\n";
+        $calendarAdd .= '<img class="" src="'.MURL_MIWOEVENTS.'/site/assets/images/mcal.png'.'"/></a>';
+        $calendarAdd .= "\n";
+        $calendarAdd .= "</span>";
+        $calendarAdd .= "\n";
+
     	# Admin Mail
     	# Send notification emails
         if (strlen(trim($event->notification_emails)) > 0) {
@@ -201,9 +224,10 @@ class MiwoeventsEmail {
         if (!empty($admin_mail)) {
         	
         	$emails = explode(',', str_replace(' ', '', $emails));
-        	
+
         	$subject = $this->MiwoeventsConfig->$admin_mail['subject'];
-	        $body = $this->MiwoeventsConfig->$admin_mail['body'];
+
+            $body = $calendarAdd . $this->MiwoeventsConfig->$admin_mail['body'];
 	
 	        $subject = str_replace('[EVENT_TITLE]', $event->title, $subject);
 	        $body = str_replace('[REGISTRATION_DETAIL]', $registration_details, $body);
@@ -235,10 +259,10 @@ class MiwoeventsEmail {
             $subject = $this->MiwoeventsConfig->$registrant_mail['subject'];
 
             if (strlen(trim(strip_tags($event->$registrant_mail['body'])))) {
-                $body = $event->$registrant_mail['body'];
+                $body = $calendarAdd . $event->$registrant_mail['body'];
             }
             else {
-                $body = $this->MiwoeventsConfig->$registrant_mail['body'];
+                $body = $calendarAdd . $this->MiwoeventsConfig->$registrant_mail['body'];
             }
 
             $subject = str_replace('[EVENT_TITLE]', $event->title, $subject);
@@ -318,6 +342,7 @@ class MiwoeventsEmail {
             $mailer->sendMail($fromEmail, $fromName, $diffMail, $subject, $body, 1,$ccEmails);
         }
     }
+	
     public function _getRegistrationDetails($attenders, $event_id, $is_group = false) {
         $old_option = MRequest::getCmd('option');
         $old_view = MRequest::getCmd('view');
@@ -354,5 +379,48 @@ class MiwoeventsEmail {
         MRequest::setVar('view', $old_view);
 
         return $output;
+    }
+
+       public function exportCal($event,$Itemid) {
+
+        $eTitle 	= strip_tags($event->title);
+        $eDateStart = $this->ts($event->event_date);
+        $eDateEnd 	= $this->ts($event->event_end_date);
+        $eDates 	= $eDateStart."/".$eDateEnd;
+        $eDetail 	= strip_tags($event->introtext.$event->fulltext);
+        $eLocation 	= MiwoDatabase::loadResult("SELECT title FROM #__miwoevents_locations WHERE id = {$event->location_id} ORDER BY id DESC LIMIT 1");
+
+        $ical  = "BEGIN:VCALENDAR\n";
+        $ical .= "VERSION:2.0\n";
+        $ical .= "PRODID:-//Miwisoft//MiwoEvents//EN\n";
+        $ical .= "BEGIN:VEVENT\n";
+        $ical .= "UID:" . md5(uniqid(mt_rand(), true)) . "@miwisoft.com\n";
+        $ical .= "DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z\n";
+        $ical .= "DTSTART:{$eDateStart}\n";
+        $ical .= "DTEND:{$eDateEnd}\n";
+        $ical .= "SUMMARY:{$eTitle}\n";
+        $ical .= "END:VEVENT\n";
+        $ical .= "END:VCALENDAR";
+
+        $sessID = "miwoevents_ical".$event->id;
+        $_SESSION[$sessID] = $ical;
+
+        $url = MUri::base().'index.php?option=com_miwoevents&view=event&task=ecalex&event_id='.$event->id.$Itemid;
+
+        $exportcal
+            = array(
+            "google"	=> "http://www.google.com/calendar/event?action=TEMPLATE&text={$eTitle}&dates={$eDates}&details={$eDetail}&location={$eLocation}&trp=true",
+            "microsoft"	=> "http://calendar.live.com/calendar/calendar.aspx?rru=addevent&dtstart={$eDateStart}={$eDateEnd}&summary={$eTitle}&location={$eLocation}",
+            "ical" 		=> $url,
+            "facebook" 	=> "http://www.facebook.com/sharer/sharer.php?u="
+        );
+        return $exportcal;
+    }
+
+    # Set Time
+    function ts($ts){
+        $x = array("-", ":");
+        $ts = str_replace(" ", "T", $ts."Z");
+        return $ts = str_replace($x, "", $ts);
     }
 }

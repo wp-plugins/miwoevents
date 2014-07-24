@@ -30,6 +30,7 @@ class MiwoeventsModelLocation extends MiwoeventsModel {
 
         $row = MiwoEvents::getTable('MiwoeventsLocations');
         $row->load($location_id);
+        $row->fields = $this->getLocationFields($row->id, "yes");
 
         return $row;
     }
@@ -164,7 +165,6 @@ class MiwoeventsModelLocation extends MiwoeventsModel {
         if (empty($this->_data)) {
             $row = MiwoEvents::getTable('MiwoEventsLocations');
             $row->load($this->_id);
-
             $this->_data = $row;
         }
 
@@ -173,5 +173,55 @@ class MiwoeventsModelLocation extends MiwoeventsModel {
 
     public function store(&$data) {
         return $this->_admin_model->store($data);
+    }
+
+    public function getLocationFields($locationId, $clear = NULL) {
+        # General Settings
+        $app	= MFactory::getApplication();
+        $db		= MFactory::getDBO();
+        $user	= MFactory::getUser();
+        $userId = $user->get('id');
+
+        $sql = "SELECT fields FROM #__miwoevents_locations WHERE id = $locationId";
+        $db->setQuery($sql);
+        $locationFields = $db->loadResult();
+
+        if (empty($locationFields)) {
+            return null;
+        }
+
+        $locationFields = json_decode($locationFields);
+
+        if (!empty($locationFields)){
+            foreach ($locationFields as $key => $eventField){
+                $sql = "
+	                SELECT
+	                    f.ordering, f.name, f.title, f.description, f.field_type, f.values, f.default_values, f.rows, f.cols, f.size, f.css_class
+	                FROM #__miwoevents_fields f
+	                WHERE f.display_in = 2 AND f.name = '$key'
+	                ORDER BY f.ordering
+	                ";
+                $db->setQuery($sql);
+                $obj = $db->loadObject();
+                $obj->field_value = $eventField;
+                $rows[] = $obj;
+            }
+
+            # sorting Array From ordering
+            asort($rows);
+        }
+
+        if ($clear == "yes") {
+            if(empty($rows)){ return; } else { return $rows;}
+        }
+        else {
+            if(empty($rows)){ return; }
+
+            foreach ($rows as $row){
+                $x[] =  MiwoEvents::get('fields')->getCustomField($row->name, $row->field_value, $row->values, $row->field_type, $row->title, $row->description);
+            }
+
+            return $x;
+        }
     }
 } 

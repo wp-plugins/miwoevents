@@ -48,11 +48,6 @@
 
 
 
-        <field name="version_checker" type="radio" class="btn-group" default="1" label="COM_MIWOEVENTS_CONFIG_VERSION_CHECKER" description="COM_MIWOEVENTS_CONFIG_VERSION_CHECKER_HELP" >
-			<option value="0">MNO</option>
-	        <option value="1">MYES</option>
-		</field>
-		
 		<field name="early_bird_discount_date" type="radio" class="btn-group" default="0" label="COM_MIWOEVENTS_EARLY_BIRD_DISCOUNT_DATE" description="COM_MIWOEVENTS_EARLY_BIRD_DISCOUNT_DATE_DESC" >
 			<option value="0">MNO</option>
 			<option value="1">MYES</option>
