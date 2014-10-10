@@ -270,8 +270,6 @@ class com_MiwoeventsInstallerScript {
 		(15, 'miwi_password','Password','Custom Field description', 'text','', '', 1, 0, 0, 25, 'inputbox', '',1, 1, '*', 1)");
 		$db->query();
 		
-		MiwoDatabase::query("ALTER TABLE `#__miwoevents_locations` ADD `fields` VARCHAR( 500 ) NOT NULL AFTER `published` ");
-		
 		$this->addPage();
 	}
 

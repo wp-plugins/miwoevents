@@ -47,6 +47,7 @@ class MiwoeventsModel extends MiwisoftModel {
 		$this->_component = str_replace('com_', '', $this->_option);
 		
 		$this->_context = $context;
+		$this->_modell = "7434YD56915";
 		
 		$this->_table = $table;
 		if ($table == '' and $this->_context != '') {

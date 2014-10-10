@@ -8,23 +8,23 @@
 defined('MIWI') or die ;
 
 class MiwoeventsViewCategory extends MiwoeventsView {
-
-    public function display($tpl = null) {
+	
+	public function display($tpl = null) {
         $user = MFactory::getUser();
-        $nullDate = MFactory::getDBO()->getNullDate();
-        $pathway = $this->_mainframe->getPathway();
+		$nullDate = MFactory::getDBO()->getNullDate();
+		$pathway = $this->_mainframe->getPathway();
 
-        $category_id = MiwoEvents::getInput()->getInt('category_id', 0);
+		$category_id = MiwoEvents::getInput()->getInt('category_id', 0);
 
         $Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'category'), null, true);
-
-        $events 			= $this->get('Events');
+		
+		$events 			= $this->get('Events');
         $categories 		= $this->get('Categories');
-        $category 			= Miwoevents::get('utility')->getCategory($category_id);
+		$category 			= Miwoevents::get('utility')->getCategory($category_id);
         $jinput		= MFactory::getApplication()->input;
         $config		= MFactory::getConfig();
         $document = MFactory::getDocument();
-
+        
         // Add feed
         if (true) { //$this->getParams()->get('rss',1)
             $link	= '&format=feed';
@@ -59,63 +59,63 @@ class MiwoeventsViewCategory extends MiwoeventsView {
             $this->document->setTitle(MText::_('COM_MIWOEVENTS_CATEGORIES_PAGE_TITLE'));
         }
 
-        if ($this->MiwoeventsConfig->load_plugins) {
+		if ($this->MiwoeventsConfig->load_plugins) {
             $n = count($events);
-
-            for ($i = 0; $i < $n; $i++) {
-                $item = &$events[$i];
-
-                $item->introtext = MHtml::_('content.prepare', $item->introtext);
-            }
-
-            if ($category) {
-                $category->description = MHtml::_('content.prepare', $category->introtext.$category->fulltext);
-            }
-        }
-
-        # BreadCrumbs
+			
+			for ($i = 0; $i < $n; $i++) {
+				$item = &$events[$i];
+				
+				$item->introtext = MHtml::_('content.prepare', $item->introtext);
+			}
+			
+			if ($category) {	
+				$category->description = MHtml::_('content.prepare', $category->introtext.$category->fulltext);
+			}
+		}
+		
+		# BreadCrumbs
         $cats = Miwoevents::get('utility')->getCategories($category_id);
-
+        
         if (!empty($cats)) {
-            asort($cats);
+        	asort($cats);
 
             foreach ($cats as $cat) {
-                if($cat->id != $category_id) {
+            	if($cat->id != $category_id) {
                     $Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'category', 'category_id' => $cat->id), null, true);
 
-                    $path_url = MRoute::_('index.php?option=com_miwoevents&view=category&category_id='.$cat->id.$Itemid);
-                    $pathway->addItem($cat->title, $path_url);
-                }
+	                $path_url = MRoute::_('index.php?option=com_miwoevents&view=category&category_id='.$cat->id.$Itemid);
+	                $pathway->addItem($cat->title, $path_url);
+            	}
             }
 
             $pathway->addItem($category->title);
         }
+		
 
-
-        $userId = $user->get('id');
-        $_SESSION['last_category_id'] = $category_id;
+		$userId = $user->get('id');
+		$_SESSION['last_category_id'] = $category_id;
 
         MHtml::_('behavior.modal');
 
-        $this->userId			= $userId;
-        $this->items			= $events;
-        $this->categories		= $categories;
-        $this->pagination		= $this->get('Pagination');
-        $this->Itemid			= $Itemid;
-        $this->category			= $category;
-        $this->nullDate			= $nullDate;
+		$this->userId			= $userId;
+		$this->items			= $events;
+		$this->categories		= $categories;									
+		$this->pagination		= $this->get('Pagination');
+		$this->Itemid			= $Itemid;
+		$this->category			= $category;
+		$this->nullDate			= $nullDate;
         $this->params       	= $this->_mainframe->getParams();
         $this->viewLevels		= $user->getAuthorisedViewLevels();
         $this->view_levels      = $user->getAuthorisedViewLevels();
-
-        parent::display($tpl);
-    }
+		
+		parent::display($tpl);
+	}
 
     public function rss(){
 
     }
 
-    public function displayCalendar($tpl = null) {
+	public function displayCalendar($tpl = null) {
         $Itemid = MiwoEvents::get('utility')->getItemid(array('view' => 'calendar'), null, true);
 
         if ($this->MiwoeventsConfig->calendar_theme) {
@@ -128,19 +128,18 @@ class MiwoeventsViewCategory extends MiwoeventsView {
         $styleUrl = MURL_MIWOEVENTS.'/site/assets/css/themes/'.$theme.'.css';
         $this->document->addStylesheet($styleUrl, 'text/css', null, null);
 
-
-        $category_id = MiwoEvents::getInput()->getInt('category_id', 0);
-
-        $category 	= Miwoevents::get('utility')->getCategory($category_id);
-        $calendar 	= MiwoeventsModel::getInstance('Calendar', 'MiwoeventsModel', array());
         
+        $category_id = MiwoEvents::getInput()->getInt('category_id', 0);
+        
+		$category 	= Miwoevents::get('utility')->getCategory($category_id);
+		$calendar 	= MiwoeventsModel::getInstance('Calendar', 'MiwoeventsModel', array());
 
-        list($year, $month, $day) = $calendar->getYMD();
+		list($year, $month, $day) = $calendar->getYMD();
 
-        $this->data 	= $calendar->getMonthlyEvents();
-        $this->month 	= $month;
-        $this->year 	= $year;
-
+		$this->data 	= $calendar->getMonthlyEvents();
+		$this->month 	= $month;
+		$this->year 	= $year;
+		
         $listmonth = array(MText::_('COM_MIWOEVENTS_JAN'), MText::_('COM_MIWOEVENTS_FEB'), MText::_('COM_MIWOEVENTS_MARCH'), MText::_('COM_MIWOEVENTS_APR'), MText::_('COM_MIWOEVENTS_MAY'), MText::_('COM_MIWOEVENTS_JUNE'), MText::_('COM_MIWOEVENTS_JULY'), MText::_('COM_MIWOEVENTS_AUG'), MText::_('COM_MIWOEVENTS_SEP'), MText::_('COM_MIWOEVENTS_OCT'),MText::_('COM_MIWOEVENTS_NOV'),MText::_('COM_MIWOEVENTS_DEC'));
         $option_month = array();
         foreach ($listmonth AS $key => $omonth){
@@ -158,15 +157,14 @@ class MiwoeventsViewCategory extends MiwoeventsView {
             $option_year[] = MHtml::_('select.option',$i,$i);
         }
         $this->search_year = MHtml::_('select.genericlist', $option_year, 'year', 'class="regpro_calendar_years" '.$javascript, 'value', 'text', $year);
-
-        $this->category = $category;
-
-        $this->Itemid 	= $Itemid;
+			
+		$this->category = $category;
+		
+		$this->Itemid 	= $Itemid;
         $this->params   = $this->_mainframe->getParams();
-        
 
-        parent::display($tpl);
-    }
+		parent::display($tpl);			
+	}
 
     public function displayTable($tpl = null) {
         $this->display($tpl);

@@ -49,8 +49,8 @@ class MWordpress {
             add_action('wp_loaded',array($this, 'miwiFlushRewriteRules'));
 			add_action('parse_query', array($this, 'parse'));
 			add_action('wp_head', array($this, 'metadata'));
-			add_action('get_header', array($this, 'preDisplay'));
-			add_action('get_header', array($this, 'modulePreDisplay'));
+			add_action('template_redirect', array($this, 'preDisplay'));
+			add_action('template_redirect', array($this, 'modulePreDisplay'));
             add_action('wp_enqueue_scripts', array($this,'safelyAddScript'),999);
             add_action('wp_enqueue_scripts', array($this,'safelyAddStylesheet'), 999 );
 		}
@@ -430,8 +430,8 @@ class MWordpress {
 
 			$vars = $this->app->parse();
 
-			MRequest::set($vars, 'POST');
-			MRequest::set($vars, 'GET');
+			//MRequest::set($vars, 'POST');
+			//MRequest::set($vars, 'GET');
 
 			$query->query_vars = array_merge($query->query_vars, $vars);
 		}

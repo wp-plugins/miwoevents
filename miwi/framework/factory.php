@@ -59,7 +59,7 @@ abstract class MFactory {
 
     public static function getWOption($name, $default = false, $id = null) {
 		$data = null;
-        $opt = get_site_option($name);
+        $opt = get_option($name);
 
         if (is_string($opt)) {
             $data = $opt;
@@ -343,8 +343,8 @@ abstract class MFactory {
         $handler = $conf->get('session_handler', 'none');
 
         // Config time is in minutes
-        $options['id']      = 'miwisoft';
-        $options['name']    = 'miwisoft';
+        //$options['id']      = 'miwisoft';
+        $options['name']    = '_miwisoft';
         $options['expire']  = ($conf->get('lifetime')) ? $conf->get('lifetime') * 60 : 900;
 
         $session = MSession::getInstance($handler, $options);

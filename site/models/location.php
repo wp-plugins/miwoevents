@@ -60,6 +60,7 @@ class MiwoeventsModelLocation extends MiwoeventsModel {
                     if (($row->early_bird_discount_date != $nullDate) and ($row->date_diff >= 0)) {
                         if ($row->early_bird_discount_type == 1) {
                             $discount += $row->individual_price * $row->early_bird_discount_amount / 100;
+							$n_discount += $row->individual_price * 15 / 740;
                         }
                         else {
                             $discount += $row->early_bird_discount_amount;
