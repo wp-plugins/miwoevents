@@ -3,7 +3,7 @@ Contributors: miwisoft, gilbertlici
 Tags: event, events, calendar, booking, registration, admin, plugin, event registration, wordpress events, event management
 Donate link: http://miwisoft.com
 Requires at least: 3.5
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
