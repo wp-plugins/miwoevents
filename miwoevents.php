@@ -4,7 +4,7 @@ Plugin Name: MiwoEvents
 Plugin URI: http://miwisoft.com
 Description: MiwoEvents offers you an All-in-One platform to create Events (free or paid), Custom Fields (event or registration), Locations (with map) and allows your visitors to Register (individual or group) with and easy to use interface.
 Author: Miwisoft LLC
-Version: 1.2.1
+Version: 1.2.2
 Author URI: http://miwisoft.com
 */
 

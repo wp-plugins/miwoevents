@@ -417,6 +417,7 @@ CREATE TABLE IF NOT EXISTS `#__miwoevents_locations` (
   `geo_country` varchar(100) 		DEFAULT NULL,
   `coordinates` varchar(30) 		DEFAULT '40.992954,29.042092',
   `language` 	varchar(7) 			DEFAULT '*',
+  `fields` 		varchar(500) 		NOT NULL DEFAULT '',
   `meta_desc` 	varchar(1024) 		DEFAULT NULL,
   `meta_key` 	varchar(1024) 		DEFAULT NULL,
   `meta_author` varchar(255) 		DEFAULT NULL,
